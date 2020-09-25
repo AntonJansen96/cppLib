@@ -1,1 +1,16 @@
-My C++ libraries.
+My C++ libraries
+
+easy
+    Header-only template library containing templates for abstract containers.
+    Currently includes templates for: sum, productsum, mean, variance, 
+    standard deviation, maximum, minimum, and printing.
+
+euler
+    Library containing a number of classes and functions related to number
+    theory and project Euler. It includes functionality for things like 
+    partitioning numbers, prime checking, generation of combinations and
+    permutations of sets, generation of Pythagorean triples, etc.
+
+stopwatch    
+    A class that can be used for timing and profile C++ code. This class is
+    more or less a wrapper for some functionality of the std::chrono library.
