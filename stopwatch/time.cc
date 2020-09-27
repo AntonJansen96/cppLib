@@ -1,5 +1,6 @@
 #include "stopwatch.h"
 #include <iomanip>
+#define timeFactor std::chrono::nanoseconds(std::chrono::seconds(1)).count()
 
 // Insert (current) Stopwatch time into stream (default std::cout).
 void Stopwatch::time(std::ostream &out)

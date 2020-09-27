@@ -1,4 +1,5 @@
 #include "stopwatch.h"
+#define timeNow std::chrono::system_clock::now()
 
 // Stop Stopwatch.
 void Stopwatch::stop()
