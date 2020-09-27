@@ -4,9 +4,6 @@
 #include <iostream>
 #include <chrono>
 
-#define timeNow    std::chrono::system_clock::now()
-#define timeFactor std::chrono::nanoseconds(std::chrono::seconds(1)).count()
-
 typedef std::chrono::time_point<std::chrono::system_clock> timePoint;
 
 // Additional function that maybe be used for profiling functions/lambdas.
@@ -30,7 +27,7 @@ class Stopwatch
         Stopwatch();
         
         // Construct Stopwatch object, specify description and start.
-        Stopwatch(std::string const &description);
+        explicit Stopwatch(std::string const &description);
 
         // Copy constructor.
         Stopwatch(Stopwatch const &other);
@@ -88,6 +85,12 @@ class Stopwatch
         Stopwatch &operator/=(size_t scalar);
 
         // Compare two Stopwatch objects.
+        bool operator==(Stopwatch const &other) const;
+
+        // Compare two Stopwatch objects.
+        bool operator!=(Stopwatch const &other) const;
+
+        // Compare two Stopwatch objects.
         bool operator<(Stopwatch const &other) const;
 
         // Compare two Stopwatch objects.
@@ -99,7 +102,7 @@ class Stopwatch
         // Dedicated swap member. Used by move assignment operator.
         void swap(Stopwatch &other);
         
-        // Private accessor for d_diff.
+        // Private accessor for d_diff. Used by rawtime() function.
         size_t accessdiff() const;
 };
 
@@ -123,6 +126,18 @@ inline size_t Stopwatch::rawtime()
 }
 
 // Compare two Stopwatch objects.
+inline bool Stopwatch::operator==(Stopwatch const &other) const
+{
+    return d_diff == other.d_diff ? true : false;
+}
+
+// Compare two Stopwatch objects.
+inline bool Stopwatch::operator!=(Stopwatch const &other) const
+{
+    return d_diff != other.d_diff ? true : false;
+}
+
+// Compare two Stopwatch objects.
 inline bool Stopwatch::operator<(Stopwatch const &other) const
 {
     return d_diff < other.d_diff ? true : false;
@@ -134,7 +149,7 @@ inline bool Stopwatch::operator>(Stopwatch const &other) const
     return d_diff > other.d_diff ? true : false;
 }
 
-// Private accessor for d_diff.
+// Private accessor for d_diff. Used by rawtime() function.
 inline size_t Stopwatch::accessdiff() const
 {
     return d_diff;
