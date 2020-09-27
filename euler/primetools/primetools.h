@@ -15,7 +15,7 @@ class Primetools
     public:
         // Construct Primetools object by specifying largest number to be analyzed.
         // Default is sizeof(32-bit integer) but can be set accordingly.
-        Primetools(size_t uplim = 4'294'967'295);
+        explicit Primetools(size_t uplim = 4'294'967'295);
 
         // Sieve of Eratosthenes. Generate all prime numbers smaller than uplim.
         std::vector<size_t> sieve(size_t uplim) const;
