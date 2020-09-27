@@ -1,7 +1,11 @@
 #include "../euler.h"
 
+namespace euler {
+
 // Returns binomial coefficient of N and n.
-double euler::binomCoeff(size_t N, size_t n)
+double binomCoeff(int N, int n)
 {
-    return euler::factorial(N) / (euler::factorial(n) * euler::factorial(N - n));
+    return factorial(N) / (factorial(n) * factorial(N - n));
 }
+
+} // Namespace.

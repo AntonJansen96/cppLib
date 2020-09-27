@@ -12,3 +12,5 @@ double euler::partition(size_t money, std::vector<size_t> const &coins)
     
     return ways[money];
 }
+
+// Using int instead of size_t does not make this faster.

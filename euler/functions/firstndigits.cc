@@ -2,11 +2,11 @@
 #include <cmath>
 
 // Returns the first N digits from base^exp.
-size_t firstNdigits(size_t base, size_t exp, size_t N)
+size_t firstNdigits(int base, int exp, int N)
 {
     double num = exp * log10(base);
     num -= floor(num);
-    num = pow(10, num);
+    num = std::pow(10, num);
     
-    return floor(pow(10, N - 1) * num);
+    return static_cast<size_t>(std::floor(std::pow(10, N - 1) * num));
 }

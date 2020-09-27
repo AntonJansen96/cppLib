@@ -15,7 +15,7 @@ namespace euler {
 std::vector<size_t> genFibonnaci(size_t uplim);
 
 // Euclidean algorithm. Returns greatest common denominator of a and b.
-size_t gcd(size_t a, size_t b);
+int gcd(int a, int b);
 
 // Check whether a number is a palindrome.
 bool isPalindrome(size_t num);
@@ -27,10 +27,10 @@ size_t numDigits(double num);
 std::vector<size_t> genPandigital(size_t a, size_t b);
 
 // Returns factorial of number.
-double factorial(double num);
+double factorial(int num);
 
 // Returns binomial coefficient of N and n.
-double binomCoeff(size_t N, size_t n);
+double binomCoeff(int N, int n);
 
 // Checks whether a number is juf.
 bool isJuf(size_t num);
@@ -51,10 +51,10 @@ double partition(size_t money, std::vector<size_t> const &coins);
 double partition(size_t money);
 
 // Returns the first N digits from base^exp.
-size_t firstNdigits(size_t base, size_t exp, size_t N);
+size_t firstNdigits(int base, int exp, int N);
 
 // Returns the sum of the digits of num.
-size_t sumDigits(size_t num);
+int sumDigits(size_t num);
 
 // Check whether num is a square.
 bool isSquare(size_t num);
@@ -67,6 +67,12 @@ bool isPerfect(size_t num);
 
 // Converts a decimal number to a specified radix.
 std::string radix(size_t value, size_t radix);
+
+// Converts a decimal number to a Roman numeral.
+std::string dec2roman(int dec);
+
+// Converts a Roman numeral to a decimal number.
+int roman2dec(std::string const &numeral);
 
 } // Namespace.
 
