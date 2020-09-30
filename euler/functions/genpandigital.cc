@@ -1,10 +1,10 @@
 #include "../euler.h"
 
 // Generate all numbers that are a to b pandigital.
-std::vector<size_t> euler::genPandigital(size_t a, size_t b)
+std::vector<size_t> euler::genPandigital(int a, int b)
 {
     std::vector<int> digits;
-    for (size_t digit = a; digit <= b; ++digit)
+    for (int digit = a; digit <= b; ++digit)
         digits.push_back(digit);
 
     Permutations perm(digits);
