@@ -9,7 +9,9 @@ int euler::gcd(int a, int b)
     return a;
 }
 
-// This is just as fast if not faster as the code below.
+// The function above is also significantly faster than https://en.wikipedia.org/wiki/Binary_GCD_algorithm.
+
+// This is just as fast if not faster as the code below:
 
 // int euler::gcd(int a, int b)
 // {
