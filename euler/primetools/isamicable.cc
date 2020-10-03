@@ -1,19 +1,11 @@
 #include "primetools.h"
 
 // Check whether a number is amicable.
-bool euler::Primetools::isAmicable(size_t num) const
+bool euler::Primetools::isAmicable(size_t num)
 {
-    size_t propdivsum1 = 0, propdivsum2 = 0;
+    size_t const pds1 = this->divisorSumProper(num);
+    size_t const pds2 = this->divisorSumProper(pds1);
 
-    for (size_t fac : factors(num))
-        propdivsum1 += fac;
-
-    propdivsum1 -= num;
-    
-    for (size_t fac : factors(propdivsum1))
-        propdivsum2 += fac;
-
-    propdivsum2 -= propdivsum1;
-    
-    return (propdivsum1 != propdivsum2 && num == propdivsum2) ? true : false;
+    // Condition for num being amicable:
+    return (pds1 != pds2 && num == pds2) ? true : false;
 }

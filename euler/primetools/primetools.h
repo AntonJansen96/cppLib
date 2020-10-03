@@ -2,58 +2,71 @@
 #define PRIMETOOLS_H
 
 #include <vector>
-#include <set>
+#include <cmath>
 
 namespace euler {
 
 // Class for performing prime-related operations/computations.
 class Primetools
-{
-    size_t d_uplim;
-    std::vector<size_t> d_primes;
+{                                           // Enough primes for 1-1000.
+    std::vector<int> d_primes  = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31};
+    int              d_nPrimes = 11;        // Number of primes in d_primes.
+    size_t           d_max     = 1000;      // Maximum number.
 
     public:
-        // Construct Primetools object by specifying largest number to be analyzed.
-        // Default is sizeof(32-bit integer) but can be set accordingly.
-        explicit Primetools(size_t uplim = 4'294'967'295);
+        // Defaulted constructor for Primetools object.
+        Primetools() = default;
 
-        // Sieve of Eratosthenes. Generate all prime numbers smaller than uplim.
+        // This object is not meant be copyable or movable.
+        Primetools(Primetools const &other) = delete;
+        Primetools(Primetools &&tmp)        = delete;
+
+        // Sieve of Eratosthenes. Generate all primes smaller than uplim.
         std::vector<size_t> sieve(size_t uplim) const;
 
         // Check whether a number is prime.
-        bool isPrime(size_t num) const;
+        bool isPrime(size_t num);
 
-        // Check whether a number is amicable.
-        bool isAmicable(size_t num) const;
+        // Generate prime factors of a number (with multiplicity).
+        std::vector<size_t> factorPrime(size_t num);
 
-        // Generate prime factors of a number.
-        std::vector<size_t> primeFacs(size_t num) const;
+        // Generates prime factors of a number (without multiplicity).
+        std::vector<size_t> factorPrimeSingle(size_t num);
 
-        // Generate all factors of a number.
-        std::set<size_t> factors(size_t num) const;
+        // Generate all factors of a number (note: vector is unsorted).
+        std::vector<size_t> factorAll(size_t num);
+
+        // Returns the sum of the factors (divisors) of a number.
+        size_t divisorSum(size_t num, int order = 1);
+
+        // Returns the sum of the proper factors (divisors) of a number.
+        size_t divisorSumProper(size_t num, int order = 1);
+
+        // Returns the largest nontrivial factor of a number.
+        // Returns 1 if number is prime.
+        size_t largestFactor(size_t num);
 
         // Compute the totient of a number.
-        size_t totient(size_t num) const;
+        size_t totient(size_t num);
 
-        // Returns the maximum number that can be analyzed.
-        size_t uplim() const;
+        // Check whether a number is amicable.
+        bool isAmicable(size_t num);
 
-        // Returns the internal array of primes.
-        std::vector<size_t> data() const;
+    private:
+        // Expands d_max by factor 4 and d_primes by factor 2.
+        void expand();
+
+        // To-do: look for faster version of std::sqrt.
+        // We only need to integer part.
+        int fastRoot(size_t num) const;
 };
 
 } // Namespace.
 
-// Returns the maximum number that can be analyzed.
-inline size_t euler::Primetools::uplim() const
+// To-do: look for faster version of std::sqrt.
+inline int euler::Primetools::fastRoot(size_t num) const
 {
-    return d_uplim;
-}
-
-// Returns the internal array of primes.
-inline std::vector<size_t> euler::Primetools::data() const
-{
-    return d_primes;
+    return std::sqrt(num);
 }
 
 #endif
