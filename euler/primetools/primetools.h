@@ -17,6 +17,10 @@ class Primetools
         // Defaulted constructor for Primetools object.
         Primetools() = default;
 
+        // Construct Primetools object with specified d_max.
+        // Use this with concurrency as this->expand() is not thread-safe.
+        explicit Primetools(size_t setMax);
+
         // This object is not meant be copyable or movable.
         Primetools(Primetools const &other) = delete;
         Primetools(Primetools &&tmp)        = delete;
