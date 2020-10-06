@@ -65,7 +65,7 @@ template <typename Type>
 // Returns the standard deviation (sample) of abstract container.
 double sdev(Type const &input)
 {
-    return sqrt(var(input));
+    return std::sqrt(var(input));
 }
 
 template <typename Type>
