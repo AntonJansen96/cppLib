@@ -11,10 +11,6 @@ euler
     partitioning numbers, prime checking, generation of combinations and
     permutations of sets, generation of Pythagorean triples, etc.
 
-    -continued fractions
-    primes  -reimplement the whole class with doubling
-            -divisor sigma (divisorsum)
-
 stopwatch    
     A class that can be used for timing and profile C++ code. This class is
     more or less a wrapper for some functionality of the std::chrono library.
