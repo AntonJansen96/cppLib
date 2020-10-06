@@ -17,6 +17,10 @@ class Permutations
         // Initialize Permutations object.
         Permutations(std::vector<int> const &input, bool reverse = false);
 
+        // This object is not meant to be copied or moved.
+        Permutations(Permutations const &other) = delete;
+        Permutations(Permutations &&temp) = delete;
+
         // Yields the next permutation as a vector.
         std::vector<int> yield();
         

@@ -22,6 +22,10 @@ class Combinations
         // Initialize combinations object.
         Combinations(std::vector<int> const &input, size_t k, bool reverse = false);
 
+        // This object is not meant to be copied or moved.
+        Combinations(Combinations const &other) = delete;
+        Combinations(Combinations &&temp) = delete;
+
         // Yields the next combination as a vector.
         std::vector<int> yield();
 
@@ -41,9 +45,6 @@ class Combinations
     private:
         // Transforms a vector of digits into an integer.
         size_t vector2number(std::vector<int> const &input);
-
-        // Private function to compute the factorial.
-        double factorial(double num) const;
 
         // Private function to compute binomial coefficient.
         double binomCoeff(size_t N, size_t n) const;
