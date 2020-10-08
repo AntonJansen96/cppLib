@@ -1,5 +1,3 @@
-My C++ libraries
-
 easy
     Header-only template library containing templates for abstract containers.
     Currently includes templates for: sum, productsum, mean, variance, 
