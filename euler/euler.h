@@ -19,6 +19,9 @@ int numDigits(size_t num);
 // Returns the sum of the digits of number.
 int sumDigits(size_t num);
 
+// Returns the number of of occurances of digit in num.
+int countDigits(size_t num, size_t digit);
+
 // Returns the first N digits from a number.
 size_t firstNdigits(size_t num, int N);
 
