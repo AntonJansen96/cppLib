@@ -11,8 +11,8 @@ bool euler::isSquare(size_t num)
 
     if (h != 2 && h != 3 && h != 5 && h != 6 && h != 7 && h != 8)
     {
-        size_t root = floor(sqrt(num) + 0.5);
-        return root * root == num;  // Take square root if you must.
+        size_t root = std::floor(std::sqrt(num) + 0.5);
+        return (root * root == num);  // Take square root if you must.
     }
     
     return false;
