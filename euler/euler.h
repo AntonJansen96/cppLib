@@ -3,6 +3,7 @@
 
 #include "permutations/permutations.h"
 #include "combinations/combinations.h"
+#include "numbersplit/numbersplit.h"
 #include "primetools/primetools.h"
 
 #include <string>
@@ -21,6 +22,9 @@ int sumDigits(size_t num);
 
 // Returns the number of of occurances of digit in num.
 int countDigits(size_t num, size_t digit);
+
+// Returns the nth digit of a number (starting at least significant digit)
+int nthDigit(size_t num, int n);
 
 // Returns the first N digits from a number.
 size_t firstNdigits(size_t num, int N);
