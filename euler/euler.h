@@ -23,7 +23,7 @@ int sumDigits(size_t num);
 // Returns the number of of occurances of digit in num.
 int countDigits(size_t num, size_t digit);
 
-// Returns the nth digit of a number (starting at least significant digit)
+// Returns the nth digit of a number (starting at least significant digit).
 int nthDigit(size_t num, int n);
 
 // Returns the first N digits from a number.
@@ -41,7 +41,7 @@ size_t lastNdigits(size_t num, int N);
 bool isSquare(size_t num);
 
 // Checks whether two numbers a and b are coprime.
-bool isCoprime(size_t a, size_t b);
+bool isCoprime(int a, int b);
 
 // Checkss whether number is a perfect number.
 bool isPerfect(size_t num);
@@ -51,6 +51,9 @@ bool isJuf(size_t num);
 
 // Checks whether number is a palindrome.
 bool isPalindrome(size_t num);
+
+// Check whether the number a is a digit permutation of number b.
+bool isPermutationOf(size_t a, size_t b);
 
 // PARTITIONING ****************************************************************
 

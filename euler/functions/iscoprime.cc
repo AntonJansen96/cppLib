@@ -1,7 +1,10 @@
 #include "../euler.h"
 
 // Checks whether two numbers a and b are coprime.
-bool euler::isCoprime(size_t a, size_t b)
+bool euler::isCoprime(int a, int b)
 {
-    return gcd(a, b) == 1;
+    if (((a | b) & 1) == 0) // Reject if both are even (gcd(a,b) >= 2.
+        return false;
+    
+    return (gcd(a, b) == 1);
 }
