@@ -1,6 +1,7 @@
 #ifndef EULER_H
 #define EULER_H
 
+#include "math/math.h"
 #include "permutations/permutations.h"
 #include "combinations/combinations.h"
 #include "numbersplit/numbersplit.h"
@@ -96,11 +97,9 @@ int roman2dec(std::string const &numeral);
 // Euclidean algorithm. Returns the greatest common denominator of a and b.
 int gcd(int a, int b);
 
-// Returns the factorial of number.
-double factorial(int num);
-
-// Returns the binomial coefficient of N and n.
-double binomCoeff(int N, int n);
+// Returns the least common multiple of a and b.
+// The smallest positive integer that is divisble by both a and b.
+int lcm(int a, int b);
 
 } // Namespace.
 
