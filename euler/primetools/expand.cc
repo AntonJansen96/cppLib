@@ -7,11 +7,11 @@ void euler::Primetools::expand()
     // std::cout << "expand called, d_max old =" << d_max << ", d_max new = " << 4*d_max << '\n';
 
     d_max *= 4; // use 4 because roo(4) = 2 is factor to increase primes with
-    int next = d_primes.back();
+    unsigned int next = d_primes.back();
 
     while (next < fastRoot(d_max) + 1)
     {
-        for (int prime : d_primes)
+        for (unsigned int const prime : d_primes)
         {
             if (next % prime == 0)
                 break;

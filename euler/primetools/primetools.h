@@ -8,10 +8,10 @@ namespace euler {
 
 // Class for performing prime-related operations/computations.
 class Primetools
-{                                           // Enough primes for 1-1000.
-    std::vector<int> d_primes  = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31};
-    int              d_nPrimes = 11;        // Number of primes in d_primes.
-    size_t           d_max     = 1000;      // Maximum number.
+{                                 // Enough primes for 1-1000.
+    std::vector<unsigned int> d_primes = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31};
+    int    d_nPrimes = 11;        // Number of primes in d_primes.
+    size_t d_max     = 1000;      // Maximum number.
 
     public:
         // Defaulted constructor for Primetools object.
@@ -28,8 +28,15 @@ class Primetools
         // Sieve of Eratosthenes. Generate all primes smaller than uplim.
         std::vector<size_t> sieve(size_t uplim) const;
 
-        // Check whether a number is prime.
+        // Check whether a number is prime using the classical method.
         bool isPrime(size_t num);
+
+        // Check whether a number is prime using the Miller-Rabin test.
+        // Deterministic for all 64 bit numbers.
+        bool miller_rabin(size_t num) const;
+
+        // Returns number of primes up to (and including) num.
+        size_t primePi(size_t num) const;
 
         // Generate prime factors of a number (with multiplicity).
         std::vector<size_t> factorPrime(size_t num);
@@ -62,13 +69,13 @@ class Primetools
 
         // To-do: look for faster version of std::sqrt.
         // We only need to integer part.
-        int fastRoot(size_t num) const;
+        unsigned int fastRoot(size_t num) const;
 };
 
 } // Namespace.
 
 // To-do: look for faster version of std::sqrt.
-inline int euler::Primetools::fastRoot(size_t num) const
+inline unsigned int euler::Primetools::fastRoot(size_t num) const
 {
     return std::sqrt(num);
 }
