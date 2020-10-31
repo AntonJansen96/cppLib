@@ -6,3 +6,5 @@ Stopwatch::Stopwatch()
 :
     d_start(timeNow)
 {}
+
+#undef timeNow

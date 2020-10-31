@@ -10,5 +10,5 @@ Stopwatch::Stopwatch(Stopwatch &&tmp)
     d_stopped(tmp.d_stopped)        
 {
     if (not tmp.d_stopped)
-        throw(std::logic_error("cannot initialize Stopwatch object with a running one!"));
+        throw(std::logic_error("cannot initialize Stopwatch with a running one"));
 }

@@ -10,3 +10,5 @@ void Stopwatch::start()
         d_start = timeNow;
     }
 }
+
+#undef timeNow

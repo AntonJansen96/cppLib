@@ -11,3 +11,5 @@ void Stopwatch::stop()
         d_diff += (d_stop - d_start).count();
     }
 }
+
+# undef timeNow

@@ -7,3 +7,5 @@ void Stopwatch::reset()
     d_start = timeNow;
     d_diff  = 0;
 }
+
+#undef timeNow
