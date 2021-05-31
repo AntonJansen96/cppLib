@@ -84,7 +84,7 @@ genTriples(size_t perimLim);
 // CERTAIN CONVERSIONS *********************************************************
 
 // Converts a number to a vector of digits.
-std::vector<size_t> euler::num2vec(size_t num);
+std::vector<size_t> num2vec(size_t num);
 
 // Converts a decimal number to a specified radix.
 std::string radix(size_t value, size_t radix);
