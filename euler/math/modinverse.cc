@@ -1,11 +1,11 @@
 #include "math.h"
 
-unsigned int euler::math::modinverse(unsigned int a, unsigned int m)
+unsigned long euler::math::modinverse(unsigned long a, unsigned long m)
 {
     auto const orig = m;
 
-    int s = 0;      // Note: s and t can be negative inside the loop.
-    int t = 1;
+    long s = 0;      // Note: s and t can be negative inside the loop.
+    long t = 1;
     while (a > 1)
     {
         auto tmp = m;

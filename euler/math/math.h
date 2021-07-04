@@ -12,7 +12,7 @@ size_t mulmod(size_t a, size_t b, size_t m);
 size_t powmod(size_t a, size_t b, size_t m);
 
 // Returns the modular inverse (ax = 1 (mod m)).
-unsigned int modinverse(unsigned int a, unsigned int m);
+unsigned long modinverse(unsigned long a, unsigned long m);
 
 // Exponentiate num [0, 10] with power.
 size_t fastpow(size_t n, size_t m);
