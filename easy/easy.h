@@ -104,11 +104,15 @@ template <typename Type>
 void print(Type const &input)
 {
     typename Type::const_iterator iter, end(input.end());
+    std::string output{"["};
 
     for (iter = input.begin(); iter != end; ++iter)
-        std::cout << *iter << ' ';
 
-    std::cout << '\n';
+        output += std::to_string(*iter) + ", ";
+
+    output[output.size() - 2] = ']';
+    output[output.size() - 1] = '\n';
+    std::cout << output;
 }
 
 } // Namespace.
