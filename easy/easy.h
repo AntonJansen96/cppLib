@@ -103,6 +103,13 @@ template <typename Type>
 // Print elements of abstract container to terminal.
 void print(Type const &input)
 {
+    // Prevent segfaults when abstract container is empty.
+    if (input.empty())
+    {
+        std::cout << "[]\n";
+        return;
+    }
+
     typename Type::const_iterator iter, end(input.end());
     std::string output{"["};
 
