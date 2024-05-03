@@ -1,4 +1,5 @@
 #include "math.h"
+#include <algorithm>
 
 // Returns (a * b) % m
 size_t euler::math::mulmod(size_t a, size_t b, size_t m)
