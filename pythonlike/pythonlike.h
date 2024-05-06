@@ -5,6 +5,6 @@
 
 namespace pythonlike {
 
-} // namespace 
+} // namespace pythonlike.
 
 #endif // PYTHONLIKE_H
