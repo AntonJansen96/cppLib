@@ -4,6 +4,7 @@
 #include "print.h"
 #include "slice.h"
 
+#include <cmath>        // for std::round, std::pow
 #include <vector>       // for std::vector
 #include <numeric>      // for std::accumulate
 #include <algorithm>    // for std::sort
@@ -62,6 +63,32 @@ template <typename Type>
 void isorted(Type &input)
 {
     std::sort(input.begin(), input.end());
+}
+
+// Reverse elements in abstract container. Returns reversed array.
+template <typename Type>
+Type reverse(Type input)
+{
+    std::reverse(input.begin(), input.end());
+    return input;
+}
+
+// Reverse elements in abstract container in-place.
+template <typename Type>
+void ireverse(Type &input)
+{
+    std::reverse(input.begin(), input.end());
+}
+
+// Round floating point numbers to a specific number of decimal places.
+template <typename Type>
+Type round(Type number, int precision = 3)
+{
+    Type scale = 1;
+    for ([[maybe_unused]] auto _ : range(precision))
+        scale *= 10;
+
+    return std::round(number * scale) / scale;
 }
 
 } // namespace pythonlike.
