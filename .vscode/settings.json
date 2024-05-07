@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.vmd": "tcl",
+        "forward_list": "cpp"
+    }
+}
