@@ -1,6 +1,98 @@
 #include "math.h"
-#include <iostream>
-#include <vector>
+
+#include <algorithm>    // For std::swap
+#include <vector>       // For std::vector
+#include <stdexcept>    // For std::logic_error
+
+namespace math {
+
+// Returns (a * b) % m
+size_t mulmod(size_t a, size_t b, size_t m)
+{   
+    a %= m;                     // (a * b) % m = a % m) * (b % m) % m.
+    b %= m;
+
+    if (a <= 0xFFFFFFF and b <= 0xFFFFFFF)  
+        return (a * b) % m;     // Fast path.
+
+#ifdef __x86_64__
+
+    size_t asmResult;           // Use GCC inline assembler.
+    __asm__
+    (
+        "mulq %2\n"             // Result in rdx:rax.
+        "divq %3"               // Quotient in rax, remainder in rdx.
+        : "=&d" (asmResult), "+%a" (a)
+        : "rm" (b), "rm" (m)
+        : "cc"                  // Clear conditions.
+    );
+
+    return asmResult;
+
+#else
+
+    if (b > a)                  // We might encounter overflows (slow path).
+        std::swap(a ,b);        // The number of loops depends on b, 
+                                // therefore try to minimize b.
+    size_t result = 0;          // Bitwise multiplication.
+    while (a > 0 and b > 0)
+    {
+        if (b & 1)              // b is odd ? a*b = a + a*(b-1).
+        {
+            result += a;
+            if (result >= m)    // Skip b-- because the bit-shift at the
+                result -= m;    // end will remove the lowest bit anyway.
+        }   
+
+        a <<= 1;
+        if (a >= m)             // b is even ? a*b = (2*a)(b/2).
+            a -= m;
+        
+        b >>= 1;                // Next bit.
+    }
+    
+    return result;
+
+#endif
+}
+
+// Returns (a^b) % m
+size_t powmod(size_t a, size_t b, size_t m)
+{
+    size_t result = 1;
+    while (b > 0)
+    {
+        if (b & 1)              // Odd b ? a^b = a*a^(b-1).
+            result = mulmod(result, a, m);
+        
+        a = mulmod(a, a, m);    // Even b ? a^b = (a*b)^(b/2).
+        
+        b >>= 1;
+    }
+
+    return result;
+}
+
+unsigned long modinverse(unsigned long a, unsigned long m)
+{
+    auto const orig = m;
+
+    long s = 0;      // Note: s and t can be negative inside the loop.
+    long t = 1;
+    while (a > 1)
+    {
+        auto tmp = m;
+        auto quotient = a / m;
+        m = a % m;
+        a = tmp;
+
+        auto tmp2 = s;
+        s = t - quotient * s;
+        t = tmp2;
+    }
+
+    return t < 0 ? t + orig : t;    // Avoid negative result.
+}
 
 namespace {
 
@@ -93,7 +185,7 @@ static const std::vector<size_t> power10 =
 } // Namespace.
 
 // Exponentiate num [0, 10] with power.
-size_t euler::math::fastpow(size_t n, size_t m)
+size_t fastpow(size_t n, size_t m)
 {
     switch (n)
     {
@@ -134,3 +226,32 @@ size_t euler::math::fastpow(size_t n, size_t m)
             throw(std::logic_error("fastpow : 0 < n > 10"));
     }
 }
+
+// Returns the integer part of log10.
+int intlog10(size_t num)
+{
+    int n = 0;
+    while (num >= 10'000'000'000'000'000){n += 16; num /= 10'000'000'000'000'000;}
+    if (num >= 100'000'000){n += 8; num /= 100'000'000;}
+    if (num >= 10'000){n += 4; num /= 10'000;}
+    if (num >= 100){n += 2; num /= 100;}
+    if (num >= 10){++n; num /= 10;}
+    return n;       
+}
+
+// Returns factorial of number.
+double factorial(int num)
+{
+    if (num > 1)
+        return num * factorial(num - 1);
+    else
+        return 1;
+}
+
+// Returns binomial coefficient of N and n.
+double binomCoeff(int N, int n)
+{
+    return factorial(N) / (factorial(n) * factorial(N - n));
+}
+
+} // Namespace math.

@@ -1,5 +1,0 @@
-file(GLOB euler_SRC combinations/*.cc)
-file(GLOB euler_SRC permutations/*.cc)
-file(GLOB euler_SRC primetools/*.cc)
-file(GLOB euler_SRC functions/*.cc)
-add_library(euler ${euler_SRC})

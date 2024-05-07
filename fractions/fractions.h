@@ -3,9 +3,7 @@
 
 #include <iosfwd>
 
-namespace euler::math {
-
-typedef int Type; // Change this to size_t if we have > 32-bit numbers.
+typedef int Type; // Change this to long for 64-bit numbers.
 
 class Fraction
 {
@@ -21,7 +19,7 @@ class Fraction
         Type &denom();                          // Return/edit the denominator.
         Fraction reduce() const;                // Reduce fraction.
         double approx() const;                  // Return the decimal value.
-        
+
         Fraction &operator=(Fraction const &other); // Copy-assignment operator.
         Fraction &operator=(Fraction &&other);      // Move-assignment operator.
 
@@ -42,6 +40,9 @@ class Fraction
         bool operator!=(Fraction const &other) const;   // Compare w. Fraction.
         bool operator<(Fraction const &other) const;    // Compare w. Fraction.
         bool operator>(Fraction const &other) const;    // Compare w. Fraction.
+
+    private:
+        Type gcd(Type a, Type b) const;                 // Greatest common divisor.
 };
 
 // Constructor.
@@ -243,6 +244,4 @@ inline Fraction operator/(Type scalar, Fraction const &rhs)
     return Fraction{rhs} /= scalar;
 }
 
-} // Namespace.
-
-#endif
+#endif // FRACTION_H

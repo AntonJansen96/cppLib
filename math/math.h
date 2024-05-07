@@ -1,9 +1,9 @@
 #ifndef MATH_H
 #define MATH_H
 
-#include "fractions/fractions.h"
+#include <cstddef>      // For size_t.
 
-namespace euler::math {
+namespace math {
 
 // Returns (a * b) % m.
 size_t mulmod(size_t a, size_t b, size_t m);
