@@ -1,8 +1,3 @@
-easy
-    Header-only template library containing templates for abstract containers.
-    Currently includes templates for: sum, productsum, mean, variance, 
-    standard deviation, maximum, minimum, and printing.
-
 euler
     Library containing a number of classes and functions related to number
     theory and project Euler. It includes functionality for things like 
