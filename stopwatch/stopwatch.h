@@ -18,7 +18,7 @@ class Stopwatch
     timePoint   d_stop;
     double      d_diff;
     std::string d_description;
-    bool        d_stopped = false;
+    bool        d_stopped = true;
     
     public:
         // CONSTRUCTORS ////////////////////////////////////////////////////////
