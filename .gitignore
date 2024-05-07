@@ -1,4 +1,9 @@
 *.o
+*.a
 main
 tests
 build
+CMakeFiles
+CMakeFiles
+CMakeCache.txt
+cmake_install.cmake

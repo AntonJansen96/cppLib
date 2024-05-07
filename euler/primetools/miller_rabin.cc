@@ -1,5 +1,5 @@
 #include "primetools.h"
-#include "../math/math.h"
+#include "../../math/math.h"
 
 // Check whether a number is prime using the Miller-Rabin test.
 // Deterministic for all 64 bit numbers.

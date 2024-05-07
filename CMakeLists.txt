@@ -8,9 +8,12 @@ set(CMAKE_CXX_STANDARD 20)
 
 include_directories(${CMAKE_SOURCE_DIR})
 
-add_library(stopwatch stopwatch/stopwatch.cpp)
-add_library(math math/math.cpp)
+file(GLOB_RECURSE EULER_SOURCES "euler/*.cc")
+add_library(euler ${EULER_SOURCES})
+
 add_library(fractions fractions/fractions.cpp)
+add_library(math math/math.cpp)
+add_library(stopwatch stopwatch/stopwatch.cpp)
 
 add_executable(main main.cpp)
-target_link_libraries(main stopwatch math fractions)
+target_link_libraries(main euler fractions math stopwatch)
