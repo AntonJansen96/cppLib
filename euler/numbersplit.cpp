@@ -1,5 +1,5 @@
 #include "numbersplit.h"
-#include "../euler.h" // circular reference
+#include "euler.h" // circular reference
 
 #include <bitset>
 

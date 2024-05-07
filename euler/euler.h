@@ -2,9 +2,9 @@
 #define EULER_H
 
 #include "../math/math.h"
-#include "permutations/permutations.h"
-#include "combinations/combinations.h"
-#include "numbersplit/numbersplit.h"
+#include "permutations.h"
+#include "combinations.h"
+#include "numbersplit.h"
 #include "primetools/primetools.h"
 
 #include <string>

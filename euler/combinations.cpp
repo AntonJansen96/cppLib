@@ -1,4 +1,5 @@
 #include "combinations.h"
+
 #include <algorithm>
 
 // Initialize combinations object.
