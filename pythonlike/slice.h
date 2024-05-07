@@ -60,8 +60,14 @@ auto view(Container const &container, size_t m, size_t n)
 }
 
 // Generate a range of numbers for use in range-based for loops.
-auto range(long start, long stop, long step = 1)
+auto range(long start, long stop = 0, long step = 1)
 {
+    if (stop == 0)
+    {
+        stop = start;
+        start = 0;
+    }
+
     if (step == 0)
     {
         print("range() : step cannot be zero, setting step to 1.");
