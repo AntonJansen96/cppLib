@@ -1,4 +1,5 @@
 #!/bin/bash
 
-find . -name 'cmake_install.cmake' | while read i; do rm $i; done
-find . -name '*.a' | while read i; do rm $i; done
+find . -name 'CMakeFiles' | xargs rm -rf
+find . -name 'cmake_install.cmake' | xargs rm -f
+find . -name '*.a' | xargs rm -f
