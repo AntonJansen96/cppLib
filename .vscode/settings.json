@@ -6,6 +6,7 @@
         "iostream": "cpp",
         "iosfwd": "cpp",
         "complex": "cpp",
-        "cstdint": "cpp"
+        "cstdint": "cpp",
+        "ostream": "cpp"
     }
 }
