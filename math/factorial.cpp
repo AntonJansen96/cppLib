@@ -1,6 +1,7 @@
 #include "math.h"
 
-namespace math {
+namespace math
+{
 
 // Returns factorial of number (0 if 64-bit overflow).
 uInt factorial(uInt num)

@@ -1,8 +1,10 @@
 #include "math.h"
 #include <array>
 
-namespace { // Anonymous namespace.
+namespace
+{ // Anonymous namespace.
 
+// clang-format off
 constexpr std::array<math::uInt, 63> power2 = 
 {
     1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768,
@@ -88,6 +90,7 @@ constexpr std::array<math::uInt, 19> power10 =
     1000000000000000, 10000000000000000, 100000000000000000, 
     1000000000000000000
 };
+// clang-format on
 
 // We want to avoid using std::pow() as a fall back because it's slow.
 // Instead, we exponentiate by multiplying n by itself m times.
@@ -101,7 +104,8 @@ math::uInt powfallback(math::uInt n, math::uInt m)
 
 } // Anonymous namespace.
 
-namespace math {
+namespace math
+{
 
 // Returns n^m where n and m are positive integers.
 // If tabulated value is not available, fall back on pow in <cmath>.
@@ -120,7 +124,7 @@ uInt fastpow(uInt n, uInt m)
 
         case 3:
             return (m < 40) ? power3[m] : powfallback(n, m);
-        
+
         case 4:
             return (m < 32) ? power4[m] : powfallback(n, m);
 
@@ -132,7 +136,7 @@ uInt fastpow(uInt n, uInt m)
 
         case 7:
             return (m < 23) ? power7[m] : powfallback(n, m);
-        
+
         case 8:
             return (m < 21) ? power8[m] : powfallback(n, m);
 

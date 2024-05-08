@@ -3,10 +3,11 @@
 
 #include <cstdint>
 
-namespace math {
+namespace math
+{
 
-using sInt = int64_t;   // Signed 64-bit integer.
-using uInt = uint64_t;  // Unsigned 64-bit integer.
+using sInt = int64_t;  // Signed 64-bit integer.
+using uInt = uint64_t; // Unsigned 64-bit integer.
 
 // Returns (a * b) % m.
 uInt mulmod(uInt a, uInt b, uInt m);
@@ -33,6 +34,6 @@ uInt binom(uInt N, uInt n);
 // Euclidian algorithm. Returns the greatest common denominator of a, b.
 uInt gcd(uInt a, uInt b);
 
-} // Namespace.
+} // namespace math
 
 #endif

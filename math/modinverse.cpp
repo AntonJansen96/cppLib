@@ -1,16 +1,17 @@
 #include "math.h"
 
-namespace math {
+namespace math
+{
 
 // Returns the modular inverse (ax = 1 (mod m)).
 uInt modinverse(uInt a, uInt m)
 {
-    if (m == 0)                 // Avoid division by zero.
+    if (m == 0) // Avoid division by zero.
         return 0;
 
     auto const orig = m;
 
-    uInt s = 0;      // Note: s and t can be negative inside the loop.
+    uInt s = 0; // Note: s and t can be negative inside the loop.
     uInt t = 1;
     while (a > 1)
     {
@@ -24,7 +25,7 @@ uInt modinverse(uInt a, uInt m)
         t = tmp2;
     }
 
-    return t < 0 ? t + orig : t;    // Avoid negative result.
+    return t < 0 ? t + orig : t; // Avoid negative result.
 }
 
 } // Namespace math.

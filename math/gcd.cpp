@@ -1,7 +1,8 @@
 #include "math.h"
 #include <algorithm>
 
-namespace math {
+namespace math
+{
 
 // Euclidian algorithm. Returns the greatest common denominator of a, b.
 uInt gcd(uInt a, uInt b)

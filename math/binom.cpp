@@ -1,9 +1,10 @@
 #include "math.h"
 
-#include <vector>      // For std::vector.
-#include <algorithm>   // For std::min.
+#include <algorithm> // For std::min.
+#include <vector>
 
-namespace math {
+namespace math
+{
 
 uInt binom(uInt n, uInt k)
 {
@@ -15,7 +16,7 @@ uInt binom(uInt n, uInt k)
     // Calculate value of Binomial Coefficient in bottom up manner.
     for (uInt i = 0; i <= n; i++)
     {
-        for (uInt j = 0; j <= std::min(i, k); j++) 
+        for (uInt j = 0; j <= std::min(i, k); j++)
         {
             // Base Cases.
             if (j == 0 || j == i)
