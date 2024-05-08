@@ -1,4 +1,5 @@
 #include "combinations.h"
+#include "../math/math.h"
 
 #include <algorithm>
 
@@ -8,7 +9,7 @@ euler::Combinations::Combinations(std::vector<int> const &input, size_t k, bool 
     d_someSet(input),
     d_mask(k, true),
     d_masksize(input.size()),
-    d_total(binomCoeff(input.size(), k)),
+    d_total(math::binom(input.size(), k)),
     d_k(k),
     d_reverse(reverse)
 {
@@ -66,22 +67,4 @@ size_t euler::Combinations::vector2number(std::vector<int> const &input)
         number = number * 10 + digit;
 
     return number;
-}
-
-namespace {
-
-double factorial(double num)
-{
-    if (num > 1)
-        return num * factorial(num - 1);
-    else
-        return 1;
-}
-
-} // Namespace.
-
-// Private function to compute binomial coefficient.
-double euler::Combinations::binomCoeff(size_t N, size_t n) const
-{
-    return factorial(N) / (factorial(n) * factorial(N - n));
 }

@@ -30,6 +30,9 @@ uInt factorial(uInt num);
 // Returns the binomial coefficient of N and n.
 uInt binom(uInt N, uInt n);
 
+// Euclidian algorithm. Returns the greatest common denominator of a, b.
+uInt gcd(uInt a, uInt b);
+
 } // Namespace.
 
 #endif

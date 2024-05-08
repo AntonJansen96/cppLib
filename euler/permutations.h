@@ -40,9 +40,6 @@ class Permutations
     private:
         // Transforms a vector of digits into an integer.
         size_t vector2number(std::vector<int> const &input);
-    
-        // Factorial for calculating the amount of permutations.
-        double factorial(double num) const;
 };
 
 } // Namespace.

@@ -46,7 +46,6 @@ class Fraction
 
   private:
     void normalize();               // Normalize fraction.
-    Type gcd(Type a, Type b) const; // Euclidian algorithm.
 };
 
 // Constructor.

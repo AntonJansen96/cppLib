@@ -45,9 +45,6 @@ class Combinations
     private:
         // Transforms a vector of digits into an integer.
         size_t vector2number(std::vector<int> const &input);
-
-        // Private function to compute binomial coefficient.
-        double binomCoeff(size_t N, size_t n) const;
 };
 
 } // Namespace.

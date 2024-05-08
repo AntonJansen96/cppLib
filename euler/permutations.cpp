@@ -1,11 +1,12 @@
 #include "permutations.h"
+#include "../math/math.h"
 #include <algorithm>
 
 // Initialize Permutations object.
 euler::Permutations::Permutations(std::vector<int> const &input, bool reverse)
 :
     d_someSet(input),
-    d_total(factorial(input.size())),
+    d_total(math::factorial(input.size())),
     d_reverse(reverse)
 {
     std::sort(d_someSet.begin(), d_someSet.end());
@@ -57,12 +58,4 @@ size_t euler::Permutations::vector2number(std::vector<int> const &input)
         number = number * 10 + digit;
 
     return number;
-}
-
-double euler::Permutations::factorial(double num) const
-{
-    if (num > 1)
-        return num * factorial(num - 1);
-    else
-        return 1;
 }

@@ -97,7 +97,7 @@ bool euler::isCoprime(int a, int b)
     if (((a | b) & 1) == 0) // Reject if both are even (gcd(a,b) >= 2).
         return false;
     
-    return (gcd(a, b) == 1);
+    return (math::gcd(a, b) == 1);
 }
 
 // Check whether num is a perfect number.
@@ -382,44 +382,9 @@ int euler::roman2dec(std::string const &roman)
     return decimal; 
 } 
 
-// Euclidean algorithm. Returns greatest common denominator of a and b.
-int euler::gcd(int a, int b)
-{
-#ifdef __GNUC__   // This is around 60% faster using specific CPU instructions.
-                  // Source https://euler.stephan-brumme.com/toolbox/
-    if (a == 0)
-        return b;
-
-    if (b == 0)
-        return a;
-
-    // MSVC++: _BitScanForward intrinsic instead
-    auto shift = __builtin_ctz(a | b);
-    a >>= __builtin_ctz(a);
-    do
-    {
-        b >>= __builtin_ctz(b);
-        if (a > b)
-            std::swap(a, b);
-        
-        b -= a;
-    } while (b != 0);
-
-    return a << shift;
-
-#else
-    // standard GCD
-    while (b) 
-        b ^= a ^= b ^= a %= b;
-    
-    return a;
-
-#endif
-}
-
 // Returns the least common multiple of a and b.
 // The smallest positive integer that is divisble by both a and b.
 int euler::lcm(int a, int b)
 {
-    return a * (b / gcd(a, b));
+    return a * (b / math::gcd(a, b));
 }

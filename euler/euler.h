@@ -96,9 +96,6 @@ int roman2dec(std::string const &numeral);
 
 // MISCELLANEOUS FUNCTIONS *****************************************************
 
-// Euclidean algorithm. Returns the greatest common denominator of a and b.
-int gcd(int a, int b);
-
 // Returns the least common multiple of a and b.
 // The smallest positive integer that is divisble by both a and b.
 int lcm(int a, int b);
