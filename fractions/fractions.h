@@ -172,7 +172,7 @@ inline Fraction &Fraction::operator*=(Type scalar)
 // Divide scalar.
 inline Fraction &Fraction::operator/=(Type scalar)
 {
-    d_num /= scalar;
+    d_den *= scalar;
     normalize();
     return *this;
 }
@@ -282,7 +282,7 @@ inline Fraction operator/(Fraction const &lhs, Type scalar)
 // Divide scalar.
 inline Fraction operator/(Type scalar, Fraction const &rhs)
 {
-    return Fraction{rhs} /= scalar;
+    return Fraction{scalar * rhs.denom(), rhs.num()};
 }
 
 #endif // FRACTION_H

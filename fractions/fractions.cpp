@@ -32,8 +32,6 @@ std::ostream &operator<<(std::ostream &out, Fraction &&obj)
 // 4. Reduce num and denom using the Euclidian algorithm.
 void Fraction::normalize()
 {
-    std::cout << "normalize called\n"; // debug
-
     // 1.
     if (d_den == 0)
         d_den = 1;

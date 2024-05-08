@@ -77,7 +77,12 @@ int main()
     cout << -4 - frac2 << endl;
     cout <<  4 * frac2 << endl;
     cout << -4 * frac2 << endl;
-    // Division is still not working properly.
+
+    cout <<  4 / frac2 << endl; // should return -8
+    cout << -4 / frac2 << endl; // should return 8
+    cout << frac2 /  4 << endl; // should return -1/8
+    cout << frac2 / -4 << endl; // should return 1/8
+    cout << (frac2 /= -4) << endl; // should return 1/8
 
     cout << boolalpha << (frac1 < frac2) << endl;    
     cout << boolalpha << (frac1 > frac2) << endl;
