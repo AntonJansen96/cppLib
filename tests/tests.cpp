@@ -4,6 +4,7 @@
 #include "stopwatch/stopwatch.h"
 #include "pythonlike/pythonlike.h"
 
+#include <cmath>
 #include <vector>
 #include <deque>
 #include <string>
@@ -46,7 +47,7 @@ int main()
     timer.start();
     cout << "hello world\n";
     timer.time();
-    cout << math::binomCoeff(5, 3) << '\n';
+    cout << math::binom(5, 3) << '\n';
     cout << "hello, world" << '\n';
     print(1, 1.25, "hello");
     cout << euler::numDigits(123456789) << '\n';
@@ -56,8 +57,6 @@ int main()
     // FRACTIONS
     auto frac1 = Fraction(1, 1);
     auto frac2 = Fraction(-2, 4);
-    print("\n\n");
-
     cout << Fraction(1, 3) << endl;
     cout << Fraction(1, 3).approx() << endl;
     cout << Fraction(2, 4) << endl;
@@ -90,4 +89,20 @@ int main()
     cout << boolalpha << (frac1 != frac2) << endl;
     cout << boolalpha << (frac1 >= frac2) << endl;
     cout << boolalpha << (frac1 <= frac2) << endl;
+
+    // MATH
+    cout << math::mulmod(130, 15, 2) << endl;
+    cout << math::mulmod(130, 15, 0) << endl;
+    cout << math::powmod(15, 6, 6) << endl;
+    cout << math::powmod(15, 6, 0) << endl;
+    cout << math::modinverse(13, 2) << endl;
+    cout << math::modinverse(13, 0) << endl;
+    cout << math::fastpow(7, 5) << endl;
+    cout << math::fastpow(13, 5) << endl;
+    cout << math::intlog10(1412411) << endl;
+    cout << math::factorial(5) << endl;
+    cout << math::factorial(0) << endl;
+    cout << math::factorial(-2) << endl;
+    cout << math::binom(18, 7) << endl; // should be 31824
+    cout << math::gcd(23142, 155) << endl;
 }
