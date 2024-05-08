@@ -2,8 +2,6 @@
 #define FRACTION_H
 
 #include <iosfwd>                               // for std::ostream
-#include <utility>                              // for std::pair
-#include <tuple>                                // for std::tie
 
 using Type = int64_t;                           // Type used for num and denom.
 
@@ -46,8 +44,8 @@ class Fraction
         bool operator<=(Fraction const &other) const;   // Compare w. Fraction.
         bool operator>=(Fraction const &other) const;   // Compare w. Fraction.
 
-    private:                                            // Normalize the fraction.
-        std::pair<Type, Type> normalize(Type num, Type denom);
+    private:                                            
+        void normalize();                               // Normalize fraction.
         Type gcd(Type a, Type b) const;                 // Euclidian algorithm.
 };
 
@@ -57,7 +55,7 @@ inline Fraction::Fraction(Type numerator, Type denominator)
     d_num(numerator),
     d_den(denominator)
 {
-    std::tie(d_num, d_den) = normalize(d_num, d_den);
+    normalize();
 }
 
 // Copy constructor.
@@ -118,7 +116,7 @@ inline Fraction &Fraction::operator+=(Fraction const &rhs)
 {
     d_num  = d_num * rhs.d_den + d_den * rhs.d_num;
     d_den *= rhs.d_den;
-    std::tie(d_num, d_den) = normalize(d_num, d_den);
+    normalize();
     return *this;
 }
 
@@ -127,7 +125,7 @@ inline Fraction &Fraction::operator-=(Fraction const &rhs)
 {
     d_num  = d_num * rhs.d_den - d_den * rhs.d_num;
     d_den *= rhs.d_den;
-    std::tie(d_num, d_den) = normalize(d_num, d_den);
+    normalize();
     return *this;
 }
 
@@ -135,7 +133,7 @@ inline Fraction &Fraction::operator-=(Fraction const &rhs)
 inline Fraction &Fraction::operator*=(Fraction const &rhs)
 {
     d_num *= rhs.d_num; d_den *= rhs.d_den;
-    std::tie(d_num, d_den) = normalize(d_num, d_den);
+    normalize();
     return *this;
 }
 
@@ -143,7 +141,7 @@ inline Fraction &Fraction::operator*=(Fraction const &rhs)
 inline Fraction &Fraction::operator/=(Fraction const &rhs)
 {
     d_num *= rhs.d_den; d_den *= rhs.d_num;
-    std::tie(d_num, d_den) = normalize(d_num, d_den);
+    normalize();
     return *this;
 }
 
@@ -151,7 +149,7 @@ inline Fraction &Fraction::operator/=(Fraction const &rhs)
 inline Fraction &Fraction::operator+=(Type scalar)
 {
     d_num += scalar * d_den;
-    std::tie(d_num, d_den) = normalize(d_num, d_den);
+    normalize();
     return *this;
 }
 
@@ -159,7 +157,7 @@ inline Fraction &Fraction::operator+=(Type scalar)
 inline Fraction &Fraction::operator-=(Type scalar)
 {
     d_num -= scalar * d_den;
-    std::tie(d_num, d_den) = normalize(d_num, d_den);
+    normalize();
     return *this;
 }
 
@@ -167,7 +165,7 @@ inline Fraction &Fraction::operator-=(Type scalar)
 inline Fraction &Fraction::operator*=(Type scalar)
 {
     d_num *= scalar;
-    std::tie(d_num, d_den) = normalize(d_num, d_den);
+    normalize();
     return *this;
 }
 
@@ -175,7 +173,7 @@ inline Fraction &Fraction::operator*=(Type scalar)
 inline Fraction &Fraction::operator/=(Type scalar)
 {
     d_num /= scalar;
-    std::tie(d_num, d_den) = normalize(d_num, d_den);
+    normalize();
     return *this;
 }
 
