@@ -25,32 +25,41 @@ std::ostream &operator<<(std::ostream &out, Fraction &&obj)
     return out << obj.num() << '/' << obj.denom();
 }
 
-// Reduce fraction.
-Fraction Fraction::reduce() const
+// Normalize fraction. This does the following:
+// 1. If the denom = 0, set denom = 1.
+// 2. If num > 0 and denom < 0, set num = -num and denom = -denom.
+// 3. If num < 0 and denom < 0, set num = -num and denom = -denom.
+// 4. Reduce num and denom using the Euclidian algorithm.
+std::pair<Type, Type> Fraction::normalize(Type num, Type denom)
 {
-    if (d_num == 0)
-        return Fraction(d_num, 1);
+    // 1.
+    if (denom == 0)
+        denom = 1;
 
-    Type thegcd = gcd(d_num, d_den);
+    // 2 and 3.
+    if (denom < 0)
+    {
+        num = -num;
+        denom = -denom;
+    }
 
-    if (thegcd == 1)
-        return *this;
+    // 4. At this point, we either have a/b or -a/b.
+    // gcd only works for a/b, so always make a positive and remember the sign.
+    Type sign = 1;
+    if (num < 0)
+    {
+        num = -num;
+        sign = -1;
+    }
+    // Compute the gcd and multiply by the sign.
+    Type const factor = gcd(num, denom);
 
-    return Fraction(d_num / thegcd, d_den / thegcd);
+    return std::make_pair(sign * num / factor, denom / factor);
 }
 
 // Euclidean algorithm. Returns greatest common denominator of a and b.
 Type Fraction::gcd(Type a, Type b) const
 {
-    // GCD does not work if we have a negative numerator.
-    // Therefore, we make the numerator positive and remember the sign.
-    Type sign = 1;
-    if (a < 0)
-    {
-        a = -a;
-        sign = -1;
-    }
-
 #ifdef __GNUC__   // This is around 60% faster using specific CPU instructions.
                   // Source https://euler.stephan-brumme.com/toolbox/
     if (a == 0)
@@ -71,14 +80,14 @@ Type Fraction::gcd(Type a, Type b) const
         b -= a;
     } while (b != 0);
 
-    return sign * (a << shift);
+    return a << shift;
 
 #else
     // standard GCD
     while (b) 
         b ^= a ^= b ^= a %= b;
     
-    return sign * a;
+    return a;
 
 #endif
 }

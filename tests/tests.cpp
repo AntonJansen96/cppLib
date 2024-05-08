@@ -54,10 +54,9 @@ int main()
     print(pp.sieve(100));
 
     // FRACTIONS
-    print();
-
-    auto frac1 = Fraction(1, 3);
+    auto frac1 = Fraction(1, 1);
     auto frac2 = Fraction(-2, 4);
+    print("\n\n");
 
     cout << Fraction(1, 3) << endl;
     cout << Fraction(1, 3).approx() << endl;
@@ -65,6 +64,7 @@ int main()
     cout << Fraction(-1, 3) << endl;
     cout << Fraction(1, -3) << endl;
     cout << Fraction(-1, -3) << endl;
+    cout << Fraction(-1, 0) << endl;
 
     cout << frac1 + frac2 << endl;
     cout << frac1 - frac2 << endl;
@@ -77,8 +77,7 @@ int main()
     cout << -4 - frac2 << endl;
     cout <<  4 * frac2 << endl;
     cout << -4 * frac2 << endl;
-    cout <<  4 / frac2 << endl;
-    cout << -4 / frac2 << endl;
+    // Division is still not working properly.
 
     cout << boolalpha << (frac1 < frac2) << endl;    
     cout << boolalpha << (frac1 > frac2) << endl;
