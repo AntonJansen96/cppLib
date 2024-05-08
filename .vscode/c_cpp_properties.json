@@ -13,7 +13,7 @@
             "compilerPath": "/opt/homebrew/bin/g++-13",
             "cStandard": "c23",
             "cppStandard": "c++20",
-            "intelliSenseMode": "gcc-x64"
+            "intelliSenseMode": "macos-gcc-arm64"
         }
     ],
     "version": 4
