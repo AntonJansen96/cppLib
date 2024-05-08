@@ -4,6 +4,8 @@
         "forward_list": "cpp",
         "cmath": "cpp",
         "iostream": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "complex": "cpp",
+        "cstdint": "cpp"
     }
 }
