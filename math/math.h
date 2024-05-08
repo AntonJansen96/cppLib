@@ -6,8 +6,8 @@
 namespace math
 {
 
-using sInt = int64_t;  // Signed 64-bit integer.
-using uInt = uint64_t; // Unsigned 64-bit integer.
+using sInt = int_fast64_t;  // Signed 64-bit integer.
+using uInt = uint_fast64_t; // Unsigned 64-bit integer.
 
 // Returns (a * b) % m.
 uInt mulmod(uInt a, uInt b, uInt m);
