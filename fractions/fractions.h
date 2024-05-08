@@ -1,78 +1,76 @@
 #ifndef FRACTION_H
 #define FRACTION_H
 
-#include <iosfwd>                               // for std::ostream
+#include <iosfwd> // for std::ostream
 
-using Type = int64_t;                           // Type used for num and denom.
+using Type = int64_t; // Type used for num and denom.
 
 class Fraction
 {
-    Type d_num;                                 // Numerator.
-    Type d_den;                                 // Denominator.
+    Type d_num; // Numerator.
+    Type d_den; // Denominator.
 
-    public:                                     // Constructor.
-        explicit Fraction(Type numerator, Type denominator = 1);
-        Fraction(Fraction const &other);        // Copy constructor.
-        Fraction(Fraction &&tmp) noexcept;      // Move constructor.
+  public: // Constructor.
+    explicit Fraction(Type numerator, Type denominator = 1);
+    Fraction(Fraction const &other);   // Copy constructor.
+    Fraction(Fraction &&tmp) noexcept; // Move constructor.
 
-        Type &num();                            // Return/edit the numerator.
-        Type &denom();                          // Return/edit the denominator.
-        Type const &num() const;                // Return the numerator.
-        Type const &denom() const;              // Return the denominator.
-        double approx() const;                  // Return the decimal value.
+    Type &num();               // Return/edit the numerator.
+    Type &denom();             // Return/edit the denominator.
+    Type const &num() const;   // Return the numerator.
+    Type const &denom() const; // Return the denominator.
+    double approx() const;     // Return the decimal value.
 
-        Fraction &operator=(Fraction const &other);      // Copy-assignment.
-        Fraction &operator=(Fraction &&other) noexcept;  // Move-assignment.
+    Fraction &operator=(Fraction const &other);     // Copy-assignment.
+    Fraction &operator=(Fraction &&other) noexcept; // Move-assignment.
 
-        friend std::ostream &operator<<(std::ostream &out, Fraction &obj);
-        friend std::ostream &operator<<(std::ostream &out, Fraction &&obj);
+    friend std::ostream &operator<<(std::ostream &out, Fraction &obj);
+    friend std::ostream &operator<<(std::ostream &out, Fraction &&obj);
 
-        Fraction &operator+=(Fraction const &rhs);      // Add Fraction.
-        Fraction &operator-=(Fraction const &rhs);      // Subtract Fraction.
-        Fraction &operator*=(Fraction const &rhs);      // Multiply Fraction.
-        Fraction &operator/=(Fraction const &rhs);      // Divide Fraction.
+    Fraction &operator+=(Fraction const &rhs); // Add Fraction.
+    Fraction &operator-=(Fraction const &rhs); // Subtract Fraction.
+    Fraction &operator*=(Fraction const &rhs); // Multiply Fraction.
+    Fraction &operator/=(Fraction const &rhs); // Divide Fraction.
 
-        Fraction &operator+=(Type scalar);              // Add scalar.
-        Fraction &operator-=(Type scalar);              // Subtract scalar.
-        Fraction &operator*=(Type scalar);              // Multiply scalar.
-        Fraction &operator/=(Type scalar);              // Divide scalar.
+    Fraction &operator+=(Type scalar); // Add scalar.
+    Fraction &operator-=(Type scalar); // Subtract scalar.
+    Fraction &operator*=(Type scalar); // Multiply scalar.
+    Fraction &operator/=(Type scalar); // Divide scalar.
 
-        bool operator==(Fraction const &other) const;   // Compare w. Fraction.
-        bool operator!=(Fraction const &other) const;   // Compare w. Fraction.
-        bool operator<(Fraction const &other) const;    // Compare w. Fraction.
-        bool operator>(Fraction const &other) const;    // Compare w. Fraction.
-        bool operator<=(Fraction const &other) const;   // Compare w. Fraction.
-        bool operator>=(Fraction const &other) const;   // Compare w. Fraction.
+    bool operator==(Fraction const &other) const; // Compare w. Fraction.
+    bool operator!=(Fraction const &other) const; // Compare w. Fraction.
+    bool operator<(Fraction const &other) const;  // Compare w. Fraction.
+    bool operator>(Fraction const &other) const;  // Compare w. Fraction.
+    bool operator<=(Fraction const &other) const; // Compare w. Fraction.
+    bool operator>=(Fraction const &other) const; // Compare w. Fraction.
 
-    private:                                            
-        void normalize();                               // Normalize fraction.
-        Type gcd(Type a, Type b) const;                 // Euclidian algorithm.
+  private:
+    void normalize();               // Normalize fraction.
+    Type gcd(Type a, Type b) const; // Euclidian algorithm.
 };
 
 // Constructor.
 inline Fraction::Fraction(Type numerator, Type denominator)
-:
-    d_num(numerator),
-    d_den(denominator)
+    : d_num(numerator)
+    , d_den(denominator)
 {
     normalize();
 }
 
 // Copy constructor.
 inline Fraction::Fraction(Fraction const &other)
-:
-    d_num(other.d_num),
-    d_den(other.d_den)
-{}
+    : d_num(other.d_num)
+    , d_den(other.d_den)
+{
+}
 
 // Move constructor.
 inline Fraction::Fraction(Fraction &&tmp) noexcept
-:
-    d_num(tmp.d_num),
-    d_den(tmp.d_den)
+    : d_num(tmp.d_num)
+    , d_den(tmp.d_den)
 {
-    tmp.d_num = 1;          // Leave the temporary
-    tmp.d_den = 1;          // object in a valid state.
+    tmp.d_num = 1; // Leave the temporary
+    tmp.d_den = 1; // object in a valid state.
 }
 
 // Return/edit the numerator.
@@ -114,7 +112,7 @@ inline Fraction &Fraction::operator=(Fraction const &other)
 // Add two Fractions.
 inline Fraction &Fraction::operator+=(Fraction const &rhs)
 {
-    d_num  = d_num * rhs.d_den + d_den * rhs.d_num;
+    d_num = d_num * rhs.d_den + d_den * rhs.d_num;
     d_den *= rhs.d_den;
     normalize();
     return *this;
@@ -123,7 +121,7 @@ inline Fraction &Fraction::operator+=(Fraction const &rhs)
 // Subtract two Fractions.
 inline Fraction &Fraction::operator-=(Fraction const &rhs)
 {
-    d_num  = d_num * rhs.d_den - d_den * rhs.d_num;
+    d_num = d_num * rhs.d_den - d_den * rhs.d_num;
     d_den *= rhs.d_den;
     normalize();
     return *this;
@@ -132,7 +130,8 @@ inline Fraction &Fraction::operator-=(Fraction const &rhs)
 // Multiply two Fractions.
 inline Fraction &Fraction::operator*=(Fraction const &rhs)
 {
-    d_num *= rhs.d_num; d_den *= rhs.d_den;
+    d_num *= rhs.d_num;
+    d_den *= rhs.d_den;
     normalize();
     return *this;
 }
@@ -140,7 +139,8 @@ inline Fraction &Fraction::operator*=(Fraction const &rhs)
 // Divide Fraction by scalar.
 inline Fraction &Fraction::operator/=(Fraction const &rhs)
 {
-    d_num *= rhs.d_den; d_den *= rhs.d_num;
+    d_num *= rhs.d_den;
+    d_den *= rhs.d_num;
     normalize();
     return *this;
 }

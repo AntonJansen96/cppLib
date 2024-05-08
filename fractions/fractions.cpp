@@ -7,8 +7,8 @@ Fraction &Fraction::operator=(Fraction &&other) noexcept
 {
     std::swap(d_num, other.d_num);
     std::swap(d_den, other.d_den);
-    other.d_num = 1;    // Leave the temporary 
-    other.d_den = 1;    // object in a valid state.
+    other.d_num = 1; // Leave the temporary
+    other.d_den = 1; // object in a valid state.
 
     return *this;
 }
@@ -61,8 +61,8 @@ void Fraction::normalize()
 // Euclidean algorithm. Returns greatest common denominator of a and b.
 Type Fraction::gcd(Type a, Type b) const
 {
-#ifdef __GNUC__   // This is around 60% faster using specific CPU instructions.
-                  // Source https://euler.stephan-brumme.com/toolbox/
+#ifdef __GNUC__ // This is around 60% faster using specific CPU instructions.
+                // Source https://euler.stephan-brumme.com/toolbox/
     if (a == 0)
         return b;
 
@@ -77,7 +77,7 @@ Type Fraction::gcd(Type a, Type b) const
         b >>= __builtin_ctz(b);
         if (a > b)
             std::swap(a, b);
-        
+
         b -= a;
     } while (b != 0);
 
@@ -85,9 +85,9 @@ Type Fraction::gcd(Type a, Type b) const
 
 #else
     // standard GCD
-    while (b) 
+    while (b)
         b ^= a ^= b ^= a %= b;
-    
+
     return a;
 
 #endif

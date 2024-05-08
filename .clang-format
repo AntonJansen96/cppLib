@@ -5,6 +5,10 @@ TabWidth:          4
 UseTab:            Never
 BreakBeforeBraces: Allman
 AllowShortIfStatementsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
 IndentCaseLabels:  true
-ColumnLimit:       100
+ColumnLimit:       88
+ConstructorInitializerAllOnOneLineOrOnePerLine: false
+BreakConstructorInitializers: BeforeComma
+ConstructorInitializerIndentWidth: 4
 ---
