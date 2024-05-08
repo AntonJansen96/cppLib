@@ -1,7 +1,6 @@
 #ifndef EULER_H
 #define EULER_H
 
-#include "../math/math.h"
 #include "permutations.h"
 #include "combinations.h"
 #include "numbersplit.h"

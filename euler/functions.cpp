@@ -1,4 +1,5 @@
 #include "euler.h"
+#include "../math/math.h"
 
 #include <cmath>
 #include <tuple>
