@@ -6,10 +6,13 @@ namespace math {
 // Returns (a * b) % m.
 uInt mulmod(uInt a, uInt b, uInt m)
 {   
+    if (m == 0)                 // Avoid division by zero.
+        return 0;
+
     a %= m;                     // (a * b) % m = a % m) * (b % m) % m.
     b %= m;
 
-    if (a <= 0xFFFFFFF and b <= 0xFFFFFFF)  
+    if (a <= 0xFFFFFFF && b <= 0xFFFFFFF)  
         return (a * b) % m;     // Fast path.
 
 #ifdef __x86_64__
@@ -32,7 +35,7 @@ uInt mulmod(uInt a, uInt b, uInt m)
         std::swap(a ,b);        // The number of loops depends on b, 
                                 // therefore try to minimize b.
     uInt result = 0;            // Bitwise multiplication.
-    while (a > 0 and b > 0)
+    while (a > 0 && b > 0)
     {
         if (b & 1)              // b is odd ? a*b = a + a*(b-1).
         {

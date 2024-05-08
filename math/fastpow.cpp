@@ -1,10 +1,9 @@
 #include "math.h"
-#include <vector>
-#include <cmath>
+#include <array>
 
 namespace { // Anonymous namespace.
 
-static const std::vector<math::uInt> power2 = 
+constexpr std::array<math::uInt, 63> power2 = 
 {
     1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768,
     65536, 131072, 262144, 524288, 1048576, 2097152, 4194304, 8388608, 16777216,
@@ -19,7 +18,7 @@ static const std::vector<math::uInt> power2 =
     2305843009213693952, 4611686018427387904
 };
 
-static const std::vector<math::uInt> power3 = 
+constexpr std::array<math::uInt, 40> power3 = 
 {
     1, 3, 9, 27, 81, 243, 729, 2187, 6561, 19683, 59049, 177147, 531441,
     1594323, 4782969, 14348907, 43046721, 129140163, 387420489, 1162261467,
@@ -30,7 +29,7 @@ static const std::vector<math::uInt> power3 =
     450283905890997363, 1350851717672992089, 4052555153018976267
 };
 
-static const std::vector<math::uInt> power4 = 
+constexpr std::array<math::uInt, 32> power4 = 
 {
     1, 4, 16, 64, 256, 1024, 4096, 16384, 65536, 262144, 1048576, 4194304,
     16777216, 67108864, 268435456, 1073741824, 4294967296, 17179869184,
@@ -40,7 +39,7 @@ static const std::vector<math::uInt> power4 =
     1152921504606846976, 4611686018427387904
 };
 
-static const std::vector<math::uInt> power5 = 
+constexpr std::array<math::uInt, 28> power5 = 
 {
     1, 5, 25, 125, 625, 3125, 15625, 78125, 390625, 1953125, 9765625, 48828125,
     244140625, 1220703125, 6103515625, 30517578125, 152587890625, 762939453125,
@@ -49,7 +48,7 @@ static const std::vector<math::uInt> power5 =
     1490116119384765625, 7450580596923828125
 };
 
-static const std::vector<math::uInt> power6 = 
+constexpr std::array<math::uInt, 25> power6 = 
 {
     1, 6, 36, 216, 1296, 7776, 46656, 279936, 1679616, 10077696, 60466176,
     362797056, 2176782336, 13060694016, 78364164096, 470184984576, 
@@ -58,7 +57,7 @@ static const std::vector<math::uInt> power6 =
     4738381338321616896
 };
 
-static const std::vector<math::uInt> power7 = 
+constexpr std::array<math::uInt, 23> power7 = 
 {
     1, 7, 49, 343, 2401, 16807, 117649, 823543, 5764801, 40353607, 282475249,
     1977326743, 13841287201, 96889010407, 678223072849, 4747561509943,
@@ -66,7 +65,7 @@ static const std::vector<math::uInt> power7 =
     79792266297612001, 558545864083284007, 3909821048582988049 
 };
 
-static const std::vector<math::uInt> power8 = 
+constexpr std::array<math::uInt, 21> power8 = 
 {
     1, 8, 64, 512, 4096, 32768, 262144, 2097152, 16777216, 134217728, 
     1073741824, 8589934592, 68719476736, 549755813888, 4398046511104,
@@ -74,7 +73,7 @@ static const std::vector<math::uInt> power8 =
     144115188075855872, 1152921504606846976
 };
 
-static const std::vector<math::uInt> power9 = 
+constexpr std::array<math::uInt, 20> power9 = 
 {
     1, 9, 81, 729, 6561, 59049, 531441, 4782969, 43046721, 387420489, 
     3486784401, 31381059609, 282429536481, 2541865828329, 22876792454961,
@@ -82,13 +81,23 @@ static const std::vector<math::uInt> power9 =
     1350851717672992089
 };
 
-static const std::vector<math::uInt> power10 = 
+constexpr std::array<math::uInt, 19> power10 = 
 {
     1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000, 
     10000000000, 100000000000, 1000000000000, 10000000000000, 100000000000000,
     1000000000000000, 10000000000000000, 100000000000000000, 
     1000000000000000000
 };
+
+// We want to avoid using std::pow() as a fall back because it's slow.
+// Instead, we exponentiate by multiplying n by itself m times.
+math::uInt powfallback(math::uInt n, math::uInt m)
+{
+    for (math::uInt i = 1; i != m; ++i)
+        n *= n;
+
+    return n;
+}
 
 } // Anonymous namespace.
 
@@ -107,34 +116,34 @@ uInt fastpow(uInt n, uInt m)
             return 1;
 
         case 2:
-            return (m < 63) ? power2[m] : std::pow(n, m);
+            return (m < 63) ? power2[m] : powfallback(n, m);
 
         case 3:
-            return (m < 40) ? power3[m] : std::pow(n, m);
+            return (m < 40) ? power3[m] : powfallback(n, m);
         
         case 4:
-            return (m < 32) ? power4[m] : std::pow(n, m);
+            return (m < 32) ? power4[m] : powfallback(n, m);
 
         case 5:
-            return (m < 28) ? power5[m] : std::pow(n, m);
+            return (m < 28) ? power5[m] : powfallback(n, m);
 
         case 6:
-            return (m < 25) ? power6[m] : std::pow(n, m);
+            return (m < 25) ? power6[m] : powfallback(n, m);
 
         case 7:
-            return (m < 23) ? power7[m] : std::pow(n, m);
+            return (m < 23) ? power7[m] : powfallback(n, m);
         
         case 8:
-            return (m < 21) ? power8[m] : std::pow(n, m);
+            return (m < 21) ? power8[m] : powfallback(n, m);
 
         case 9:
-            return (m < 20) ? power9[m] : std::pow(n, m);
+            return (m < 20) ? power9[m] : powfallback(n, m);
 
         case 10:
-            return (m < 19) ? power10[m] : std::pow(n, m);
+            return (m < 19) ? power10[m] : powfallback(n, m);
 
         default:
-            return std::pow(n, m);
+            return powfallback(n, m);
     }
 }
 

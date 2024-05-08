@@ -7,6 +7,9 @@ namespace math {
 
 uInt binom(uInt n, uInt k)
 {
+    if (k > n)
+        return 0;
+
     std::vector<std::vector<uInt>> C(n + 1, std::vector<uInt>(k + 1, 0));
 
     // Calculate value of Binomial Coefficient in bottom up manner.
