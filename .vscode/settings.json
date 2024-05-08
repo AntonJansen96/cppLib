@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "*.vmd": "tcl",
-        "forward_list": "cpp"
+        "forward_list": "cpp",
+        "cmath": "cpp",
+        "iostream": "cpp"
     }
 }
