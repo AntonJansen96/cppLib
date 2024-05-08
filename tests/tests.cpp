@@ -47,10 +47,43 @@ int main()
     cout << "hello world\n";
     timer.time();
     cout << math::binomCoeff(5, 3) << '\n';
-    cout << (Fraction(6, 3) + Fraction(13, 7)).approx() << '\n';
     cout << "hello, world" << '\n';
     print(1, 1.25, "hello");
     cout << euler::numDigits(123456789) << '\n';
     auto pp = euler::Primetools{1000};
     print(pp.sieve(100));
+
+    // FRACTIONS
+    print();
+
+    auto frac1 = Fraction(1, 3);
+    auto frac2 = Fraction(-2, 4);
+
+    cout << Fraction(1, 3) << endl;
+    cout << Fraction(1, 3).approx() << endl;
+    cout << Fraction(2, 4) << endl;
+    cout << Fraction(-1, 3) << endl;
+    cout << Fraction(1, -3) << endl;
+    cout << Fraction(-1, -3) << endl;
+
+    cout << frac1 + frac2 << endl;
+    cout << frac1 - frac2 << endl;
+    cout << frac1 * frac2 << endl;
+    cout << frac1 / frac2 << endl;
+
+    cout <<  4 + frac2 << endl;
+    cout << -4 + frac2 << endl;
+    cout <<  4 - frac2 << endl;
+    cout << -4 - frac2 << endl;
+    cout <<  4 * frac2 << endl;
+    cout << -4 * frac2 << endl;
+    cout <<  4 / frac2 << endl;
+    cout << -4 / frac2 << endl;
+
+    cout << boolalpha << (frac1 < frac2) << endl;    
+    cout << boolalpha << (frac1 > frac2) << endl;
+    cout << boolalpha << (frac1 == frac2) << endl;
+    cout << boolalpha << (frac1 != frac2) << endl;
+    cout << boolalpha << (frac1 >= frac2) << endl;
+    cout << boolalpha << (frac1 <= frac2) << endl;
 }

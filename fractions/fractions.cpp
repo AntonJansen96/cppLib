@@ -3,10 +3,12 @@
 #include <iostream>
 
 // Move-assignment operator.
-Fraction &Fraction::operator=(Fraction &&other)
+Fraction &Fraction::operator=(Fraction &&other) noexcept
 {
     std::swap(d_num, other.d_num);
     std::swap(d_den, other.d_den);
+    other.d_num = 1;    // Leave the temporary 
+    other.d_den = 1;    // object in a valid state.
 
     return *this;
 }
@@ -40,6 +42,15 @@ Fraction Fraction::reduce() const
 // Euclidean algorithm. Returns greatest common denominator of a and b.
 Type Fraction::gcd(Type a, Type b) const
 {
+    // GCD does not work if we have a negative numerator.
+    // Therefore, we make the numerator positive and remember the sign.
+    Type sign = 1;
+    if (a < 0)
+    {
+        a = -a;
+        sign = -1;
+    }
+
 #ifdef __GNUC__   // This is around 60% faster using specific CPU instructions.
                   // Source https://euler.stephan-brumme.com/toolbox/
     if (a == 0)
@@ -60,14 +71,14 @@ Type Fraction::gcd(Type a, Type b) const
         b -= a;
     } while (b != 0);
 
-    return a << shift;
+    return sign * (a << shift);
 
 #else
     // standard GCD
     while (b) 
         b ^= a ^= b ^= a %= b;
     
-    return a;
+    return sign * a;
 
 #endif
 }

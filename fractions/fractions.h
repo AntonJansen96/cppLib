@@ -3,7 +3,7 @@
 
 #include <iosfwd>
 
-typedef int Type; // Change this to long for 64-bit numbers.
+using Type = int64_t;                           // Type used for num and denom.
 
 class Fraction
 {
@@ -13,15 +13,17 @@ class Fraction
     public:                                     // Constructor.
         explicit Fraction(Type numerator, Type denominator = 1);
         Fraction(Fraction const &other);        // Copy constructor.
-        Fraction(Fraction &&tmp);               // Move constructor.
+        Fraction(Fraction &&tmp) noexcept;      // Move constructor.
 
         Type &num();                            // Return/edit the numerator.
         Type &denom();                          // Return/edit the denominator.
+        Type const &num() const;                // Return the numerator.
+        Type const &denom() const;              // Return the denominator.
         Fraction reduce() const;                // Reduce fraction.
         double approx() const;                  // Return the decimal value.
 
-        Fraction &operator=(Fraction const &other); // Copy-assignment operator.
-        Fraction &operator=(Fraction &&other);      // Move-assignment operator.
+        Fraction &operator=(Fraction const &other);      // Copy-assignment.
+        Fraction &operator=(Fraction &&other) noexcept;  // Move-assignment.
 
         friend std::ostream &operator<<(std::ostream &out, Fraction &obj);
         friend std::ostream &operator<<(std::ostream &out, Fraction &&obj);
@@ -40,6 +42,8 @@ class Fraction
         bool operator!=(Fraction const &other) const;   // Compare w. Fraction.
         bool operator<(Fraction const &other) const;    // Compare w. Fraction.
         bool operator>(Fraction const &other) const;    // Compare w. Fraction.
+        bool operator<=(Fraction const &other) const;   // Compare w. Fraction.
+        bool operator>=(Fraction const &other) const;   // Compare w. Fraction.
 
     private:
         Type gcd(Type a, Type b) const;                 // Greatest common divisor.
@@ -48,9 +52,15 @@ class Fraction
 // Constructor.
 inline Fraction::Fraction(Type numerator, Type denominator)
 :
-    d_num(numerator),
-    d_den(denominator)
-{}
+    d_num(numerator),       // zero denominators are set to 1.
+    d_den((denominator == 0) ? 1 : denominator)
+{
+    if (d_den < 0)          // Ensure the denominator is always positive.
+    {                       // Also makes sure that -a/-b = a/b.
+        d_num = -d_num;
+        d_den = -d_den;
+    }
+}
 
 // Copy constructor.
 inline Fraction::Fraction(Fraction const &other)
@@ -60,11 +70,14 @@ inline Fraction::Fraction(Fraction const &other)
 {}
 
 // Move constructor.
-inline Fraction::Fraction(Fraction &&tmp)
+inline Fraction::Fraction(Fraction &&tmp) noexcept
 :
     d_num(tmp.d_num),
     d_den(tmp.d_den)
-{}
+{
+    tmp.d_num = 1;          // Leave the temporary
+    tmp.d_den = 1;          // object in a valid state.
+}
 
 // Return/edit the numerator.
 inline Type &Fraction::num()
@@ -74,6 +87,18 @@ inline Type &Fraction::num()
 
 // Return/edit the denominator.
 inline Type &Fraction::denom()
+{
+    return d_den;
+}
+
+// Return the numerator.
+inline Type const &Fraction::num() const
+{
+    return d_num;
+}
+
+// Return the denominator.
+inline Type const &Fraction::denom() const
 {
     return d_den;
 }
@@ -170,6 +195,18 @@ inline bool Fraction::operator>(Fraction const &other) const
 inline bool Fraction::operator<(Fraction const &other) const
 {
     return (d_num * other.d_den < other.d_num * d_den);
+}
+
+// Compare w. Fraction.
+inline bool Fraction::operator>=(Fraction const &other) const
+{
+    return (d_num * other.d_den >= other.d_num * d_den);
+}
+
+// Compare w. Fraction.
+inline bool Fraction::operator<=(Fraction const &other) const
+{
+    return (d_num * other.d_den <= other.d_num * d_den);
 }
 
 // Add Fraction.
