@@ -24,7 +24,7 @@ uInt fastpow(uInt n, uInt m);
 // Returns the integer part of log10.
 uInt intlog10(uInt num);
 
-// Returns the factorial of a number.
+// Returns factorial of number (0 if 64-bit overflow).
 uInt factorial(uInt num);
 
 // Returns the binomial coefficient of N and n.
