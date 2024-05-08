@@ -1,30 +1,34 @@
-#ifndef MATH_H
-#define MATH_H
+#ifndef CPPLIBMATH_H
+#define CPPLIBMATH_H
 
-#include <cstddef>      // For size_t.
+#include <cstdint>
 
 namespace math {
 
+using sInt = int64_t;   // Signed 64-bit integer.
+using uInt = uint64_t;  // Unsigned 64-bit integer.
+
 // Returns (a * b) % m.
-size_t mulmod(size_t a, size_t b, size_t m);
+uInt mulmod(uInt a, uInt b, uInt m);
 
 // Returns (a^b) % m.
-size_t powmod(size_t a, size_t b, size_t m);
+uInt powmod(uInt a, uInt b, uInt m);
 
 // Returns the modular inverse (ax = 1 (mod m)).
-unsigned long modinverse(unsigned long a, unsigned long m);
+uInt modinverse(uInt a, uInt m);
 
-// Exponentiate num [0, 10] with power.
-size_t fastpow(size_t n, size_t m);
+// Returns n^m where n and m are positive integers.
+// If tabulated value is not available, fall back on pow in <cmath>.
+uInt fastpow(uInt n, uInt m);
 
 // Returns the integer part of log10.
-int intlog10(size_t num);
+uInt intlog10(uInt num);
 
 // Returns the factorial of a number.
-double factorial(int num);
+uInt factorial(uInt num);
 
 // Returns the binomial coefficient of N and n.
-double binomCoeff(int N, int n);
+uInt binom(uInt N, uInt n);
 
 } // Namespace.
 
