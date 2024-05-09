@@ -4,7 +4,7 @@
 #include <chrono>
 #include <iostream>
 
-typedef std::chrono::time_point<std::chrono::system_clock> timePoint;
+using timePoint = std::chrono::time_point<std::chrono::system_clock>;
 
 // Additional function that formats raw time into a human-readable string.
 std::string format(size_t rawtime);
