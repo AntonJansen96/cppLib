@@ -42,22 +42,11 @@ std::string ctos(Container<std::string> const &input)
     return output + ']';
 }
 
-//! Check if this is even necessary, or whether we can always do the (Type &input).
-// Base template for printing (type is const).
+// Base template for printing.
 // Will work for primitive types and all objects with an overloaded << operator.
 template <typename Type>
 void _doprint(Type const &input)
 {
-    // std::cerr << "\n_doprint(Type const &input) called\n" << std::flush;
-    std::cout << input << ' ';
-}
-
-// Base template for printing (type is not const)
-// Will work for primitive types and all objects with an overloaded << operator.
-template <typename Type>
-void _doprint(Type &input)
-{
-    // std::cerr << "\n_doprint(Type &input) called\n" << std::flush;
     std::cout << input << ' ';
 }
 
@@ -70,18 +59,13 @@ inline void _doprint(bool input)
     std::cout << std::boolalpha << input << ' ';
 }
 
-//! This at further inspection does not seem necessary? Test more!
-// Specialization for printing of the std::string type (string is const).
-// void _doprint(std::string const &input)
-// {
-//     std::cout << input << ' ';
-// }
-
-// Specialization for printing of the std::string type (string is not const).
-// void _doprint(std::string &input)
-// {
-//     std::cout << input << ' ';
-// }
+// Specialization for printing of the std::string type.
+// Note: not a template, inline to avoid symbol duplication problems.
+// Alternatively, we can put this in a .cpp file.
+inline void _doprint(std::string const &input)
+{
+    std::cout << input << ' ';
+}
 
 // Specialization for printing of abstract containers.
 template <template <typename, typename...> class ContainerType, typename ValueType, typename... Args>
