@@ -1,58 +1,47 @@
-#include "math/math.h"
 #include "euler/euler.h"
 #include "fractions/fractions.h"
-#include "stopwatch/stopwatch.h"
+#include "math/math.h"
 #include "pythonlike/pythonlike.h"
+#include "stopwatch/stopwatch.h"
 
-#include <cmath>
-#include <vector>
-#include <deque>
-#include <string>
 #include <array>
-#include <list>
+#include <cmath>
+#include <deque>
 #include <forward_list>
+#include <list>
+#include <string>
+#include <vector>
 
 using namespace std;
 using namespace pythonlike;
 
+void func()
+{
+    auto p = euler::Primetools(1000);
+    p.sieve(1000);
+}
+
 int main()
 {
-    vector<int> x = {1, 4, 9, 16, 25};
-    vector<int> y = {0, 6, 1, 7, 5, 0, 9, 3, 4, 9};
-    vector<string> z = {"anton", "arend", "alwin"};
+    // STOPWATCH
+    profile(1000, func);
 
-    print("hello", 1.25, true, z, z);
-    print(min(x), max(x), sum(x));
-    print(min(y), max(y), ctos(y));
-    print(sorted(y));
-
-    string const a = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
-    char const *b = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
-
-    print(slice(b, 0, 5));
-
-    for (auto name : view(z, 1, 3))
-        print(name);
-
-    for (auto num : range(1, 11))
-        print(num, num * num);
-
-    print(reverse(z));
-    ireverse(z);
-    print(reverse(string("hello")));
-    print(z);
-    print(round(3.141515125124, 1));
-
-    Stopwatch timer("hello");
-    timer.start();
-    cout << "hello world\n";
-    timer.time();
-    cout << math::binom(5, 3) << '\n';
-    cout << "hello, world" << '\n';
-    print(1, 1.25, "hello");
-    cout << euler::numDigits(123456789) << '\n';
-    auto pp = euler::Primetools{1000};
-    print(pp.sieve(100));
+    // PYTHONLIKE
+    using grid = std::vector<std::vector<int>>;
+    grid g = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+    print(g);
+    string const xx = "hello world";
+    string yy = "hello";
+    vector<string> zz = {"hello", "world", "anton"};
+    vector<string> const aa = {"hello", "world", "anton"};
+    print(xx);
+    print(yy);
+    print(zz);
+    print(aa);
+    print(min(std::vector<size_t>{}));
+    print(reverse(std::vector<size_t>{}));
+    print(slice("hello", 1, 3));  // slice char*
+    print(slice("hello"s, 1, 3)); // slice std::string
 
     // FRACTIONS
     auto frac1 = Fraction(1, 1);
@@ -70,20 +59,20 @@ int main()
     cout << frac1 * frac2 << endl;
     cout << frac1 / frac2 << endl;
 
-    cout <<  4 + frac2 << endl;
+    cout << 4 + frac2 << endl;
     cout << -4 + frac2 << endl;
-    cout <<  4 - frac2 << endl;
+    cout << 4 - frac2 << endl;
     cout << -4 - frac2 << endl;
-    cout <<  4 * frac2 << endl;
+    cout << 4 * frac2 << endl;
     cout << -4 * frac2 << endl;
 
-    cout <<  4 / frac2 << endl; // should return -8
-    cout << -4 / frac2 << endl; // should return 8
-    cout << frac2 /  4 << endl; // should return -1/8
-    cout << frac2 / -4 << endl; // should return 1/8
+    cout << 4 / frac2 << endl;     // should return -8
+    cout << -4 / frac2 << endl;    // should return 8
+    cout << frac2 / 4 << endl;     // should return -1/8
+    cout << frac2 / -4 << endl;    // should return 1/8
     cout << (frac2 /= -4) << endl; // should return 1/8
 
-    cout << boolalpha << (frac1 < frac2) << endl;    
+    cout << boolalpha << (frac1 < frac2) << endl;
     cout << boolalpha << (frac1 > frac2) << endl;
     cout << boolalpha << (frac1 == frac2) << endl;
     cout << boolalpha << (frac1 != frac2) << endl;
