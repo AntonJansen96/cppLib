@@ -76,13 +76,13 @@ inline auto range(long start, long stop = 0, long step = 1)
 
     if (step == 0)
     {
-        print("range() : step cannot be zero, setting step to 1.");
+        std::cerr << "range() : step cannot be zero, setting step to 1." << std::endl;
         step = 1;
     }
 
     if ((step > 0 && start >= stop) || (step < 0 && start <= stop))
     {
-        print("range() : invalid range, returning empty range.");
+        std::cerr << "range() : invalid range, returning empty range." << std::endl;
         start = 0;
         stop = 0;
     }

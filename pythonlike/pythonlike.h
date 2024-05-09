@@ -25,6 +25,9 @@ typename Type::value_type sum(Type const &input)
 template <typename Type>
 typename Type::value_type max(Type const &input)
 {
+    if (input.empty())
+        return 0;
+
     typename Type::const_iterator iter, end(input.end());
     typename Type::value_type largest = *input.begin();
 
@@ -39,6 +42,9 @@ typename Type::value_type max(Type const &input)
 template <typename Type>
 typename Type::value_type min(Type const &input)
 {
+    if (input.empty())
+        return 0;
+
     typename Type::const_iterator iter, end(input.end());
     typename Type::value_type smallest = *input.begin();
 

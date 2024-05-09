@@ -74,6 +74,18 @@ void _doprint(ContainerType<ValueType, Args...> const &input)
     std::cout << pythonlike::ctos(input) << ' ';
 }
 
+// Specialization for printing of nested containers.
+template <template <typename, typename...> class OuterContainerType, 
+          template <typename, typename...> class InnerContainerType, 
+          typename ValueType, typename... Args>
+void _doprint(OuterContainerType<InnerContainerType<ValueType, Args...>> const &input)
+{
+    for (const auto& innerContainer : input) {
+        _doprint(innerContainer);
+        std::cout << '\n';
+    }
+}
+
 // Specialization to handle when nothing is specified.
 // Note: not a template, inline to avoid symbol duplication problems.
 // Alternatively, we can put this in a .cpp file.
