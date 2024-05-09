@@ -1,22 +1,22 @@
 #include "numbersplit.h"
-#include "euler.h" // circular reference
+#include "euler.h"
 
 #include <bitset>
 
 // Constructor
 euler::NumberSplit::NumberSplit(size_t number)
-:
-    d_number(number),
-    d_length(euler::numDigits(number) - 1),    // hekje paaltje met komma's
-    d_total(1 << d_length)              // 2**d_length
-{}
+    : d_number(number)
+    , d_length(euler::numDigits(number) - 1) // hekje paaltje met komma's
+    , d_total(1 << d_length)                 // 2**d_length
+{
+}
 
 // Yield the next set.
 std::vector<size_t> euler::NumberSplit::yieldNext()
 {
     ++d_count;
-    
-    d_set.clear(); 
+
+    d_set.clear();
     d_mem = euler::firstNdigits(d_number, 1);
 
     std::bitset<64> mask = d_count; // good for up to 2**64

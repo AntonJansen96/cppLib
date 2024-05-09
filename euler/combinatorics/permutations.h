@@ -3,7 +3,8 @@
 
 #include <vector>
 
-namespace euler {
+namespace euler
+{
 
 // Object for generating the (lexicographic) permutations of a vector.
 class Permutations
@@ -13,32 +14,32 @@ class Permutations
     size_t const d_total;
     bool d_reverse;
 
-    public:
-        // Initialize Permutations object.
-        Permutations(std::vector<int> const &input, bool reverse = false);
+  public:
+    // Initialize Permutations object.
+    Permutations(std::vector<int> const &input, bool reverse = false);
 
-        // This object is not meant to be copied or moved.
-        Permutations(Permutations const &other) = delete;
-        Permutations(Permutations &&temp) = delete;
+    // This object is not meant to be copied or moved.
+    Permutations(Permutations const &other) = delete;
+    Permutations(Permutations &&temp) = delete;
 
-        // Yields the next permutation as a vector.
-        std::vector<int> yield();
-        
-        // Yield the next permutation as an integer.
-        // This is only possible when all elements are digits.
-        size_t yieldnumber();
+    // Yields the next permutation as a vector.
+    std::vector<int> yield();
 
-        // Returns true when all permutations were yielded.
-        bool done() const;
+    // Yield the next permutation as an integer.
+    // This is only possible when all elements are digits.
+    size_t yieldnumber();
 
-        // Returns total number of permutations.
-        size_t numPerms() const;
+    // Returns true when all permutations were yielded.
+    bool done() const;
 
-        // Resets everything.
-        void reset();
+    // Returns total number of permutations.
+    size_t numPerms() const;
+
+    // Resets everything.
+    void reset();
 };
 
-} // Namespace.
+} // namespace euler
 
 // Returns true when all permutations were yielded.
 inline bool euler::Permutations::done() const

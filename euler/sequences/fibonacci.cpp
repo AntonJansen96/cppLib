@@ -8,7 +8,7 @@ std::vector<size_t> fibonacci(size_t uplim)
 {
     std::vector<size_t> numbers = {1};
     size_t idx = 1, next = 1;
-    
+
     while (next <= uplim)
     {
         numbers.push_back(next);
@@ -19,4 +19,4 @@ std::vector<size_t> fibonacci(size_t uplim)
     return numbers;
 }
 
-} // namespace sequences.
+} // namespace euler::sequences

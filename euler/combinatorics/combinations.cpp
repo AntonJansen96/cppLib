@@ -6,13 +6,12 @@
 
 // Initialize combinations object.
 euler::Combinations::Combinations(std::vector<int> const &input, size_t k, bool reverse)
-:
-    d_someSet(input),
-    d_mask(k, true),
-    d_masksize(input.size()),
-    d_total(math::binom(input.size(), k)),
-    d_k(k),
-    d_reverse(reverse)
+    : d_someSet(input)
+    , d_mask(k, true)
+    , d_masksize(input.size())
+    , d_total(math::binom(input.size(), k))
+    , d_k(k)
+    , d_reverse(reverse)
 {
     std::sort(d_someSet.begin(), d_someSet.end());
 
@@ -57,5 +56,5 @@ void euler::Combinations::reset()
 {
     d_count = 0;
     std::sort(d_mask.begin(), d_mask.end());
-    std::reverse(d_mask.begin(), d_mask.end());            
+    std::reverse(d_mask.begin(), d_mask.end());
 }

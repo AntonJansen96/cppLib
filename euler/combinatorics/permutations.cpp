@@ -5,10 +5,9 @@
 
 // Initialize Permutations object.
 euler::Permutations::Permutations(std::vector<int> const &input, bool reverse)
-:
-    d_someSet(input),
-    d_total(math::factorial(input.size())),
-    d_reverse(reverse)
+    : d_someSet(input)
+    , d_total(math::factorial(input.size()))
+    , d_reverse(reverse)
 {
     std::sort(d_someSet.begin(), d_someSet.end());
 
@@ -20,12 +19,12 @@ euler::Permutations::Permutations(std::vector<int> const &input, bool reverse)
 std::vector<int> euler::Permutations::yield()
 {
     ++d_count;
-    
+
     if (d_reverse)
         std::prev_permutation(d_someSet.begin(), d_someSet.end());
     else
         std::next_permutation(d_someSet.begin(), d_someSet.end());
-    
+
     return d_someSet;
 }
 
@@ -34,12 +33,12 @@ std::vector<int> euler::Permutations::yield()
 size_t euler::Permutations::yieldnumber()
 {
     ++d_count;
-    
+
     if (d_reverse)
         std::prev_permutation(d_someSet.begin(), d_someSet.end());
     else
         std::next_permutation(d_someSet.begin(), d_someSet.end());
-    
+
     return utility::vec2num(d_someSet);
 }
 
@@ -48,5 +47,5 @@ void euler::Permutations::reset()
 {
     d_count = 0;
     std::sort(d_someSet.begin(), d_someSet.end());
-    std::reverse(d_someSet.begin(), d_someSet.end());            
+    std::reverse(d_someSet.begin(), d_someSet.end());
 }

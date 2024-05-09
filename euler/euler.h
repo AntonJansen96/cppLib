@@ -1,17 +1,18 @@
 #ifndef CPPLIB_EULER_H
 #define CPPLIB_EULER_H
 
-#include "combinatorics/permutations.h"
 #include "combinatorics/combinations.h"
 #include "combinatorics/numbersplit.h"
+#include "combinatorics/permutations.h"
 #include "primetools/primetools.h"
 #include "sequences/sequences.h"
 
 #include <string>
-#include <vector>
 #include <tuple>
+#include <vector>
 
-namespace euler {
+namespace euler
+{
 
 // Returns the number of digits of a number.
 int numDigits(size_t num);
@@ -68,12 +69,12 @@ double partition(size_t money, std::vector<size_t> const &coins);
 std::vector<size_t> genPandigital(int a, int b);
 
 // Generates primitive Pythagorean triples with perimeter (a + b + c) < perimLim.
-std::tuple<std::vector<size_t>, std::vector<size_t>, std::vector<size_t>> 
+std::tuple<std::vector<size_t>, std::vector<size_t>, std::vector<size_t>>
 genPrimTriples(size_t perimLim);
 
 // Generates all Pythagorean triples with perimeter (a + b + c) < perimLim.
 // Contains duplicate perimeters.
-std::tuple<std::vector<size_t>, std::vector<size_t>, std::vector<size_t>> 
+std::tuple<std::vector<size_t>, std::vector<size_t>, std::vector<size_t>>
 genTriples(size_t perimLim);
 
 // CERTAIN CONVERSIONS *********************************************************
@@ -93,6 +94,6 @@ int roman2dec(std::string const &numeral);
 // The smallest positive integer that is divisble by both a and b.
 int lcm(int a, int b);
 
-} // Namespace.
+} // namespace euler
 
 #endif
