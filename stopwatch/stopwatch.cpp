@@ -3,14 +3,19 @@
 // Construct Stopwatch object and start.
 Stopwatch::Stopwatch()
 :
-    d_start(std::chrono::system_clock::now())
+    d_start(std::chrono::system_clock::time_point()),
+    d_diff(0),
+    d_description("''"),
+    d_stopped(true)
 {}
 
 // Construct Stopwatch object, specify description and start.
 Stopwatch::Stopwatch(std::string const &description)
 :
-    d_start(std::chrono::system_clock::now()),
-    d_description(description)
+    d_start(std::chrono::system_clock::time_point()),
+    d_diff(0),
+    d_description(description),
+    d_stopped(true)
 {}
 
 // Copy constructor.
@@ -41,6 +46,9 @@ void Stopwatch::start()
         d_stopped = false;
         d_start = std::chrono::system_clock::now();
     }
+    else
+        std::cerr << "warning: tried to call start() on running "
+        << "Stopwatch object (" << d_description << ")\n";
 }
 
 // Stop Stopwatch.
@@ -91,41 +99,14 @@ std::ostream &operator<<(std::ostream &out, Stopwatch &&obj)
 // Add Stopwatch elapsed times.
 Stopwatch &Stopwatch::operator+=(Stopwatch const &rhs)
 {
-    if ((not d_stopped) || (not rhs.d_stopped))
-        std::cout << "cannot add running Stopwatch" << std::endl;
-    
-    d_diff += rhs.d_diff;
-
+    d_diff += rhs.rawtime();
     return *this;
 }
 
 // Subtract Stopwatch elapsed times.
 Stopwatch &Stopwatch::operator-=(Stopwatch const &rhs)
 {
-    if ((not d_stopped) || (not rhs.d_stopped))
-        std::cout << "cannot subtract running Stopwatch" << std::endl;
-    
-    d_diff -= rhs.d_diff;
-
-    return *this;
-}
-
-// Multiply Stopwatch time by scalar.
-Stopwatch &Stopwatch::operator*=(size_t scalar)
-{
-    if (not d_stopped)
-        std::cout << "cannot multiply running Stopwatch" << std::endl;
-    
-    d_diff *= scalar;
-    return *this;
-}
-
-// Divide Stopwatch time by scalar.
-Stopwatch &Stopwatch::operator/=(size_t scalar)
-{
-    std::cout << "cannot divide running Stopwatch" << std::endl;
-    
-    d_diff /= scalar;
+    d_diff -= rhs.rawtime();
     return *this;
 }
 

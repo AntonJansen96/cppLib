@@ -6,16 +6,19 @@
 
 typedef std::chrono::time_point<std::chrono::system_clock> timePoint;
 
-// Additional function that maybe be used for profiling functions/lambdas.
+// Additional function that may be be used for profiling functions/lambdas.
 // Make sure to inline the function to be tested.
 size_t profile(size_t iterations, void (*func)());
+
+// Additional Stopwatch function. Sleeps (the current thread) for #seconds.
+void sleep(float seconds);
 
 class Stopwatch
 {
     timePoint   d_start;            // Stores starting time.
     size_t      d_diff;             // Stores elapsed time.
     std::string d_description;      // Optional descriptor.
-    bool        d_stopped = true;   // Stopwatch running or not?
+    bool        d_stopped;          // Stopwatch running or not?
 
     public:
         Stopwatch();                          // Constructors.
@@ -41,9 +44,6 @@ class Stopwatch
 
         Stopwatch &operator+=(Stopwatch const &rhs);  // Add Stopwatches. 
         Stopwatch &operator-=(Stopwatch const &rhs);  // Subtract Stopwatches.
-        
-        Stopwatch &operator*=(size_t scalar); // Multiply by scalar.
-        Stopwatch &operator/=(size_t scalar); // Divide by scalar.
 
         bool operator==(Stopwatch const &other) const;  // Compare w. Stopwatch.
         bool operator!=(Stopwatch const &other) const;  // Compare w. Stopwatch.
@@ -68,76 +68,64 @@ inline bool Stopwatch::isrunning() const
     return !d_stopped;
 }
 
-// Stop Stopwatch and return raw time (value of d_diff) in ns.
+// Get Stopwatch elapsed time in ns.
 inline size_t Stopwatch::rawtime() const
 {
+    if (not d_stopped)
+    {
+        timePoint const currtime = std::chrono::system_clock::now();
+        return d_diff + (currtime - d_start).count();
+    }
+
     return d_diff;
 }
 
-// Add Stopwatch objects (times).
+// Add Stopwatch objects.
 inline Stopwatch operator+(Stopwatch const &lhs, Stopwatch const &rhs)
 {
     return Stopwatch{lhs} += rhs;
 }
 
-// Subtract Stopwatch objects (times).
+// Subtract Stopwatch objects.
 inline Stopwatch operator-(Stopwatch const &lhs, Stopwatch const &rhs)
 {
     return Stopwatch{lhs} -= rhs;
 }
 
-// Multiply Stopwatch object's time by scalar.
-inline Stopwatch operator*(Stopwatch const &lhs, size_t scalar)
-{
-    return Stopwatch{lhs} *= scalar;
-}
-
-// Multiply Stopwatch object's time by scalar.
-inline Stopwatch operator*(size_t scalar, Stopwatch const &rhs)
-{
-    return Stopwatch{rhs} *= scalar;
-}
-
-// Divide Stopwatch object's time by scalar.
-inline Stopwatch operator/(Stopwatch const &lhs, size_t scalar)
-{
-    return Stopwatch{lhs} /= scalar;
-}
-
 // Compare two Stopwatch objects.
 inline bool Stopwatch::operator==(Stopwatch const &other) const
 {
-    return d_diff == other.d_diff ? true : false;
+    return rawtime() == other.rawtime() ? true : false;
 }
 
 // Compare two Stopwatch objects.
 inline bool Stopwatch::operator!=(Stopwatch const &other) const
 {
-    return d_diff != other.d_diff ? true : false;
+    return rawtime() != other.rawtime() ? true : false;
 }
 
 // Compare two Stopwatch objects.
 inline bool Stopwatch::operator<(Stopwatch const &other) const
 {
-    return d_diff < other.d_diff ? true : false;
+    return rawtime() < other.rawtime() ? true : false;
 }
 
 // Compare two Stopwatch objects.
 inline bool Stopwatch::operator>(Stopwatch const &other) const
 {
-    return d_diff > other.d_diff ? true : false;
+    return rawtime() > other.rawtime() ? true : false;
 }
 
 // Compare two Stopwatch objects.
 inline bool Stopwatch::operator<=(Stopwatch const &other) const
 {
-    return d_diff <= other.d_diff ? true : false;
+    return rawtime() <= other.rawtime() ? true : false;
 }
 
 // Compare two Stopwatch objects.
 inline bool Stopwatch::operator>=(Stopwatch const &other) const
 {
-    return d_diff >= other.d_diff ? true : false;
+    return rawtime() >= other.rawtime() ? true : false;
 }
 
 #endif
