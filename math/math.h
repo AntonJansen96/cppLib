@@ -1,6 +1,7 @@
 #ifndef CPPLIBMATH_H
 #define CPPLIBMATH_H
 
+#include "templates.h"
 #include <cstdint>
 
 namespace math
