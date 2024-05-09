@@ -35,16 +35,17 @@ size_t firstNdigits(int base, int exp, int N);
 // Returns the last N digits from a number.
 size_t lastNdigits(size_t num, int N);
 
+// Reverse a number. Example: 1234 -> 4321.
+size_t reverseNumber(size_t num);
+
 // CHECKS FOR CERTAIN PROPERTIES ***********************************************
 
-// Checks whether number is a perfect square.
-bool isSquare(size_t num);
+// Check if a number is automorphic.
+// Automorphic means that the square of the number ends with the number itself.
+bool isAutomorphic(size_t num);
 
 // Checks whether two numbers a and b are coprime.
 bool isCoprime(int a, int b);
-
-// Checkss whether number is a perfect number.
-bool isPerfect(size_t num);
 
 // Checks whether number is juf.
 bool isJuf(size_t num);
@@ -52,8 +53,14 @@ bool isJuf(size_t num);
 // Checks whether number is a palindrome.
 bool isPalindrome(size_t num);
 
+// Checkss whether number is a perfect number.
+bool isPerfect(size_t num);
+
 // Check whether the number a is a digit permutation of number b.
 bool isPermutationOf(size_t a, size_t b);
+
+// Checks whether number is a perfect square.
+bool isSquare(size_t num);
 
 // PARTITIONING ****************************************************************
 

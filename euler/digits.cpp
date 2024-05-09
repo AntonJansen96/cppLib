@@ -72,4 +72,17 @@ size_t lastNdigits(size_t num, int N)
     return (num % math::fastpow(10, N));
 }
 
+// Reverse a number. Example: 1234 -> 4321.
+size_t reverseNumber(size_t num)
+{
+    size_t reversed = 0;
+
+    while (num)
+    {
+        reversed = reversed * 10 + (num % 10);
+        num /= 10;
+    }
+    return reversed;
+}
+
 } // namespace euler.

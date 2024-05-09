@@ -4,21 +4,20 @@
 #include <algorithm>
 #include <cmath>
 
-// Check whether num is a square.
-bool euler::isSquare(size_t num)
+// Check if a number is automorphic.
+// Automorphic means that the square of the number ends with the number itself.
+bool euler::isAutomorphic(size_t num)
 {
-    size_t h = num & 0xF; // Last hexadecimal "digit".
+    size_t m = 1;
+    size_t temp = num;
 
-    if (h > 9)
-        return false; // Return immediately in 6/16 cases.
-
-    if (h != 2 && h != 3 && h != 5 && h != 6 && h != 7 && h != 8)
+    while (temp > 0)
     {
-        size_t root = std::floor(std::sqrt(num) + 0.5);
-        return (root * root == num); // Take square root if you must.
+        m *= 10;
+        temp /= 10;
     }
 
-    return false;
+    return math::mulmod(num, num, m);
 }
 
 // Checks whether two numbers a and b are coprime.
@@ -30,25 +29,11 @@ bool euler::isCoprime(int a, int b)
     return (math::gcd(a, b) == 1);
 }
 
-// Check whether num is a perfect number.
-bool euler::isPerfect(size_t num)
-{
-    if (num == 6 or num == 28 or num == 496 or num == 8128 or num == 33550336 or
-        num == 8589869056 or num == 137438691328 or
-        num == 2305843008139952128 // next one is larger than size_t so stop.
-    )
-        return true;
-
-    return false;
-}
-
 // Checks whether a number is juf.
 bool euler::isJuf(size_t num)
 {
     return (num % 7 == 0 || std::to_string(num).find('7') != std::string::npos ||
-            (euler::isPalindrome(num) && num > 10))
-               ? true
-               : false;
+            (euler::isPalindrome(num) && num > 10));
 }
 
 // Check whether a number is a palindrome.
@@ -63,6 +48,18 @@ bool euler::isPalindrome(size_t num)
     }
 
     return invnum == num ? true : false;
+}
+
+// Check whether num is a perfect number.
+bool euler::isPerfect(size_t num)
+{
+    if (num == 6 or num == 28 or num == 496 or num == 8128 or num == 33550336 or
+        num == 8589869056 or num == 137438691328 or
+        num == 2305843008139952128 // next one is larger than size_t so stop.
+    )
+        return true;
+
+    return false;
 }
 
 namespace
@@ -105,6 +102,23 @@ double euler::partition(size_t money)
             ways[jj] += ways[jj - coins[ii]];
 
     return ways[money];
+}
+
+// Check whether num is a square.
+bool euler::isSquare(size_t num)
+{
+    size_t h = num & 0xF; // Last hexadecimal "digit".
+
+    if (h > 9)
+        return false; // Return immediately in 6/16 cases.
+
+    if (h != 2 && h != 3 && h != 5 && h != 6 && h != 7 && h != 8)
+    {
+        size_t root = std::floor(std::sqrt(num) + 0.5);
+        return (root * root == num); // Take square root if you must.
+    }
+
+    return false;
 }
 
 // Returns #ways money can be divided by coins in listed in coinvector.
