@@ -1,9 +1,9 @@
 #ifndef CPPLIB_EULER_H
 #define CPPLIB_EULER_H
 
-#include "permutations.h"
-#include "combinations.h"
-#include "numbersplit.h"
+#include "combinatorics/permutations.h"
+#include "combinatorics/combinations.h"
+#include "combinatorics/numbersplit.h"
 #include "primetools/primetools.h"
 
 #include <string>
