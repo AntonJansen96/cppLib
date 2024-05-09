@@ -41,10 +41,6 @@ class Combinations
 
         // Resets everything.
         void reset();
-    
-    private:
-        // Transforms a vector of digits into an integer.
-        size_t vector2number(std::vector<int> const &input);
 };
 
 } // Namespace.

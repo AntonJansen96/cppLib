@@ -43,5 +43,6 @@ more or less a wrapper for some functionality of the std::chrono library.
 - [x]  math
 - [x]  stopwatch
 - [x]  pythonlike
+- [x]  utility
 - [ ]  unit and integration tests
 - [ ]  allow setting of fractions type (32bit or 64bit integer) in cmake.

@@ -13,9 +13,10 @@ add_subdirectory(fractions)
 add_subdirectory(math)
 add_subdirectory(pythonlike)
 add_subdirectory(stopwatch)
+add_subdirectory(utility)
 
 # Install the libraries.
-install(TARGETS euler fractions math stopwatch ARCHIVE DESTINATION /usr/local/lib)
+install(TARGETS euler fractions math stopwatch utility ARCHIVE DESTINATION /usr/local/lib)
 
 # Install the header files (avoid annoying includes in the header files (.cpp is fine)).
-install(DIRECTORY euler/ fractions/ math/ pythonlike/ stopwatch/ DESTINATION /usr/local/include/cpplib FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY euler/ fractions/ math/ pythonlike/ stopwatch/ utility/ DESTINATION /usr/local/include/cpplib FILES_MATCHING PATTERN "*.h")

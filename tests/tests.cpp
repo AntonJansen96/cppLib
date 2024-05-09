@@ -3,6 +3,7 @@
 #include "math/math.h"
 #include "pythonlike/pythonlike.h"
 #include "stopwatch/stopwatch.h"
+#include "utility/utility.h"
 
 #include <array>
 #include <cmath>
@@ -23,6 +24,13 @@ void func()
 
 int main()
 {
+    Stopwatch clock;
+    clock.start();
+
+    // UTILITY
+    print(utility::num2vec(12345));
+    print(utility::vec2num(std::vector<int>{1, 2, 3, 4, 5}));
+
     // STOPWATCH
     profile(1000, func);
 
@@ -94,4 +102,6 @@ int main()
     cout << math::factorial(-2) << endl;
     cout << math::binom(18, 7) << endl; // should be 31824
     cout << math::gcd(23142, 155) << endl;
+
+    print(fs("Executing tests took {}.", clock));
 }

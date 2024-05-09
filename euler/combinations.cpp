@@ -1,5 +1,6 @@
 #include "combinations.h"
 #include "../math/math.h"
+#include "../utility/utility.h"
 
 #include <algorithm>
 
@@ -48,7 +49,7 @@ size_t euler::Combinations::yieldnumber()
 
     std::prev_permutation(d_mask.begin(), d_mask.end());
 
-    return vector2number(d_comb);
+    return utility::vec2num(d_comb);
 }
 
 // Resets everything.
@@ -57,14 +58,4 @@ void euler::Combinations::reset()
     d_count = 0;
     std::sort(d_mask.begin(), d_mask.end());
     std::reverse(d_mask.begin(), d_mask.end());            
-}
-
-// Transforms a vector of digits into an integer.
-size_t euler::Combinations::vector2number(std::vector<int> const &input)
-{
-    size_t number = 0;
-    for (auto digit : input)
-        number = number * 10 + digit;
-
-    return number;
 }

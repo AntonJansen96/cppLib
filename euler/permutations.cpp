@@ -1,5 +1,6 @@
 #include "permutations.h"
 #include "../math/math.h"
+#include "../utility/utility.h"
 #include <algorithm>
 
 // Initialize Permutations object.
@@ -39,7 +40,7 @@ size_t euler::Permutations::yieldnumber()
     else
         std::next_permutation(d_someSet.begin(), d_someSet.end());
     
-    return vector2number(d_someSet);
+    return utility::vec2num(d_someSet);
 }
 
 // Resets everything.
@@ -48,14 +49,4 @@ void euler::Permutations::reset()
     d_count = 0;
     std::sort(d_someSet.begin(), d_someSet.end());
     std::reverse(d_someSet.begin(), d_someSet.end());            
-}
-
-// Transforms a vector of digits into an integer.
-size_t euler::Permutations::vector2number(std::vector<int> const &input)
-{
-    size_t number = 0;
-    for (auto digit : input)
-        number = number * 10 + digit;
-
-    return number;
 }
