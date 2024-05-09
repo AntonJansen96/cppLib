@@ -5,14 +5,13 @@
 #include "combinatorics/combinations.h"
 #include "combinatorics/numbersplit.h"
 #include "primetools/primetools.h"
+#include "sequences/sequences.h"
 
 #include <string>
 #include <vector>
 #include <tuple>
 
 namespace euler {
-
-// NUMBERS AND DIGITS **********************************************************
 
 // Returns the number of digits of a number.
 int numDigits(size_t num);
@@ -65,9 +64,6 @@ double partition(size_t money, std::vector<size_t> const &coins);
 
 // GENERATORS ******************************************************************
 
-// Generates all Fibonacci numbers smaller than uplim.
-std::vector<size_t> genFibonnaci(size_t uplim);
-
 // Generates all numbers that are a to b pandigital.
 std::vector<size_t> genPandigital(int a, int b);
 
@@ -81,9 +77,6 @@ std::tuple<std::vector<size_t>, std::vector<size_t>, std::vector<size_t>>
 genTriples(size_t perimLim);
 
 // CERTAIN CONVERSIONS *********************************************************
-
-// Converts a number to a vector of digits.
-std::vector<size_t> num2vec(size_t num);
 
 // Converts a decimal number to a specified radix.
 std::string radix(size_t value, size_t radix);
