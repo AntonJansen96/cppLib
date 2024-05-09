@@ -2,6 +2,7 @@
 #define CPPLIB_PYTHONLIKE_PRINT_H
 
 #include <iostream>
+#include <sstream>
 
 namespace pythonlike {
 
