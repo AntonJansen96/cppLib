@@ -11,10 +11,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include_directories(..)
 add_subdirectory(../euler euler)
+add_subdirectory(../fileio fileio)
 add_subdirectory(../fractions fractions)
 add_subdirectory(../math math)
 add_subdirectory(../stopwatch stopwatch)
 add_subdirectory(../utility utility)
 
 add_executable(tests tests.cpp)
-target_link_libraries(tests euler fractions math stopwatch utility)
+target_link_libraries(tests euler fileio fractions math stopwatch utility)
