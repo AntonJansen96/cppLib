@@ -36,3 +36,12 @@ view(), and range() functions.
 
 A class that can be used to time and profile C++ code. This class is
 more or less a wrapper for some functionality of the std::chrono library.
+
+- [x]  build system
+- [ ]  euler
+- [x]  fractions
+- [x]  math
+- [x]  stopwatch
+- [x]  pythonlike
+- [ ]  unit and integration tests
+- [ ]  allow setting of fractions type (32bit or 64bit integer) in cmake.
