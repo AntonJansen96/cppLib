@@ -2,39 +2,37 @@
 
 // Construct Stopwatch object and start.
 Stopwatch::Stopwatch()
-:
-    d_start(std::chrono::system_clock::time_point()),
-    d_diff(0),
-    d_description("''"),
-    d_stopped(true)
-{}
+    : d_start(std::chrono::system_clock::time_point())
+    , d_diff(0)
+    , d_description("''")
+    , d_stopped(true)
+{
+}
 
 // Construct Stopwatch object, specify description and start.
 Stopwatch::Stopwatch(std::string const &description)
-:
-    d_start(std::chrono::system_clock::time_point()),
-    d_diff(0),
-    d_description(description),
-    d_stopped(true)
-{}
+    : d_start(std::chrono::system_clock::time_point())
+    , d_diff(0)
+    , d_description(description)
+    , d_stopped(true)
+{
+}
 
 // Copy constructor.
 Stopwatch::Stopwatch(Stopwatch const &other)
-:
-    d_start(other.d_start),
-    d_diff(other.d_diff),
-    d_description(other.d_description),
-    d_stopped(other.d_stopped)
+    : d_start(other.d_start)
+    , d_diff(other.d_diff)
+    , d_description(other.d_description)
+    , d_stopped(other.d_stopped)
 {
 }
 
 // Move constructor.
 Stopwatch::Stopwatch(Stopwatch &&tmp) noexcept
-:
-    d_start(tmp.d_start),
-    d_diff(tmp.d_diff),
-    d_description(tmp.d_description),
-    d_stopped(tmp.d_stopped)        
+    : d_start(tmp.d_start)
+    , d_diff(tmp.d_diff)
+    , d_description(tmp.d_description)
+    , d_stopped(tmp.d_stopped)
 {
 }
 
@@ -48,7 +46,7 @@ void Stopwatch::start()
     }
     else
         std::cerr << "warning: tried to call start() on running "
-        << "Stopwatch object (" << d_description << ")\n";
+                  << "Stopwatch object (" << d_description << ")\n";
 }
 
 // Stop Stopwatch.
@@ -66,7 +64,7 @@ void Stopwatch::stop()
 void Stopwatch::reset()
 {
     d_start = std::chrono::system_clock::time_point();
-    d_diff  = 0;
+    d_diff = 0;
 }
 
 // Copy-assignment.
@@ -77,7 +75,7 @@ Stopwatch &Stopwatch::operator=(Stopwatch const &other)
 
 // Move-assignment.
 Stopwatch &Stopwatch::operator=(Stopwatch &&tmp) noexcept
-{    
+{
     swap(tmp);
     return *this;
 }
