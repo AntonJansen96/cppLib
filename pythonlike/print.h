@@ -4,11 +4,11 @@
 #include <iostream>
 #include <sstream>
 
-namespace pythonlike {
+namespace pythonlike
+{
 
 // Return abstract container as a string.
-template <typename Type>
-std::string ctos(Type const &input)
+template <typename Type> std::string ctos(Type const &input)
 {
     if (input.empty())
         return "[]";
@@ -44,8 +44,7 @@ std::string ctos(Container<std::string> const &input)
 
 // Base template for printing.
 // Will work for primitive types and all objects with an overloaded << operator.
-template <typename Type>
-void _doprint(Type const &input)
+template <typename Type> void _doprint(Type const &input)
 {
     std::cout << input << ' ';
 }
@@ -68,19 +67,21 @@ inline void _doprint(std::string const &input)
 }
 
 // Specialization for printing of abstract containers.
-template <template <typename, typename...> class ContainerType, typename ValueType, typename... Args>
+template <template <typename, typename...> class ContainerType, typename ValueType,
+          typename... Args>
 void _doprint(ContainerType<ValueType, Args...> const &input)
 {
     std::cout << pythonlike::ctos(input) << ' ';
 }
 
 // Specialization for printing of nested containers.
-template <template <typename, typename...> class OuterContainerType, 
-          template <typename, typename...> class InnerContainerType, 
-          typename ValueType, typename... Args>
+template <template <typename, typename...> class OuterContainerType,
+          template <typename, typename...> class InnerContainerType, typename ValueType,
+          typename... Args>
 void _doprint(OuterContainerType<InnerContainerType<ValueType, Args...>> const &input)
 {
-    for (const auto& innerContainer : input) {
+    for (const auto &innerContainer : input)
+    {
         _doprint(innerContainer);
         std::cout << '\n';
     }
@@ -90,11 +91,11 @@ void _doprint(OuterContainerType<InnerContainerType<ValueType, Args...>> const &
 // Note: not a template, inline to avoid symbol duplication problems.
 // Alternatively, we can put this in a .cpp file.
 inline void _doprint()
-{}
+{
+}
 
 // Variadic template. Main thing that gets executed.
-template <typename T, typename... Args>
-void _doprint(T first, Args... args)
+template <typename T, typename... Args> void _doprint(T first, Args... args)
 {
     _doprint(first);
     _doprint(args...);
@@ -106,8 +107,7 @@ void _doprint(T first, Args... args)
 // Print arguments to terminal.
 // Works for primitive types and all objects with an overloaded << operator.
 // Also works for abstract containers containing primitive types and std::strings.
-template <typename... Args>
-void print(Args... args)
+template <typename... Args> void print(Args... args)
 {
     _doprint(args...);
     std::cout << std::endl;
@@ -116,8 +116,7 @@ void print(Args... args)
 namespace
 {
 // Helper function for the variadic template fs function.
-template<typename Type>
-std::string to_string(Type value)
+template <typename Type> std::string to_string(Type value)
 {
     std::ostringstream os;
     os << value;
@@ -127,11 +126,10 @@ std::string to_string(Type value)
 
 // Create a Python-style f-string.
 // Use: fs("{} {}", "hello", "world!").
-template<typename... Args>
-std::string fs(std::string const &input, Args... args)
+template <typename... Args> std::string fs(std::string const &input, Args... args)
 {
     std::string output{input};
-    std::string argStrings[] = { to_string(args)... };
+    std::string argStrings[] = {to_string(args)...};
 
     for (auto const &arg : argStrings)
     {
