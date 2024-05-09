@@ -45,7 +45,7 @@ class Fraction
     bool operator>=(Fraction const &other) const; // Compare w. Fraction.
 
   private:
-    void normalize();               // Normalize fraction.
+    void normalize(); // Normalize fraction.
 };
 
 // Constructor.
