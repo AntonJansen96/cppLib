@@ -8,7 +8,7 @@ typedef std::chrono::time_point<std::chrono::system_clock> timePoint;
 
 // Additional function that may be be used for profiling functions/lambdas.
 // Make sure to inline the function to be tested.
-size_t profile(size_t iterations, void (*func)());
+size_t profile(size_t cycles, void (*func)());
 
 // Additional Stopwatch function. Sleeps (the current thread) for #seconds.
 void sleep(float seconds);
