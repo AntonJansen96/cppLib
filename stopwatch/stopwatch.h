@@ -8,102 +8,52 @@ typedef std::chrono::time_point<std::chrono::system_clock> timePoint;
 
 // Additional function that maybe be used for profiling functions/lambdas.
 // Make sure to inline the function to be tested.
-void profile(size_t iterations, void (*func)());
+size_t profile(size_t iterations, void (*func)());
 
 class Stopwatch
 {
-    // DATA MEMBERS ////////////////////////////////////////////////////////////
+    timePoint   d_start;            // Stores starting time.
+    size_t      d_diff;             // Stores elapsed time.
+    std::string d_description;      // Optional descriptor.
+    bool        d_stopped = true;   // Stopwatch running or not?
 
-    timePoint   d_start;
-    timePoint   d_stop;
-    double      d_diff;
-    std::string d_description;
-    bool        d_stopped = true;
-    
     public:
-        // CONSTRUCTORS ////////////////////////////////////////////////////////
-
-        // Construct Stopwatch object and start.
-        Stopwatch();
-        
-        // Construct Stopwatch object, specify description and start.
+        Stopwatch();                          // Constructors.
         explicit Stopwatch(std::string const &description);
+        Stopwatch(Stopwatch const &other);    // Copy constructor.
+        Stopwatch(Stopwatch &&tmp) noexcept;  // Move constructor.
 
-        // Copy constructor.
-        Stopwatch(Stopwatch const &other);
+        void start();                // Start Stopwatch.
+        void stop();                 // Stop Stopwatch.
+        void reset();                // Reset Stopwatch.
+        std::string &description();  // Return/edit optional descriptor.
+        bool isrunning() const;      // Check whether Stopwatch is running.
+        std::string time(std::ostream &out = std::cout); // Return elapsed time as formatted string.
+        size_t rawtime() const;      // Return elapsed time as the number of ns.
 
-        // Move constructor.
-        Stopwatch(Stopwatch &&tmp);
+        Stopwatch &operator=(Stopwatch const &other);    // Copy-assignment.
+        Stopwatch &operator=(Stopwatch &&tmp) noexcept;  // Move-assignment.
 
-        // MEMBER FUNCTIONS ////////////////////////////////////////////////////
-
-        // Start Stopwatch.
-        void start();
-
-        // Stop Stopwatch.
-        void stop();
-
-        // Reset Stopwatch.
-        void reset();
-
-        // Return/edit Stopwatch description.
-        std::string &description();
-
-        // Check whether Stopwatch is running.
-        bool isrunning() const;
-
-        // Stop Stopwatch and insert fancy time into stream (default std::cout).
-        void time(std::ostream &out = std::cout);
-
-        // Stop Stopwatch and return raw time (value of d_diff) in ns.
-        size_t rawtime();
-
-        // OVERLOADED OPERATORS ////////////////////////////////////////////////
-
-        // Copy assignment operator.
-        Stopwatch &operator=(Stopwatch const &other);
-
-        // Move assignment operator.
-        Stopwatch &operator=(Stopwatch &&tmp);
-
-        // Insert Stopwatch time into stream.
+        // Insert formatted time into stream (l-value).
         friend std::ostream &operator<<(std::ostream &out, Stopwatch &obj);
-
-        // Insert Stopwatch time into stream.
+        // Insert formatted time into stream (r-value).
         friend std::ostream &operator<<(std::ostream &out, Stopwatch &&obj);
 
-        // Add Stopwatch objects (times).
-        Stopwatch &operator+=(Stopwatch const &rhs);
-
-        // Subtract Stopwatch objects (times).
-        Stopwatch &operator-=(Stopwatch const &rhs);
-
-        // Multiply Stopwatch object's time by scalar.
-        Stopwatch &operator*=(size_t scalar);
-
-        // Divide Stopwatch object's time by scalar.
-        Stopwatch &operator/=(size_t scalar);
-
-        // Compare two Stopwatch objects.
-        bool operator==(Stopwatch const &other) const;
-
-        // Compare two Stopwatch objects.
-        bool operator!=(Stopwatch const &other) const;
-
-        // Compare two Stopwatch objects.
-        bool operator<(Stopwatch const &other) const;
-
-        // Compare two Stopwatch objects.
-        bool operator>(Stopwatch const &other) const;
-            
-    private:
-        // HELPER FUNCTIONS ////////////////////////////////////////////////////
-
-        // Dedicated swap member. Used by move assignment operator.
-        void swap(Stopwatch &other);
+        Stopwatch &operator+=(Stopwatch const &rhs);  // Add Stopwatches. 
+        Stopwatch &operator-=(Stopwatch const &rhs);  // Subtract Stopwatches.
         
-        // Private accessor for d_diff. Used by rawtime() function.
-        size_t accessdiff() const;
+        Stopwatch &operator*=(size_t scalar); // Multiply by scalar.
+        Stopwatch &operator/=(size_t scalar); // Divide by scalar.
+
+        bool operator==(Stopwatch const &other) const;  // Compare w. Stopwatch.
+        bool operator!=(Stopwatch const &other) const;  // Compare w. Stopwatch.
+        bool operator<(Stopwatch const &other) const;   // Compare w. Stopwatch.
+        bool operator>(Stopwatch const &other) const;   // Compare w. Stopwatch.
+        bool operator<=(Stopwatch const &other) const;  // Compare w. Stopwatch.
+        bool operator>=(Stopwatch const &other) const;  // Compare w. Stopwatch.
+
+    private:
+        void swap(Stopwatch &other);  // Dedicated swap member.
 };
 
 // Return/edit Stopwatch description.
@@ -119,38 +69,7 @@ inline bool Stopwatch::isrunning() const
 }
 
 // Stop Stopwatch and return raw time (value of d_diff) in ns.
-inline size_t Stopwatch::rawtime()
-{
-    this->stop();
-    return accessdiff();
-}
-
-// Compare two Stopwatch objects.
-inline bool Stopwatch::operator==(Stopwatch const &other) const
-{
-    return d_diff == other.d_diff ? true : false;
-}
-
-// Compare two Stopwatch objects.
-inline bool Stopwatch::operator!=(Stopwatch const &other) const
-{
-    return d_diff != other.d_diff ? true : false;
-}
-
-// Compare two Stopwatch objects.
-inline bool Stopwatch::operator<(Stopwatch const &other) const
-{
-    return d_diff < other.d_diff ? true : false;
-}
-
-// Compare two Stopwatch objects.
-inline bool Stopwatch::operator>(Stopwatch const &other) const
-{
-    return d_diff > other.d_diff ? true : false;
-}
-
-// Private accessor for d_diff. Used by rawtime() function.
-inline size_t Stopwatch::accessdiff() const
+inline size_t Stopwatch::rawtime() const
 {
     return d_diff;
 }
@@ -183,6 +102,42 @@ inline Stopwatch operator*(size_t scalar, Stopwatch const &rhs)
 inline Stopwatch operator/(Stopwatch const &lhs, size_t scalar)
 {
     return Stopwatch{lhs} /= scalar;
+}
+
+// Compare two Stopwatch objects.
+inline bool Stopwatch::operator==(Stopwatch const &other) const
+{
+    return d_diff == other.d_diff ? true : false;
+}
+
+// Compare two Stopwatch objects.
+inline bool Stopwatch::operator!=(Stopwatch const &other) const
+{
+    return d_diff != other.d_diff ? true : false;
+}
+
+// Compare two Stopwatch objects.
+inline bool Stopwatch::operator<(Stopwatch const &other) const
+{
+    return d_diff < other.d_diff ? true : false;
+}
+
+// Compare two Stopwatch objects.
+inline bool Stopwatch::operator>(Stopwatch const &other) const
+{
+    return d_diff > other.d_diff ? true : false;
+}
+
+// Compare two Stopwatch objects.
+inline bool Stopwatch::operator<=(Stopwatch const &other) const
+{
+    return d_diff <= other.d_diff ? true : false;
+}
+
+// Compare two Stopwatch objects.
+inline bool Stopwatch::operator>=(Stopwatch const &other) const
+{
+    return d_diff >= other.d_diff ? true : false;
 }
 
 #endif
