@@ -1,5 +1,5 @@
-#ifndef PRINT_H
-#define PRINT_H
+#ifndef CPPLIB_PYTHONLIKE_PRINT_H
+#define CPPLIB_PYTHONLIKE_PRINT_H
 
 #include <iostream>
 
@@ -62,7 +62,9 @@ void _doprint(Type &input)
 
 // Specialization for printing of the bool type.
 // We have a specialization so that we can print true/false instead of 1/0.
-void _doprint(bool input)
+// Note: not a template, inline to avoid symbol duplication problems.
+// Alternatively, we can put this in a .cpp file.
+inline void _doprint(bool input)
 {
     std::cout << std::boolalpha << input << ' ';
 }
@@ -88,7 +90,9 @@ void _doprint(ContainerType<ValueType, Args...> const &input)
 }
 
 // Specialization to handle when nothing is specified.
-void _doprint()
+// Note: not a template, inline to avoid symbol duplication problems.
+// Alternatively, we can put this in a .cpp file.
+inline void _doprint()
 {}
 
 // Variadic template. Main thing that gets executed.

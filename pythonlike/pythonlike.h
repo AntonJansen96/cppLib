@@ -1,5 +1,5 @@
-#ifndef PYTHONLIKE_H
-#define PYTHONLIKE_H
+#ifndef CPPLIB_PYTHONLIKE_H
+#define CPPLIB_PYTHONLIKE_H
 
 #include "print.h"
 #include "slice.h"

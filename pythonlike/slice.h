@@ -1,5 +1,5 @@
-#ifndef SLICE_H
-#define SLICE_H
+#ifndef CPPLIB_PYTHONLIKE_SLICE_H
+#define CPPLIB_PYTHONLIKE_SLICE_H
 
 #include <algorithm>
 #include <string>
@@ -10,7 +10,9 @@
 namespace pythonlike {
 
 // Slice char* strings. Returns sliced string as a new char*.
-char* slice(const char* string, size_t m, size_t n)
+// Note: not a template, inline to avoid symbol duplication problems.
+// Alternatively, we can put this in a .cpp file.
+inline char* slice(const char* string, size_t m, size_t n)
 {
     size_t len = n - m;
     char* result = new char[len + 1];
@@ -31,7 +33,9 @@ auto slice(Container const &container, size_t m, size_t n)
 }
 
 // Specialization to slice std::strings. Return sliced string as a new std::string.
-std::string slice(std::string const &string, size_t m, size_t n)
+// Note: not a template, inline to avoid symbol duplication problems.
+// Alternatively, we can put this in a .cpp file.
+inline std::string slice(std::string const &string, size_t m, size_t n)
 {
     return string.substr(m, n - m);
 }
@@ -60,7 +64,9 @@ auto view(Container const &container, size_t m, size_t n)
 }
 
 // Generate a range of numbers for use in range-based for loops.
-auto range(long start, long stop = 0, long step = 1)
+// Note: not a template, inline to avoid symbol duplication problems.
+// Alternatively, we can put this in a .cpp file.
+inline auto range(long start, long stop = 0, long step = 1)
 {
     if (stop == 0)
     {
