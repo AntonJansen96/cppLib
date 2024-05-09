@@ -22,6 +22,6 @@ size_t profile(size_t cycles, void (*func)())
     double const mean = math::mean(values);
     double const sdev = math::sdev(values);
 
-    print("profile: average execution time is", mean, "±", sdev, "ns (", cycles, "cycles ).");
+    print(fs("profile: average execution time is {} ± {} ({} cycles).", format(mean), format(sdev), cycles));
     return static_cast<size_t>(mean);
 }

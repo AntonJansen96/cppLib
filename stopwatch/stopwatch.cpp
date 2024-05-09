@@ -85,14 +85,14 @@ Stopwatch &Stopwatch::operator=(Stopwatch &&tmp) noexcept
 // Insert Stopwatch time into stream (l-value).
 std::ostream &operator<<(std::ostream &out, Stopwatch &obj)
 {
-    obj.time(out);
+    out << format(obj.rawtime());
     return out;
 }
 
 // Insert Stopwatch time into stream (r-value).
 std::ostream &operator<<(std::ostream &out, Stopwatch &&obj)
 {
-    obj.time(out);
+    out << format(obj.rawtime());
     return out;
 }
 

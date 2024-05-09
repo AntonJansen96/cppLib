@@ -1,4 +1,4 @@
-#include "stopwatch.h"
+#include <chrono>
 #include <thread>
 
 // Additional Stopwatch function. Sleeps (the current thread) for #seconds.

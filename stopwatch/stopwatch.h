@@ -6,6 +6,9 @@
 
 typedef std::chrono::time_point<std::chrono::system_clock> timePoint;
 
+// Additional function that formats raw time into a human-readable string.
+std::string format(size_t rawtime);
+
 // Additional function that may be be used for profiling functions/lambdas.
 // Make sure to inline the function to be tested.
 size_t profile(size_t cycles, void (*func)());
@@ -31,8 +34,8 @@ class Stopwatch
         void reset();                // Reset Stopwatch.
         std::string &description();  // Return/edit optional descriptor.
         bool isrunning() const;      // Check whether Stopwatch is running.
-        std::string time(std::ostream &out = std::cout); // Return elapsed time as formatted string.
         size_t rawtime() const;      // Return elapsed time as the number of ns.
+        void time(std::ostream &out = std::cout); // Return formatted elapsed time.
 
         Stopwatch &operator=(Stopwatch const &other);    // Copy-assignment.
         Stopwatch &operator=(Stopwatch &&tmp) noexcept;  // Move-assignment.
@@ -78,6 +81,11 @@ inline size_t Stopwatch::rawtime() const
     }
 
     return d_diff;
+}
+
+inline void Stopwatch::time(std::ostream &out)
+{
+    out << format(rawtime()) << std::endl;
 }
 
 // Add Stopwatch objects.
