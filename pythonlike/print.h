@@ -116,6 +116,35 @@ void print(Args... args)
     std::cout << std::endl;
 }
 
+namespace
+{
+// Helper function for the variadic template fs function.
+template<typename Type>
+std::string to_string(Type value)
+{
+    std::ostringstream os;
+    os << value;
+    return os.str();
+}
+} // anonymous namespace.
+
+// Create a Python-style f-string.
+// Use: fs("{} {}", "hello", "world!").
+template<typename... Args>
+std::string fs(std::string const &input, Args... args)
+{
+    std::string output{input};
+    std::string argStrings[] = { to_string(args)... };
+
+    for (auto const &arg : argStrings)
+    {
+        size_t pos = output.find_first_of('{');
+        output.replace(pos, 2, arg);
+    }
+
+    return output;
+}
+
 } // namespace pythonlike.
 
 #endif
