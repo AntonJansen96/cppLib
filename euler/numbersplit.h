@@ -1,5 +1,5 @@
-#ifndef NUMBERSPLIT_H
-#define NUMBERSPLIT_H
+#ifndef CPPLIB_EULER_NUMBERSPLIT_H
+#define CPPLIB_EULER_NUMBERSPLIT_H
 
 #include <iosfwd>
 #include <vector>

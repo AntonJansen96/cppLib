@@ -1,5 +1,5 @@
-#ifndef FRACTION_H
-#define FRACTION_H
+#ifndef CPPLIB_FRACTION_H
+#define CPPLIB_FRACTION_H
 
 #include <iosfwd> // for std::ostream
 

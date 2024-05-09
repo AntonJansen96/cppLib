@@ -1,5 +1,5 @@
-#ifndef EULER_H
-#define EULER_H
+#ifndef CPPLIB_EULER_H
+#define CPPLIB_EULER_H
 
 #include "permutations.h"
 #include "combinations.h"

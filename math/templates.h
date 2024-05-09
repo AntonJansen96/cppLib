@@ -1,5 +1,5 @@
-#ifndef CPPLIBMATH_TEMPLATES_H
-#define CPPLIBMATH_TEMPLATES_H
+#ifndef CPPLIB_MATH_TEMPLATES_H
+#define CPPLIB_MATH_TEMPLATES_H
 
 #include <cmath>
 #include <numeric>

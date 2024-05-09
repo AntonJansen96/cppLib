@@ -1,5 +1,5 @@
-#ifndef CPPLIBMATH_H
-#define CPPLIBMATH_H
+#ifndef CPPLIB_MATH_H
+#define CPPLIB_MATH_H
 
 #include "templates.h"
 #include <cstdint>

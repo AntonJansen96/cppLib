@@ -1,5 +1,5 @@
-#ifndef STOPWATCH_H
-#define STOPWATCH_H
+#ifndef CPPLIB_STOPWATCH_H
+#define CPPLIB_STOPWATCH_H
 
 #include <chrono>
 #include <iostream>

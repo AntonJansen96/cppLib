@@ -1,5 +1,5 @@
-#ifndef PRIMETOOLS_H
-#define PRIMETOOLS_H
+#ifndef CPPLIB_EULER_PRIMETOOLS_H
+#define CPPLIB_EULER_PRIMETOOLS_H
 
 #include <vector>
 #include <cmath>

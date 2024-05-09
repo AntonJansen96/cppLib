@@ -1,5 +1,5 @@
-#ifndef PERMUTATIONS_H
-#define PERMUTATIONS_H
+#ifndef CPPLIB_EULER_PERMUTATIONS_H
+#define CPPLIB_EULER_PERMUTATIONS_H
 
 #include <vector>
 

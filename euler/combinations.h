@@ -1,5 +1,5 @@
-#ifndef COMBINATIONS_H
-#define COMBINATIONS_H
+#ifndef CPPLIB_EULER_COMBINATIONS_H
+#define CPPLIB_EULER_COMBINATIONS_H
 
 #include <vector>
 
