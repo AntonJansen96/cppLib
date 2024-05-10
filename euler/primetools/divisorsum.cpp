@@ -1,8 +1,10 @@
 #include "primetools.h"
 
-namespace {
+namespace
+{
 
-void findFactors0(size_t num, std::vector<size_t> const &pFacs, size_t idx, size_t factor, size_t &factorSum)
+void findFactors0(size_t num, std::vector<size_t> const &pFacs, size_t idx,
+                  size_t factor, size_t &factorSum)
 {
     if (idx == pFacs.size())
     {
@@ -21,7 +23,8 @@ void findFactors0(size_t num, std::vector<size_t> const &pFacs, size_t idx, size
     }
 }
 
-void findFactors1(size_t num, std::vector<size_t> const &pFacs, size_t idx, size_t factor, size_t &factorSum)
+void findFactors1(size_t num, std::vector<size_t> const &pFacs, size_t idx,
+                  size_t factor, size_t &factorSum)
 {
     if (idx == pFacs.size())
     {
@@ -40,7 +43,8 @@ void findFactors1(size_t num, std::vector<size_t> const &pFacs, size_t idx, size
     }
 }
 
-void findFactors2(size_t num, std::vector<size_t> const &pFacs, size_t idx, size_t factor, size_t &factorSum)
+void findFactors2(size_t num, std::vector<size_t> const &pFacs, size_t idx,
+                  size_t factor, size_t &factorSum)
 {
     if (idx == pFacs.size())
     {
@@ -59,7 +63,8 @@ void findFactors2(size_t num, std::vector<size_t> const &pFacs, size_t idx, size
     }
 }
 
-void findFactors3(size_t num, std::vector<size_t> const &pFacs, size_t idx, size_t factor, size_t &factorSum)
+void findFactors3(size_t num, std::vector<size_t> const &pFacs, size_t idx,
+                  size_t factor, size_t &factorSum)
 {
     if (idx == pFacs.size())
     {
@@ -78,7 +83,8 @@ void findFactors3(size_t num, std::vector<size_t> const &pFacs, size_t idx, size
     }
 }
 
-void findFactors4(size_t num, std::vector<size_t> const &pFacs, size_t idx, size_t factor, int order, size_t &factorSum)
+void findFactors4(size_t num, std::vector<size_t> const &pFacs, size_t idx,
+                  size_t factor, int order, size_t &factorSum)
 {
     if (idx == pFacs.size())
     {

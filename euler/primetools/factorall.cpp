@@ -1,10 +1,12 @@
 #include "primetools.h"
 
-namespace {
+namespace
+{
 
 std::vector<size_t> factors;
 
-void findFactors(size_t num, std::vector<size_t> const &pFacs, size_t idx, size_t factor)
+void findFactors(size_t num, std::vector<size_t> const &pFacs, size_t idx,
+                 size_t factor)
 {
     if (idx == pFacs.size())
     {
@@ -40,10 +42,10 @@ std::vector<size_t> euler::Primetools::factorAll(size_t num)
 // std::set<size_t> euler::Primetools::factorAll(size_t num)
 // {   // First obtain the prime factors of the num.
 //     std::vector<size_t> const pFactors{factorPrime(num)};
-    
+
 //     size_t iter;
 //     std::set<size_t> factors = {1};
-//                     // comb != 2^pFactors.size() 
+//                     // comb != 2^pFactors.size()
 //     for (int comb = 1; comb != (1 << pFactors.size()); ++comb)
 //     {
 //         iter = 1;

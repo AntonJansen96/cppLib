@@ -37,4 +37,4 @@ Fraction tosqrt_frac(std::vector<size_t> const &cf, size_t iter = 2);
 
 } // namespace euler::contfrac
 
-# endif
+#endif
