@@ -106,5 +106,9 @@ int main()
     cout << math::binom(18, 7) << endl; // should be 31824
     cout << math::gcd(23142, 155) << endl;
 
+    for (auto i : range(1, 101))
+        print(math::isqrt(i));
+
+    print(euler::contfrac::tosqrt_frac(euler::contfrac::fromsqrt(15)));
     print(fs("Executing tests took {}.", clock));
 }
