@@ -15,7 +15,7 @@ Fraction &Fraction::operator=(Fraction &&other) noexcept
 }
 
 // Insert Fraction (l-value) into stream.
-std::ostream &operator<<(std::ostream &out, Fraction &obj)
+std::ostream &operator<<(std::ostream &out, Fraction const &obj)
 {
     return out << obj.num() << '/' << obj.denom();
 }

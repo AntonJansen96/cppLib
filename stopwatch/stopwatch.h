@@ -41,7 +41,7 @@ class Stopwatch
     Stopwatch &operator=(Stopwatch &&tmp) noexcept; // Move-assignment.
 
     // Insert formatted time into stream (l-value).
-    friend std::ostream &operator<<(std::ostream &out, Stopwatch &obj);
+    friend std::ostream &operator<<(std::ostream &out, Stopwatch const &obj);
     // Insert formatted time into stream (r-value).
     friend std::ostream &operator<<(std::ostream &out, Stopwatch &&obj);
 

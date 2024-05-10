@@ -24,7 +24,7 @@ class Fraction
     Fraction &operator=(Fraction const &other);     // Copy-assignment.
     Fraction &operator=(Fraction &&other) noexcept; // Move-assignment.
 
-    friend std::ostream &operator<<(std::ostream &out, Fraction &obj);
+    friend std::ostream &operator<<(std::ostream &out, Fraction const &obj);
     friend std::ostream &operator<<(std::ostream &out, Fraction &&obj);
 
     Fraction &operator+=(Fraction const &rhs); // Add Fraction.
