@@ -29,10 +29,10 @@ Stopwatch::Stopwatch(Stopwatch const &other)
 
 // Move constructor.
 Stopwatch::Stopwatch(Stopwatch &&tmp) noexcept
-    : d_start(tmp.d_start)
-    , d_diff(tmp.d_diff)
-    , d_description(tmp.d_description)
-    , d_stopped(tmp.d_stopped)
+    : d_start(std::move(tmp.d_start))
+    , d_diff(std::move(tmp.d_diff))
+    , d_description(std::move(tmp.d_description))
+    , d_stopped(std::move(tmp.d_stopped))
 {
 }
 
@@ -83,14 +83,14 @@ Stopwatch &Stopwatch::operator=(Stopwatch &&tmp) noexcept
 // Insert Stopwatch time into stream (l-value).
 std::ostream &operator<<(std::ostream &out, Stopwatch const &obj)
 {
-    out << format(obj.rawtime());
+    out << Stopwatch::format(obj.rawtime());
     return out;
 }
 
 // Insert Stopwatch time into stream (r-value).
 std::ostream &operator<<(std::ostream &out, Stopwatch &&obj)
 {
-    out << format(obj.rawtime());
+    out << Stopwatch::format(obj.rawtime());
     return out;
 }
 
@@ -109,7 +109,7 @@ Stopwatch &Stopwatch::operator-=(Stopwatch const &rhs)
 }
 
 // Dedicated swap member.
-void Stopwatch::swap(Stopwatch &other)
+void Stopwatch::swap(Stopwatch &other) noexcept
 {
     std::swap(d_start, other.d_start);
     std::swap(d_diff, other.d_diff);

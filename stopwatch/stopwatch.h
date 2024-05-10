@@ -4,11 +4,6 @@
 #include <chrono>
 #include <iostream>
 
-using timePoint = std::chrono::time_point<std::chrono::system_clock>;
-
-// Additional function that formats raw time into a human-readable string.
-std::string format(size_t rawtime);
-
 // Additional function that may be be used for profiling functions/lambdas.
 // Make sure to inline the function to be tested.
 size_t profile(size_t cycles, void (*func)());
@@ -18,6 +13,8 @@ void sleep(float seconds);
 
 class Stopwatch
 {
+    using timePoint = std::chrono::time_point<std::chrono::system_clock>;
+
     timePoint d_start;         // Stores starting time.
     size_t d_diff;             // Stores elapsed time.
     std::string d_description; // Optional descriptor.
@@ -35,6 +32,7 @@ class Stopwatch
     std::string &description(); // Return/edit optional descriptor.
     bool isrunning() const;     // Check whether Stopwatch is running.
     size_t rawtime() const;     // Return elapsed time as the number of ns.
+    static std::string format(size_t rawtime); // Format raw time into a string.
     void time(std::ostream &out = std::cout); // Return formatted elapsed time.
 
     Stopwatch &operator=(Stopwatch const &other);   // Copy-assignment.
@@ -56,7 +54,7 @@ class Stopwatch
     bool operator>=(Stopwatch const &other) const; // Compare w. Stopwatch.
 
   private:
-    void swap(Stopwatch &other); // Dedicated swap member.
+    void swap(Stopwatch &other) noexcept; // Dedicated swap member.
 };
 
 // Return/edit Stopwatch description.
@@ -76,7 +74,7 @@ inline size_t Stopwatch::rawtime() const
 {
     if (not d_stopped)
     {
-        timePoint const currtime = std::chrono::system_clock::now();
+        Stopwatch::timePoint const currtime = std::chrono::system_clock::now();
         return d_diff + (currtime - d_start).count();
     }
 
@@ -85,7 +83,7 @@ inline size_t Stopwatch::rawtime() const
 
 inline void Stopwatch::time(std::ostream &out)
 {
-    out << format(rawtime()) << std::endl;
+    out << Stopwatch::format(rawtime()) << std::endl;
 }
 
 // Add Stopwatch objects.

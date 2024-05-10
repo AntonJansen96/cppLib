@@ -1,3 +1,4 @@
+#include "stopwatch.h"
 #include <iomanip>
 
 enum Time : size_t
@@ -10,7 +11,7 @@ enum Time : size_t
     DAY = 86400000000000
 };
 
-std::string format(size_t rawtime)
+std::string Stopwatch::format(size_t rawtime)
 {
     std::ostringstream oss;
 

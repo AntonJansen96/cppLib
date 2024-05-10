@@ -9,6 +9,7 @@ using namespace pythonlike;
 // Make sure to inline the function to be tested.
 size_t profile(size_t cycles, void (*func)())
 {
+    using timePoint = std::chrono::time_point<std::chrono::system_clock>;
     std::vector<size_t> values(cycles);
 
     for (size_t idx = 0; idx != cycles; ++idx)
@@ -22,7 +23,7 @@ size_t profile(size_t cycles, void (*func)())
     double const mean = math::mean(values);
     double const sdev = math::sdev(values);
 
-    print(fs("profile: average execution time is {} ± {} ({} cycles).", format(mean),
-             format(sdev), cycles));
+    print(fs("profile: average execution time is {} ± {} ({} cycles).", Stopwatch::format(mean),
+             Stopwatch::format(sdev), cycles));
     return static_cast<size_t>(mean);
 }
