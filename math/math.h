@@ -10,6 +10,9 @@ namespace math
 using sInt = int_fast64_t;  // Signed 64-bit integer.
 using uInt = uint_fast64_t; // Unsigned 64-bit integer.
 
+// Integer part of the square root.
+uInt isqrt(uInt n);
+
 // Returns (a * b) % m.
 uInt mulmod(uInt a, uInt b, uInt m);
 
