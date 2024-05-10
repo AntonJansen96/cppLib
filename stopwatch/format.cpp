@@ -20,11 +20,11 @@ std::string format(size_t rawtime)
     }
     else if (rawtime < MILLISECOND) // less than 1ms
     {
-        oss << rawtime / 1000.0 << "us";
+        oss << rawtime / static_cast<float>(MICROSECOND) << "us";
     }
     else if (rawtime < SECOND) // less than 1s
     {
-        oss << std::fixed << std::setprecision(2) << rawtime / 1000000.0 << "ms";
+        oss << std::fixed << std::setprecision(2) << rawtime / static_cast<float>(MILLISECOND) << "ms";
     }
     else // 1s or more
     {
@@ -33,7 +33,7 @@ std::string format(size_t rawtime)
             size_t days = rawtime / DAY;
             size_t hours = (rawtime % DAY) / HOUR;
             size_t minutes = ((rawtime % DAY) % HOUR) / MINUTE;
-            double seconds = (((rawtime % DAY) % HOUR) % MINUTE) / 1000000000.0;
+            double seconds = (((rawtime % DAY) % HOUR) % MINUTE) / static_cast<float>(SECOND);
             oss << days << "d" << hours << "h" << minutes << "m" << std::fixed
                 << std::setprecision(0) << seconds << "s";
         }
@@ -41,20 +41,20 @@ std::string format(size_t rawtime)
         {
             size_t hours = rawtime / HOUR;
             size_t minutes = (rawtime % HOUR) / MINUTE;
-            double seconds = ((rawtime % HOUR) % MINUTE) / 1000000000.0;
+            double seconds = ((rawtime % HOUR) % MINUTE) / static_cast<float>(SECOND);
             oss << hours << "h" << minutes << "m" << std::fixed << std::setprecision(0)
                 << seconds << "s";
         }
         else if (rawtime >= MINUTE) // 1m or more
         {
             size_t minutes = rawtime / MINUTE;
-            double seconds = (rawtime % MINUTE) / 1000000000.0;
+            double seconds = (rawtime % MINUTE) / static_cast<float>(SECOND);
             oss << minutes << "m" << std::fixed << std::setprecision(0) << seconds
                 << "s";
         }
         else // less than 1m
         {
-            oss << std::fixed << std::setprecision(2) << rawtime / 1000000000.0 << "s";
+            oss << std::fixed << std::setprecision(2) << rawtime / static_cast<float>(SECOND) << "s";
         }
     }
     return oss.str();
