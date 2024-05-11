@@ -30,3 +30,5 @@ set(EULER_SOURCES
 
 add_library(euler ${EULER_SOURCES})
 target_include_directories(euler PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(euler math utility)
