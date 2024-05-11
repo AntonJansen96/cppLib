@@ -25,7 +25,8 @@ std::string Stopwatch::format(size_t rawtime)
     }
     else if (rawtime < SECOND) // less than 1s
     {
-        oss << std::fixed << std::setprecision(2) << rawtime / static_cast<float>(MILLISECOND) << "ms";
+        oss << std::fixed << std::setprecision(2)
+            << rawtime / static_cast<float>(MILLISECOND) << "ms";
     }
     else // 1s or more
     {
@@ -34,7 +35,8 @@ std::string Stopwatch::format(size_t rawtime)
             size_t days = rawtime / DAY;
             size_t hours = (rawtime % DAY) / HOUR;
             size_t minutes = ((rawtime % DAY) % HOUR) / MINUTE;
-            double seconds = (((rawtime % DAY) % HOUR) % MINUTE) / static_cast<float>(SECOND);
+            float seconds =
+                (((rawtime % DAY) % HOUR) % MINUTE) / static_cast<float>(SECOND);
             oss << days << "d" << hours << "h" << minutes << "m" << std::fixed
                 << std::setprecision(0) << seconds << "s";
         }
@@ -42,20 +44,21 @@ std::string Stopwatch::format(size_t rawtime)
         {
             size_t hours = rawtime / HOUR;
             size_t minutes = (rawtime % HOUR) / MINUTE;
-            double seconds = ((rawtime % HOUR) % MINUTE) / static_cast<float>(SECOND);
+            float seconds = ((rawtime % HOUR) % MINUTE) / static_cast<float>(SECOND);
             oss << hours << "h" << minutes << "m" << std::fixed << std::setprecision(0)
                 << seconds << "s";
         }
         else if (rawtime >= MINUTE) // 1m or more
         {
             size_t minutes = rawtime / MINUTE;
-            double seconds = (rawtime % MINUTE) / static_cast<float>(SECOND);
+            float seconds = (rawtime % MINUTE) / static_cast<float>(SECOND);
             oss << minutes << "m" << std::fixed << std::setprecision(0) << seconds
                 << "s";
         }
         else // less than 1m
         {
-            oss << std::fixed << std::setprecision(2) << rawtime / static_cast<float>(SECOND) << "s";
+            oss << std::fixed << std::setprecision(2)
+                << rawtime / static_cast<float>(SECOND) << "s";
         }
     }
     return oss.str();
