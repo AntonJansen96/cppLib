@@ -2,20 +2,19 @@
 #define CPPLIB_STOPWATCH_H
 
 #include <chrono>
+#include <functional>
 #include <iostream>
 
 // Additional function that may be be used for profiling functions/lambdas.
 // Make sure to inline the function to be tested.
-size_t profile(size_t cycles, void (*func)());
+size_t profile(std::function<void()> func, size_t cycles = 1);
 
 // Additional Stopwatch function. Sleeps (the current thread) for #seconds.
 void sleep(float seconds);
 
 class Stopwatch
-{
-    using timePoint = std::chrono::time_point<std::chrono::system_clock>;
-
-    timePoint d_start;         // Stores starting time.
+{ // Stores starting time.
+    std::chrono::time_point<std::chrono::high_resolution_clock> d_start;
     size_t d_diff;             // Stores elapsed time.
     std::string d_description; // Optional descriptor.
     bool d_stopped;            // Stopwatch running or not?
@@ -33,7 +32,7 @@ class Stopwatch
     bool isrunning() const;     // Check whether Stopwatch is running.
     size_t rawtime() const;     // Return elapsed time as the number of ns.
     static std::string format(size_t rawtime); // Format raw time into a string.
-    void time(std::ostream &out = std::cout); // Return formatted elapsed time.
+    void time(std::ostream &out = std::cout);  // Return formatted elapsed time.
 
     Stopwatch &operator=(Stopwatch const &other);   // Copy-assignment.
     Stopwatch &operator=(Stopwatch &&tmp) noexcept; // Move-assignment.
@@ -72,9 +71,10 @@ inline bool Stopwatch::isrunning() const
 // Get Stopwatch elapsed time in ns.
 inline size_t Stopwatch::rawtime() const
 {
+    using namespace std::chrono;
     if (not d_stopped)
     {
-        Stopwatch::timePoint const currtime = std::chrono::system_clock::now();
+        time_point<high_resolution_clock> const currtime = high_resolution_clock::now();
         return d_diff + (currtime - d_start).count();
     }
 
@@ -83,7 +83,7 @@ inline size_t Stopwatch::rawtime() const
 
 inline void Stopwatch::time(std::ostream &out)
 {
-    out << Stopwatch::format(rawtime()) << std::endl;
+    out << Stopwatch::format(rawtime()) << '\n';
 }
 
 // Add Stopwatch objects.
@@ -101,37 +101,37 @@ inline Stopwatch operator-(Stopwatch const &lhs, Stopwatch const &rhs)
 // Compare two Stopwatch objects.
 inline bool Stopwatch::operator==(Stopwatch const &other) const
 {
-    return rawtime() == other.rawtime() ? true : false;
+    return rawtime() == other.rawtime();
 }
 
 // Compare two Stopwatch objects.
 inline bool Stopwatch::operator!=(Stopwatch const &other) const
 {
-    return rawtime() != other.rawtime() ? true : false;
+    return rawtime() != other.rawtime();
 }
 
 // Compare two Stopwatch objects.
 inline bool Stopwatch::operator<(Stopwatch const &other) const
 {
-    return rawtime() < other.rawtime() ? true : false;
+    return rawtime() < other.rawtime();
 }
 
 // Compare two Stopwatch objects.
 inline bool Stopwatch::operator>(Stopwatch const &other) const
 {
-    return rawtime() > other.rawtime() ? true : false;
+    return rawtime() > other.rawtime();
 }
 
 // Compare two Stopwatch objects.
 inline bool Stopwatch::operator<=(Stopwatch const &other) const
 {
-    return rawtime() <= other.rawtime() ? true : false;
+    return rawtime() <= other.rawtime();
 }
 
 // Compare two Stopwatch objects.
 inline bool Stopwatch::operator>=(Stopwatch const &other) const
 {
-    return rawtime() >= other.rawtime() ? true : false;
+    return rawtime() >= other.rawtime();
 }
 
 #endif

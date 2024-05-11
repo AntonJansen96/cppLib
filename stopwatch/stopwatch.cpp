@@ -2,7 +2,7 @@
 
 // Construct Stopwatch object and start.
 Stopwatch::Stopwatch()
-    : d_start(std::chrono::system_clock::time_point())
+    : d_start(std::chrono::high_resolution_clock::time_point())
     , d_diff(0)
     , d_description("''")
     , d_stopped(true)
@@ -11,7 +11,7 @@ Stopwatch::Stopwatch()
 
 // Construct Stopwatch object, specify description and start.
 Stopwatch::Stopwatch(std::string const &description)
-    : d_start(std::chrono::system_clock::time_point())
+    : d_start(std::chrono::high_resolution_clock::time_point())
     , d_diff(0)
     , d_description(description)
     , d_stopped(true)
@@ -29,10 +29,10 @@ Stopwatch::Stopwatch(Stopwatch const &other)
 
 // Move constructor.
 Stopwatch::Stopwatch(Stopwatch &&tmp) noexcept
-    : d_start(std::move(tmp.d_start))
-    , d_diff(std::move(tmp.d_diff))
-    , d_description(std::move(tmp.d_description))
-    , d_stopped(std::move(tmp.d_stopped))
+    : d_start(tmp.d_start)
+    , d_diff(tmp.d_diff)
+    , d_description(tmp.d_description)
+    , d_stopped(tmp.d_stopped)
 {
 }
 
@@ -42,7 +42,7 @@ void Stopwatch::start()
     if (d_stopped)
     {
         d_stopped = false;
-        d_start = std::chrono::system_clock::now();
+        d_start = std::chrono::high_resolution_clock::now();
     }
     else
         std::cerr << "warning: tried to call start() on running "
@@ -54,7 +54,7 @@ void Stopwatch::stop()
 {
     if (not d_stopped)
     {
-        timePoint const stoptime = std::chrono::system_clock::now();
+        auto const stoptime = std::chrono::high_resolution_clock::now();
         d_stopped = true;
         d_diff += (stoptime - d_start).count();
     }
@@ -63,7 +63,7 @@ void Stopwatch::stop()
 // Reset Stopwatch.
 void Stopwatch::reset()
 {
-    d_start = std::chrono::system_clock::time_point();
+    d_start = std::chrono::high_resolution_clock::time_point();
     d_diff = 0;
 }
 
