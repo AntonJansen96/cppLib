@@ -6,6 +6,9 @@ namespace math
 // Returns (a^b) % m
 uInt powmod(uInt a, uInt b, uInt m)
 {
+    if (m == 0) // Avoid division by zero.
+        return 0;
+
     uInt result = 1;
     while (b > 0)
     {

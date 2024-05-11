@@ -10,8 +10,8 @@ namespace math
 using sInt = int_fast64_t;  // Signed 64-bit integer.
 using uInt = uint_fast64_t; // Unsigned 64-bit integer.
 
-// Integer part of the square root.
-uInt isqrt(uInt n);
+// Integer part of the square root. Returns 0 for negative numbers.
+uInt isqrt(sInt n);
 
 // Returns (a * b) % m.
 uInt mulmod(uInt a, uInt b, uInt m);
@@ -23,7 +23,6 @@ uInt powmod(uInt a, uInt b, uInt m);
 uInt modinverse(uInt a, uInt m);
 
 // Returns n^m where n and m are positive integers.
-// If tabulated value is not available, fall back on pow in <cmath>.
 uInt fastpow(uInt n, uInt m);
 
 // Returns the integer part of log10.

@@ -96,10 +96,11 @@ constexpr std::array<math::uInt, 19> power10 =
 // Instead, we exponentiate by multiplying n by itself m times.
 math::uInt powfallback(math::uInt n, math::uInt m)
 {
-    for (math::uInt i = 1; i != m; ++i)
-        n *= n;
+    math::uInt result = 1;
+    for (math::uInt i = 0; i != m; ++i)
+        result *= n;
 
-    return n;
+    return result;
 }
 
 } // Anonymous namespace.
@@ -108,13 +109,12 @@ namespace math
 {
 
 // Returns n^m where n and m are positive integers.
-// If tabulated value is not available, fall back on pow in <cmath>.
 uInt fastpow(uInt n, uInt m)
 {
     switch (n)
     {
         case 0:
-            return 0;
+            return m == 0 ? 1 : 0; // 0^0 = 1.
 
         case 1:
             return 1;

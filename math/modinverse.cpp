@@ -6,7 +6,10 @@ namespace math
 // Returns the modular inverse (ax = 1 (mod m)).
 uInt modinverse(uInt a, uInt m)
 {
-    if (m == 0) // Avoid division by zero.
+    // The modulus m cannot be 0.
+    // The modular inverse does not exist for a = 0.
+    // The modular inverse does not exist if a and m are not coprime.
+    if (m == 0 || a == 0 || math::gcd(a, m) != 1) 
         return 0;
 
     auto const orig = m;

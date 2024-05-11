@@ -4,10 +4,10 @@
 namespace math
 {
 
-// Integer part of the square root.
-uInt isqrt(uInt n)
+// Integer part of the square root. Returns 0 for negative numbers.
+uInt isqrt(sInt n)
 {
-    return static_cast<uInt>(std::sqrt(n));
+    return n < 0 ? 0 : static_cast<uInt>(std::sqrt(n));
 }
 
 } // namespace math
