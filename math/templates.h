@@ -10,6 +10,9 @@ namespace math
 // Mean of values in abstract container.
 template <typename Container> double mean(Container const &array)
 {
+    if (array.empty()) // Edge case for empty container.
+        return 0.0;
+
     auto sum = std::accumulate(array.begin(), array.end(), 0);
     auto len = static_cast<double>(array.size());
 
@@ -19,6 +22,9 @@ template <typename Container> double mean(Container const &array)
 // Standard deviation of values in abstract container.
 template <typename Container> double sdev(Container const &array)
 {
+    if (array.empty()) // Edge case for empty container.
+        return 0.0;
+
     auto Mean = mean(array);
     auto len = static_cast<double>(array.size());
 
