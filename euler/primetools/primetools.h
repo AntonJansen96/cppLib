@@ -9,7 +9,7 @@ namespace euler
 
 // Class for performing prime-related operations/computations.
 class Primetools
-{   // Enough primes for 1-1000.
+{ // Enough primes for 1-1000.
     std::vector<unsigned int> d_primes = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31};
     int d_nPrimes = 11;  // Number of primes in d_primes.
     size_t d_max = 1000; // Maximum number.

@@ -31,7 +31,7 @@ size_t euler::Primetools::totient(size_t num)
 
         if (idx == d_nPrimes) // If we have reached the end of the current d_primes
             this->expand();   //  vector, call // expand() (i.e. double the vector).
-    } 
+    }
 
     if (num > 2)
         totient -= totient / num;
