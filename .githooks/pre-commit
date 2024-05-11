@@ -1,0 +1,10 @@
+#!/bin/bash
+
+format_script_path="./doformat.sh"
+"$format_script_path"
+
+# Check if the script was successful
+if [ $? -ne 0 ]; then
+  echo "doformat.sh failed"
+  exit 1
+fi
