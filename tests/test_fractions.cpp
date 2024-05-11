@@ -2,7 +2,7 @@
 #include <cassert>
 
 int main()
-{    
+{
     // Test whether normalize() works properly.
     assert(Fraction(2, 4) == Fraction(1, 2));
     assert(Fraction(-2, -4) == Fraction(1, 2));
