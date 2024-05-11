@@ -1,6 +1,11 @@
 #!/bin/bash
 
-rm -rf build
-cmake -B build
+set -e
+
+if [ ! -f "build/CMakeCache.txt" ]; then
+  cmake -B build || { echo "cmake failed"; rm -rf build; exit 1; }
+fi
+
 make -j -C build
-./build/tests
+
+./build/test_main

@@ -17,5 +17,38 @@ add_subdirectory(../math math)
 add_subdirectory(../stopwatch stopwatch)
 add_subdirectory(../utility utility)
 
-add_executable(tests tests.cpp)
-target_link_libraries(tests euler fileio fractions math stopwatch utility)
+# EULER
+add_executable(test_euler test_euler.cpp)
+target_link_libraries(test_euler fileio fractions math stopwatch utility)
+
+# FILEIO
+add_executable(test_fileio test_fileio.cpp)
+target_link_libraries(test_fileio fileio fractions math stopwatch utility)
+
+# FRACTIONS
+add_executable(test_fractions test_fractions.cpp)
+target_link_libraries(test_fractions fileio fractions math stopwatch utility)
+
+# MATH
+add_executable(test_math test_math.cpp)
+target_link_libraries(test_math fileio fractions math stopwatch utility)
+
+# PYTHONLIKE
+add_executable(test_pythonlike test_pythonlike.cpp)
+target_link_libraries(test_pythonlike fileio fractions math stopwatch utility)
+
+# STOPWATCH
+add_executable(test_stopwatch test_stopwatch.cpp)
+target_link_libraries(test_stopwatch euler fileio fractions math stopwatch utility)
+
+# UTILITY
+add_executable(test_utility test_utility.cpp)
+target_link_libraries(test_utility fileio fractions math stopwatch utility)
+
+# MAIN TESTS
+add_executable(test_main test_main.cpp)
+target_link_libraries(test_main stopwatch)
+
+# DEBUG
+add_executable(debug debug.cpp)
+target_link_libraries(debug fileio fractions math stopwatch utility)
