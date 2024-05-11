@@ -9,7 +9,7 @@ uInt modinverse(uInt a, uInt m)
     // The modulus m cannot be 0.
     // The modular inverse does not exist for a = 0.
     // The modular inverse does not exist if a and m are not coprime.
-    if (m == 0 || a == 0 || math::gcd(a, m) != 1) 
+    if (m == 0 || a == 0 || math::gcd(a, m) != 1)
         return 0;
 
     auto const orig = m;

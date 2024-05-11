@@ -16,9 +16,9 @@ int main()
     assert(math::powmod(5, 3, 7) == 6);
     assert(math::powmod(1234, 78, 120) == 16);
 
-    assert(math::modinverse(0, 5) == 0);  // Edge case: a is 0
-    assert(math::modinverse(5, 0) == 0);  // Edge case: m is 0
-    assert(math::modinverse(4, 2) == 0);  // Edge case: a and m are not coprime
+    assert(math::modinverse(0, 5) == 0); // Edge case: a is 0
+    assert(math::modinverse(5, 0) == 0); // Edge case: m is 0
+    assert(math::modinverse(4, 2) == 0); // Edge case: a and m are not coprime
     assert(math::modinverse(15, 26) == 7);
 
     assert(math::fastpow(0, 0) == 1);
@@ -36,10 +36,10 @@ int main()
     assert(math::factorial(1) == 1);
     assert(math::factorial(5) == 120);
     assert(math::factorial(100) == 0); // int64 overflow -> 0.
-    
+
     assert(math::binom(5, 2) == 10);
     assert(math::binom(18, 7) == 31824);
-    
+
     assert(math::gcd(123, 456) == 3);
     assert(math::gcd(23142, 155) == 1);
 }
