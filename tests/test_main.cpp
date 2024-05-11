@@ -9,7 +9,7 @@ int main()
 
     // euler
     clock1.start();
-    system("build/test_stopwatch");
+    system("build/test_euler");
     clock1.stop();
 
     // fileio
