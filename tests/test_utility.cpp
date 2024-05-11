@@ -1,8 +1,9 @@
 #include "utility/utility.h"
-#include <iostream>
+#include <cassert>
 
 int main()
 {
-    utility::num2vec(12345);
-    std::cout << utility::vec2num(std::vector<int>{1, 2, 3, 4, 5}) << '\n';
+    std::vector<int> const vec = {1, 2, 3, 4, 5};
+    assert(utility::num2vec(12345) == vec);
+    assert(utility::vec2num(vec) == 12345);
 }
