@@ -1,12 +1,13 @@
 #ifndef CPPLIB_FRACTION_H
 #define CPPLIB_FRACTION_H
 
-#include <iosfwd> // for std::ostream
+#include <cstdint>
+#include <iosfwd>
 
 #ifdef SINGLE
-using sInt = int32_t; // signed 32-bit integer.
+using sInt = int_fast32_t; // signed 32-bit integer.
 #else
-using sInt = int64_t; // signed 64-bit integer.
+using sInt = int_fast64_t; // signed 64-bit integer.
 #endif
 
 class Fraction
