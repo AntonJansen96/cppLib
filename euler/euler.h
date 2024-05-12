@@ -4,7 +4,6 @@
 #include "combinatorics/combinations.h"
 #include "combinatorics/numbersplit.h"
 #include "combinatorics/permutations.h"
-#include "contfrac/contfrac.h"
 #include "primetools/primetools.h"
 #include "sequences/sequences.h"
 

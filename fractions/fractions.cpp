@@ -3,6 +3,9 @@
 
 #include <iostream>
 
+namespace fractions
+{
+
 // Move-assignment operator.
 Fraction &Fraction::operator=(Fraction &&other) noexcept
 {
@@ -58,3 +61,5 @@ void Fraction::normalize()
     d_num = sign * d_num / factor;
     d_den = d_den / factor;
 }
+
+} // namespace fractions

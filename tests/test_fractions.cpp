@@ -1,6 +1,8 @@
 #include "fractions/fractions.h"
 #include <cassert>
 
+using namespace fractions;
+
 int main()
 {
     // Test whether normalize() works properly.

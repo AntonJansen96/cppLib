@@ -1,9 +1,7 @@
 set(EULER_SOURCES
-    contfrac/fromfrac.cpp
-    contfrac/tofrac.cpp
-    contfrac/fromsqrt.cpp
-    contfrac/tosqrt.cpp
-    triples.cpp
+    combinatorics/numbersplit.cpp
+    combinatorics/permutations.cpp
+    combinatorics/combinations.cpp
     primetools/isamicable.cpp
     primetools/propdivsum.cpp
     primetools/isprime.cpp
@@ -20,12 +18,10 @@ set(EULER_SOURCES
     primetools/factorall.cpp
     sequences/fibonacci.cpp
     sequences/pisano.cpp
-    combinatorics/numbersplit.cpp
-    combinatorics/permutations.cpp
-    combinatorics/combinations.cpp
     digits.cpp
     functions.cpp
     roman.cpp
+    triples.cpp
 )
 
 add_library(euler ${EULER_SOURCES})
