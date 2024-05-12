@@ -3,22 +3,26 @@
 
 #include <iosfwd> // for std::ostream
 
-using Type = int64_t; // Type used for num and denom.
+#ifdef SINGLE
+using sInt = int32_t; // signed 32-bit integer.
+#else
+using sInt = int64_t; // signed 64-bit integer.
+#endif
 
 class Fraction
 {
-    Type d_num; // Numerator.
-    Type d_den; // Denominator.
+    sInt d_num; // Numerator.
+    sInt d_den; // Denominator.
 
   public: // Constructor.
-    explicit Fraction(Type numerator, Type denominator = 1);
+    explicit Fraction(sInt numerator, sInt denominator = 1);
     Fraction(Fraction const &other);   // Copy constructor.
     Fraction(Fraction &&tmp) noexcept; // Move constructor.
 
-    Type &num();               // Return/edit the numerator.
-    Type &denom();             // Return/edit the denominator.
-    Type const &num() const;   // Return the numerator.
-    Type const &denom() const; // Return the denominator.
+    sInt &num();               // Return/edit the numerator.
+    sInt &denom();             // Return/edit the denominator.
+    sInt const &num() const;   // Return the numerator.
+    sInt const &denom() const; // Return the denominator.
     double approx() const;     // Return the decimal value.
 
     Fraction &operator=(Fraction const &other);     // Copy-assignment.
@@ -32,10 +36,10 @@ class Fraction
     Fraction &operator*=(Fraction const &rhs); // Multiply Fraction.
     Fraction &operator/=(Fraction const &rhs); // Divide Fraction.
 
-    Fraction &operator+=(Type scalar); // Add scalar.
-    Fraction &operator-=(Type scalar); // Subtract scalar.
-    Fraction &operator*=(Type scalar); // Multiply scalar.
-    Fraction &operator/=(Type scalar); // Divide scalar.
+    Fraction &operator+=(sInt scalar); // Add scalar.
+    Fraction &operator-=(sInt scalar); // Subtract scalar.
+    Fraction &operator*=(sInt scalar); // Multiply scalar.
+    Fraction &operator/=(sInt scalar); // Divide scalar.
 
     bool operator==(Fraction const &other) const; // Compare w. Fraction.
     bool operator!=(Fraction const &other) const; // Compare w. Fraction.
@@ -49,7 +53,7 @@ class Fraction
 };
 
 // Constructor.
-inline Fraction::Fraction(Type numerator, Type denominator)
+inline Fraction::Fraction(sInt numerator, sInt denominator)
     : d_num(numerator)
     , d_den(denominator)
 {
@@ -73,25 +77,25 @@ inline Fraction::Fraction(Fraction &&tmp) noexcept
 }
 
 // Return/edit the numerator.
-inline Type &Fraction::num()
+inline sInt &Fraction::num()
 {
     return d_num;
 }
 
 // Return/edit the denominator.
-inline Type &Fraction::denom()
+inline sInt &Fraction::denom()
 {
     return d_den;
 }
 
 // Return the numerator.
-inline Type const &Fraction::num() const
+inline sInt const &Fraction::num() const
 {
     return d_num;
 }
 
 // Return the denominator.
-inline Type const &Fraction::denom() const
+inline sInt const &Fraction::denom() const
 {
     return d_den;
 }
@@ -145,7 +149,7 @@ inline Fraction &Fraction::operator/=(Fraction const &rhs)
 }
 
 // Add scalar.
-inline Fraction &Fraction::operator+=(Type scalar)
+inline Fraction &Fraction::operator+=(sInt scalar)
 {
     d_num += scalar * d_den;
     normalize();
@@ -153,7 +157,7 @@ inline Fraction &Fraction::operator+=(Type scalar)
 }
 
 // Subtract scalar.
-inline Fraction &Fraction::operator-=(Type scalar)
+inline Fraction &Fraction::operator-=(sInt scalar)
 {
     d_num -= scalar * d_den;
     normalize();
@@ -161,7 +165,7 @@ inline Fraction &Fraction::operator-=(Type scalar)
 }
 
 // Multiply Scalar.
-inline Fraction &Fraction::operator*=(Type scalar)
+inline Fraction &Fraction::operator*=(sInt scalar)
 {
     d_num *= scalar;
     normalize();
@@ -169,7 +173,7 @@ inline Fraction &Fraction::operator*=(Type scalar)
 }
 
 // Divide scalar.
-inline Fraction &Fraction::operator/=(Type scalar)
+inline Fraction &Fraction::operator/=(sInt scalar)
 {
     d_den *= scalar;
     normalize();
@@ -237,49 +241,49 @@ inline Fraction operator/(Fraction const &lhs, Fraction const &rhs)
 }
 
 // Add scalar.
-inline Fraction operator+(Fraction const &lhs, Type scalar)
+inline Fraction operator+(Fraction const &lhs, sInt scalar)
 {
     return Fraction{lhs} += scalar;
 }
 
 // Add scalar.
-inline Fraction operator+(Type scalar, Fraction const &rhs)
+inline Fraction operator+(sInt scalar, Fraction const &rhs)
 {
     return Fraction{rhs} += scalar;
 }
 
 // Subtract scalar.
-inline Fraction operator-(Fraction const &lhs, Type scalar)
+inline Fraction operator-(Fraction const &lhs, sInt scalar)
 {
     return Fraction{lhs} -= scalar;
 }
 
 // Subtract scalar.
-inline Fraction operator-(Type scalar, Fraction const &rhs)
+inline Fraction operator-(sInt scalar, Fraction const &rhs)
 {
     return Fraction{rhs} -= scalar;
 }
 
 // Multiply scalar.
-inline Fraction operator*(Fraction const &lhs, Type scalar)
+inline Fraction operator*(Fraction const &lhs, sInt scalar)
 {
     return Fraction{lhs} *= scalar;
 }
 
 // Multiply scalar.
-inline Fraction operator*(Type scalar, Fraction const &rhs)
+inline Fraction operator*(sInt scalar, Fraction const &rhs)
 {
     return Fraction{rhs} *= scalar;
 }
 
 // Divide scalar.
-inline Fraction operator/(Fraction const &lhs, Type scalar)
+inline Fraction operator/(Fraction const &lhs, sInt scalar)
 {
     return Fraction{lhs} /= scalar;
 }
 
 // Divide scalar.
-inline Fraction operator/(Type scalar, Fraction const &rhs)
+inline Fraction operator/(sInt scalar, Fraction const &rhs)
 {
     return Fraction{scalar * rhs.denom(), rhs.num()};
 }

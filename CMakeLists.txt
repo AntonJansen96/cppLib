@@ -5,6 +5,12 @@ project(cpplib)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+option(SINGLE, OFF)
+if(SINGLE)
+    add_definitions(-DSINGLE)
+    message("-- NOTE: will build cpplibs in single-precision.")
+endif()
+
 add_subdirectory(euler)
 add_subdirectory(fileio)
 add_subdirectory(fractions)

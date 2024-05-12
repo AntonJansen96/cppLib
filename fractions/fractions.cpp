@@ -46,14 +46,14 @@ void Fraction::normalize()
 
     // 4. At this point, we either have a/b or -a/b.
     // gcd only works for a/b, so always make a positive and remember the sign.
-    Type sign = 1;
+    sInt sign = 1;
     if (d_num < 0)
     {
         d_num = -d_num;
         sign = -1;
     }
     // Compute the gcd and multiply by the sign.
-    Type const factor = math::gcd(d_num, d_den);
+    sInt const factor = math::gcd(d_num, d_den);
 
     d_num = sign * d_num / factor;
     d_den = d_den / factor;

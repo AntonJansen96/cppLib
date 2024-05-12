@@ -4,6 +4,123 @@
 namespace
 { // Anonymous namespace.
 
+#ifdef SINGLE
+
+// clang-format off
+constexpr std::array<math::uInt, 32> power2 = 
+{
+    1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 
+    65536, 131072, 262144, 524288, 1048576, 2097152, 4194304, 8388608, 16777216, 
+    33554432, 67108864, 134217728, 268435456, 536870912, 1073741824, 2147483648
+};
+
+constexpr std::array<math::uInt, 21> power3 = 
+{
+    1, 3, 9, 27, 81, 243, 729, 2187, 6561, 19683, 59049, 177147, 531441, 1594323, 
+    4782969, 14348907, 43046721, 129140163, 387420489, 1162261467, 3486784401
+};
+
+constexpr std::array<math::uInt, 16> power4 = 
+{
+    1, 4, 16, 64, 256, 1024, 4096, 16384, 65536, 262144, 1048576, 4194304, 
+    16777216, 67108864, 268435456, 1073741824
+};
+
+constexpr std::array<math::uInt, 14> power5 = 
+{
+    1, 5, 25, 125, 625, 3125, 15625, 78125, 390625, 1953125, 9765625, 48828125,
+    244140625, 1220703125
+};
+
+constexpr std::array<math::uInt, 13> power6 = 
+{
+    1, 6, 36, 216, 1296, 7776, 46656, 279936, 1679616, 10077696, 60466176, 
+    362797056, 2176782336
+};
+
+constexpr std::array<math::uInt, 12> power7 = 
+{
+    1, 7, 49, 343, 2401, 16807, 117649, 823543, 5764801, 40353607, 282475249, 
+    1977326743
+};
+
+constexpr std::array<math::uInt, 11> power8 = 
+{
+    1, 8, 64, 512, 4096, 32768, 262144, 2097152, 16777216, 134217728, 1073741824
+};
+
+constexpr std::array<math::uInt, 11> power9 = 
+{
+    1, 9, 81, 729, 6561, 59049, 531441, 4782969, 43046721, 387420489, 3486784401
+};
+
+constexpr std::array<math::uInt, 10> power10 = 
+{
+    1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000
+};
+// clang-format on
+
+// We want to avoid using std::pow() as a fall back because it's slow.
+// Instead, we exponentiate by multiplying n by itself m times.
+math::uInt powfallback(math::uInt n, math::uInt m)
+{
+    math::uInt result = 1;
+    for (math::uInt i = 0; i != m; ++i)
+        result *= n;
+
+    return result;
+}
+
+} // Anonymous namespace.
+
+namespace math
+{
+
+// Returns n^m where n and m are positive integers.
+uInt fastpow(uInt n, uInt m)
+{
+    switch (n)
+    {
+        case 0:
+            return m == 0 ? 1 : 0; // 0^0 = 1.
+
+        case 1:
+            return 1;
+
+        case 2:
+            return (m < 32) ? power2[m] : powfallback(n, m);
+
+        case 3:
+            return (m < 21) ? power3[m] : powfallback(n, m);
+
+        case 4:
+            return (m < 16) ? power4[m] : powfallback(n, m);
+
+        case 5:
+            return (m < 14) ? power5[m] : powfallback(n, m);
+
+        case 6:
+            return (m < 13) ? power6[m] : powfallback(n, m);
+
+        case 7:
+            return (m < 12) ? power7[m] : powfallback(n, m);
+
+        case 8:
+            return (m < 11) ? power8[m] : powfallback(n, m);
+
+        case 9:
+            return (m < 11) ? power9[m] : powfallback(n, m);
+
+        case 10:
+            return (m < 10) ? power10[m] : powfallback(n, m);
+
+        default:
+            return powfallback(n, m);
+    }
+}
+
+#else
+
 // clang-format off
 constexpr std::array<math::uInt, 63> power2 = 
 {
@@ -150,5 +267,7 @@ uInt fastpow(uInt n, uInt m)
             return powfallback(n, m);
     }
 }
+
+#endif
 
 } // Namespace math.
