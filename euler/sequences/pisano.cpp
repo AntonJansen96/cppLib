@@ -4,13 +4,13 @@ namespace euler::sequences
 {
 
 // Returns the Pisano period for the Fibonacci sequence modulo n
-size_t pisanoperiod(size_t n)
+uInt pisanoperiod(uInt n)
 {
-    size_t a = 0;
-    size_t b = 1;
-    size_t c;
+    uInt a = 0;
+    uInt b = 1;
+    uInt c;
 
-    for (size_t i = 0; i != n * n; ++i)
+    for (uInt i = 0; i != n * n; ++i)
     {
         c = (a + b) % n;
         a = b;

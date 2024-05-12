@@ -5,14 +5,14 @@ namespace euler
 {
 
 // Generate primitive Pythagorean triples with perimeter (a + b + c) < perimLim.
-std::tuple<std::vector<size_t>, std::vector<size_t>, std::vector<size_t>>
-genPrimTriples(size_t perimLim)
+std::tuple<std::vector<uInt>, std::vector<uInt>, std::vector<uInt>>
+genPrimTriples(uInt perimLim)
 {
-    std::vector<size_t> A, B, C;
-    size_t a, b, c;
+    std::vector<uInt> A, B, C;
+    uInt a, b, c;
 
-    for (size_t m = 1; m < sqrt(perimLim); ++m)
-        for (size_t n = m + 1; n < sqrt(perimLim); ++n)
+    for (uInt m = 1; m < sqrt(perimLim); ++m)
+        for (uInt n = m + 1; n < sqrt(perimLim); ++n)
             if (!(m & 1 && n & 1) && isCoprime(m, n))
             {
                 a = n * n - m * m;
@@ -32,14 +32,14 @@ genPrimTriples(size_t perimLim)
 
 // Generate all Pythagorean triples with perimeter (a + b + c) < perimLim.
 // Contains duplicate perimeters.
-std::tuple<std::vector<size_t>, std::vector<size_t>, std::vector<size_t>>
-genTriples(size_t perimLim)
+std::tuple<std::vector<uInt>, std::vector<uInt>, std::vector<uInt>>
+genTriples(uInt perimLim)
 {
-    std::vector<size_t> A, B, C;
-    size_t a, b, c, k;
+    std::vector<uInt> A, B, C;
+    uInt a, b, c, k;
 
-    for (size_t m = 1; m < sqrt(perimLim); ++m)
-        for (size_t n = m + 1; n < sqrt(perimLim); ++n)
+    for (uInt m = 1; m < sqrt(perimLim); ++m)
+        for (uInt n = m + 1; n < sqrt(perimLim); ++n)
             if (!(m & 1 && n & 1) && isCoprime(m, n))
             {
                 a = n * n - m * m;

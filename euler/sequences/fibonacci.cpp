@@ -1,13 +1,13 @@
-#include <vector>
+#include "sequences.h"
 
 namespace euler::sequences
 {
 
 // Generate all Fibonacci numbers smaller than uplim.
-std::vector<size_t> fibonacci(size_t uplim)
+std::vector<uInt> fibonacci(uInt uplim)
 {
-    std::vector<size_t> numbers = {1};
-    size_t idx = 1, next = 1;
+    std::vector<uInt> numbers = {1};
+    uInt idx = 1, next = 1;
 
     while (next <= uplim)
     {

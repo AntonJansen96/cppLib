@@ -4,8 +4,11 @@
 
 #include <algorithm>
 
+namespace euler
+{
+
 // Initialize combinations object.
-euler::Combinations::Combinations(std::vector<int> const &input, size_t k, bool reverse)
+Combinations::Combinations(std::vector<uInt> const &input, uInt k, bool reverse)
     : d_someSet(input)
     , d_mask(k, true)
     , d_masksize(input.size())
@@ -22,12 +25,12 @@ euler::Combinations::Combinations(std::vector<int> const &input, size_t k, bool 
 }
 
 // Yields the next combination.
-std::vector<int> euler::Combinations::yield()
+std::vector<uInt> Combinations::yield()
 {
     ++d_count;
 
     d_comb.clear();
-    for (size_t idx = 0; idx != d_masksize; ++idx)
+    for (uInt idx = 0; idx != d_masksize; ++idx)
         if (d_mask[idx])
             d_comb.push_back(d_someSet[idx]);
 
@@ -37,12 +40,12 @@ std::vector<int> euler::Combinations::yield()
 }
 
 // Yields the next combination.
-size_t euler::Combinations::yieldnumber()
+uInt Combinations::yieldnumber()
 {
     ++d_count;
 
     d_comb.clear();
-    for (size_t idx = 0; idx != d_masksize; ++idx)
+    for (uInt idx = 0; idx != d_masksize; ++idx)
         if (d_mask[idx])
             d_comb.push_back(d_someSet[idx]);
 
@@ -52,9 +55,11 @@ size_t euler::Combinations::yieldnumber()
 }
 
 // Resets everything.
-void euler::Combinations::reset()
+void Combinations::reset()
 {
     d_count = 0;
     std::sort(d_mask.begin(), d_mask.end());
     std::reverse(d_mask.begin(), d_mask.end());
 }
+
+} // namespace euler

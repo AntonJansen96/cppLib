@@ -1,19 +1,19 @@
 #include "../math/math.h"
-#include <cstddef>
+#include "euler.h"
 
 namespace euler
 {
 
 // Returns the number of digits of a number.
-int numDigits(size_t num)
+uInt numDigits(uInt num)
 {
     return math::intlog10(num) + 1;
 }
 
 // Returns the sum of the digits of num.
-int sumDigits(size_t num)
+uInt sumDigits(uInt num)
 {
-    int count = 0;
+    uInt count = 0;
 
     while (num)
     {
@@ -24,9 +24,9 @@ int sumDigits(size_t num)
 }
 
 // Returns the number of of occurances of digit in num.
-int countDigits(size_t num, size_t digit)
+uInt countDigits(uInt num, uInt digit)
 {
-    size_t count = 0;
+    uInt count = 0;
 
     while (num)
     {
@@ -39,7 +39,7 @@ int countDigits(size_t num, size_t digit)
 }
 
 // Returns the nth digit of a number (starting at least significant digit).
-int nthDigit(size_t num, int n)
+uInt nthDigit(uInt num, uInt n)
 {
     while (--n > 0)
         num /= 10;
@@ -48,7 +48,7 @@ int nthDigit(size_t num, int n)
 }
 
 // Returns the first N digits from a number.
-size_t firstNdigits(size_t num, int N)
+uInt firstNdigits(uInt num, uInt N)
 {
     while (num >= math::fastpow(10, N))
         num /= 10;
@@ -57,25 +57,25 @@ size_t firstNdigits(size_t num, int N)
 }
 
 // Returns the first N digits from base^exp.
-size_t firstNdigits(int base, int exp, int N)
+uInt firstNdigits(uInt base, uInt exp, uInt N)
 {
     double num = exp * log10(base);
     num -= floor(num);
     num = std::pow(10, num);
 
-    return static_cast<size_t>(std::floor(std::pow(10, N - 1) * num));
+    return static_cast<uInt>(std::floor(std::pow(10, N - 1) * num));
 }
 
 // Returns the last N digits from a number.
-size_t lastNdigits(size_t num, int N)
+uInt lastNdigits(uInt num, uInt N)
 {
     return (num % math::fastpow(10, N));
 }
 
 // Reverse a number. Example: 1234 -> 4321.
-size_t reverseNumber(size_t num)
+uInt reverseNumber(uInt num)
 {
-    size_t reversed = 0;
+    uInt reversed = 0;
 
     while (num)
     {

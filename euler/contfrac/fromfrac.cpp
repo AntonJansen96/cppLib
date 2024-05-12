@@ -4,12 +4,12 @@ namespace euler::contfrac
 {
 
 // Converts a fraction p/q to a continued fraction representation.
-std::vector<size_t> fromfrac(Fraction const &frac)
+std::vector<uInt> fromfrac(Fraction const &frac)
 {
-    size_t p = frac.num();
-    size_t q = frac.denom();
+    uInt p = frac.num();
+    uInt q = frac.denom();
 
-    std::vector<size_t> cf;
+    std::vector<uInt> cf;
     while (q != 0)
     {
         cf.push_back(p / q);
@@ -20,9 +20,9 @@ std::vector<size_t> fromfrac(Fraction const &frac)
 }
 
 // Converts a fraction p/q to a continued fraction representation.
-std::vector<size_t> fromfrac(size_t p, size_t q)
+std::vector<uInt> fromfrac(uInt p, uInt q)
 {
-    std::vector<size_t> cf;
+    std::vector<uInt> cf;
     while (q != 0)
     {
         cf.push_back(p / q);

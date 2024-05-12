@@ -1,5 +1,4 @@
 #include "contfrac.h"
-#include <iostream>
 
 namespace euler::contfrac
 {
@@ -9,18 +8,18 @@ namespace euler::contfrac
 // Note that unlike the fraction case, the continued fraction representation
 // of a square root is periodic. Therefore, the number N resulting from this
 // function will be an approximation.
-double tosqrt_dec(std::vector<size_t> const &cf, size_t iter)
+double tosqrt_dec(std::vector<uInt> const &cf, uInt iter)
 {
     iter == 0 ? iter = 1 : iter;
 
     // First we add cf to itself #iter times.
-    std::vector<size_t> cfnew;
-    for (size_t i = 0; i != iter; ++i)
+    std::vector<uInt> cfnew;
+    for (uInt i = 0; i != iter; ++i)
         cfnew.insert(cfnew.end(), cf.begin() + 1, cf.end());
     cfnew.insert(cfnew.begin(), cf[0]);
 
-    size_t p = 1;
-    size_t q = 0;
+    uInt p = 1;
+    uInt q = 0;
     // Now go reversed.
     for (auto it = cfnew.rbegin(); it != cfnew.rend(); ++it)
     {
@@ -35,18 +34,18 @@ double tosqrt_dec(std::vector<size_t> const &cf, size_t iter)
 // Note that unlike the fraction case, the continued fraction representation
 // of a square root is periodic. Therefore, the number N resulting from this
 // function will be an approximation.
-Fraction tosqrt_frac(std::vector<size_t> const &cf, size_t iter)
+Fraction tosqrt_frac(std::vector<uInt> const &cf, uInt iter)
 {
     iter == 0 ? iter = 1 : iter;
 
     // First we add cf to itself #iter times.
-    std::vector<size_t> cfnew;
-    for (size_t i = 0; i != iter; ++i)
+    std::vector<uInt> cfnew;
+    for (uInt i = 0; i != iter; ++i)
         cfnew.insert(cfnew.end(), cf.begin() + 1, cf.end());
     cfnew.insert(cfnew.begin(), cf[0]);
 
-    size_t p = 1;
-    size_t q = 0;
+    uInt p = 1;
+    uInt q = 0;
     // Now go reversed.
     for (auto it = cfnew.rbegin(); it != cfnew.rend(); ++it)
     {
