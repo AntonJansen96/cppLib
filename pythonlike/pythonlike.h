@@ -1,6 +1,7 @@
 #ifndef CPPLIB_PYTHONLIKE_H
 #define CPPLIB_PYTHONLIKE_H
 
+#include "fstring.h"
 #include "print.h"
 #include "slice.h"
 
