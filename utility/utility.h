@@ -1,7 +1,7 @@
 #ifndef CPPLIB_UTILITY_H
 #define CPPLIB_UTILITY_H
 
-#include "../pythonlike/pythonlike.h"
+#include <algorithm>
 #include <vector>
 
 namespace utility
@@ -25,7 +25,8 @@ template <typename Type> std::vector<Type> num2vec(Type number)
         digits.push_back(number % 10);
         number /= 10;
     }
-    return pythonlike::reverse(digits);
+    std::reverse(digits.begin(), digits.end());
+    return digits;
 }
 
 } // namespace utility
