@@ -41,7 +41,7 @@ Fraction tofrac(std::vector<uInt> const &cf)
 {
     uInt p = 1;
     uInt q = 0;
-    for (uInt idx = cf.size() - 1; idx > 0; --idx)
+    for (sInt idx = cf.size() - 1; idx != -1; --idx)
     {
         std::swap(p, q);
         p += cf[idx] * q;
@@ -105,15 +105,15 @@ double tosqrt_dec(std::vector<uInt> const &cf, uInt iter)
         cfnew.insert(cfnew.end(), cf.begin() + 1, cf.end());
     cfnew.insert(cfnew.begin(), cf[0]);
 
-    uInt p = 1;
-    uInt q = 0;
+    double p = 1; // These numbers can get quite large,
+    double q = 0; // make double to prevent overflow.
     // Now go reversed.
     for (auto it = cfnew.rbegin(); it != cfnew.rend(); ++it)
     {
         std::swap(p, q);
         p += *it * q;
     }
-    return (p * p) / static_cast<double>(q * q);
+    return std::pow(static_cast<double>(p) / q, 2);
 }
 
 // Converts a continued fraction back to a square root sqrt(N).

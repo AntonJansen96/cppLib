@@ -33,4 +33,13 @@ int main()
     assert((Fraction(1, 2) != Fraction(3, 4)) == true);
     assert((Fraction(1, 2) >= Fraction(3, 4)) == false);
     assert((Fraction(1, 2) <= Fraction(3, 4)) == true);
+
+    // Test continued fractions.
+    for (uInt p = 1; p != 11; ++p)
+        for (uInt q = 1; q != 11; ++q)
+            assert(tofrac(fromfrac(p, q)) == Fraction(p, q));
+
+    // Test square roots.
+    for (uInt n = 4; n != 101; ++n)
+        assert(tosqrt_dec(fromsqrt(n)) - static_cast<double>(n) < 1e-4);
 }
