@@ -1,6 +1,7 @@
 *.o
 *.a
 main
+debug.cpp
 build
 
 CMakeFiles
