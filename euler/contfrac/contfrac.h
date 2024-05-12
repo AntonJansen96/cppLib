@@ -1,8 +1,8 @@
 #ifndef CPPLIB_EULER_CONTFRAC_H
 #define CPPLIB_EULER_CONTFRAC_H
 
-#include "contfrac.h"
 #include "../../fractions/fractions.h" // TODO This is a problem when installing.
+#include "contfrac.h"
 #include <vector>
 
 namespace euler::contfrac
