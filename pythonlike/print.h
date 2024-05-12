@@ -1,147 +1,123 @@
 #ifndef CPPLIB_PYTHONLIKE_PRINT_H
 #define CPPLIB_PYTHONLIKE_PRINT_H
 
+// clang-format off
+#ifdef DEBUG
+#define LOG(x) std::clog << "DEBUG: " << x << '\n'
+#else
+#define LOG(x) do {} while (0)
+#endif
+// clang-format on
+
+#include <concepts>
 #include <iostream>
-#include <sstream>
+
+namespace // Anonymous namespace for helper functions.
+{
+
+// Case 1: no print() arguments specified.
+
+inline void doprint()
+{
+    LOG("case 1 (no arguments specified) was called");
+}
+
+// Case 2: print() base case.
+
+template <typename Type> void doprint(Type const &input, bool fromC = false)
+{
+    LOG("case 2 (print base case) was called");
+    std::cout << input;
+}
+
+// Case 3: print() arguments of type bool (for std::boolalpha).
+
+inline void doprint(bool input, bool fromC = false)
+{
+    LOG("case 3 (print args of type bool) was called");
+
+    std::cout << std::boolalpha << input;
+}
+
+// Case 4: print() arguments of type std::string, char, and char*.
+// Treat separately because in containers we want to print these args as 'arg'.
+
+template <typename Type>
+concept StringChar = std::is_same_v<Type, std::string> || std::is_same_v<Type, char> ||
+                     std::is_same_v<Type, const char *>;
+
+template <StringChar Type> void doprint(Type const &input, bool fromC = false)
+{
+    LOG("case 4 (print args of type string, char, char*) was called");
+
+    if (fromC)
+        std::cout << "'" << input << "'";
+    else
+        std::cout << input;
+}
+
+// Case 5: print() arguments of the types derived from std::ostream.
+
+template <typename Type>
+concept Stream = std::is_base_of<std::ostream, Type>::value;
+
+template <Stream Type> void doprint(Type *input, bool fromC = false)
+{
+    LOG("case 5 (print args of types derived from std::ostream) was called");
+
+    std::cout << (*input).str();
+}
+
+// Case 6: print() Container arguments, but not std::string.
+
+template <typename Type>
+concept Container = requires(Type const &input) {
+    { input.begin() } -> std::same_as<typename Type::const_iterator>;
+    { input.end() } -> std::same_as<typename Type::const_iterator>;
+    { input.empty() } -> std::same_as<bool>;
+} && !std::same_as<Type, std::string>;
+
+template <Container Type> void doprint(Type const &input, bool fromC = false)
+{
+    LOG("case 6 (print Container types) was called");
+
+    if (input.empty())
+        std::cout << "[] ";
+
+    std::cout << '[';
+
+    typename Type::const_iterator iter, end(input.end());
+    // Do not use a range-based for-loop here as std::next() is more universal.
+    for (iter = input.begin(); iter != end; ++iter)
+    {
+        doprint(*iter, true);
+        if (std::next(iter) != input.end())
+            std::cout << ", ";
+    }
+
+    std::cout << "]";
+}
+
+// Main variadic template function.
+template <typename Type, typename... Args> void doprint(Type first, Args... args)
+{
+    doprint(first);
+    doprint(' ');
+    doprint(args...);
+}
+
+} // anonymous namespace.
 
 namespace pythonlike
 {
 
-// Return abstract container as a string.
-template <typename Type> std::string ctos(Type const &input)
+// print args to terminal.
+template <typename... Args> void print(Args... args) noexcept
+// This is a wrapper for the main variadic template function.
+// We wrap so we can insert newline character after doprint finishes.
 {
-    if (input.empty())
-        return "[]";
-
-    typename Type::const_iterator iter, end(input.end());
-
-    std::string output{"["};
-    for (iter = input.begin(); iter != end; ++iter)
-    {
-        output += std::to_string(*iter);
-        if (std::next(iter) != input.end())
-            output += ", ";
-    }
-    return output + ']';
-}
-
-// Specialization for abstract containers containing std::strings.
-template <template <typename...> class Container>
-std::string ctos(Container<std::string> const &input)
-{
-    if (input.empty())
-        return "[]";
-
-    std::string output{"["};
-    for (auto iter = input.begin(); iter != input.end(); ++iter)
-    {
-        output += "'" + *iter + "'";
-        if (std::next(iter) != input.end())
-            output += ", ";
-    }
-    return output + ']';
-}
-
-// Base template for printing.
-// Will work for primitive types and all objects with an overloaded << operator.
-template <typename Type> void _doprint(Type const &input)
-{
-    std::cout << input << ' ';
-}
-
-// Specialization for printing of the bool type.
-// We have a specialization so that we can print true/false instead of 1/0.
-// Note: not a template, inline to avoid symbol duplication problems.
-// Alternatively, we can put this in a .cpp file.
-inline void _doprint(bool input)
-{
-    std::cout << std::boolalpha << input << ' ';
-}
-
-// Specialization for printing of the std::string type.
-// Note: not a template, inline to avoid symbol duplication problems.
-// Alternatively, we can put this in a .cpp file.
-inline void _doprint(std::string const &input)
-{
-    std::cout << input << ' ';
-}
-
-// Specialization for printing of abstract containers.
-template <template <typename, typename...> class ContainerType, typename ValueType,
-          typename... Args>
-void _doprint(ContainerType<ValueType, Args...> const &input)
-{
-    std::cout << pythonlike::ctos(input) << ' ';
-}
-
-// Specialization for printing of nested containers.
-template <template <typename, typename...> class OuterContainerType,
-          template <typename, typename...> class InnerContainerType, typename ValueType,
-          typename... Args>
-void _doprint(OuterContainerType<InnerContainerType<ValueType, Args...>> const &input)
-{
-    for (const auto &innerContainer : input)
-    {
-        _doprint(innerContainer);
-        std::cout << '\n';
-    }
-}
-
-// Specialization to handle when nothing is specified.
-// Note: not a template, inline to avoid symbol duplication problems.
-// Alternatively, we can put this in a .cpp file.
-inline void _doprint()
-{
-}
-
-// Variadic template. Main thing that gets executed.
-template <typename T, typename... Args> void _doprint(T first, Args... args)
-{
-    _doprint(first);
-    _doprint(args...);
-}
-
-// This is a wrapper for the variadic template function.
-// We do this so we can print a newline after variadic finishes.
-
-// Print arguments to terminal.
-// Works for primitive types and all objects with an overloaded << operator.
-// Also works for abstract containers containing primitive types and std::strings.
-template <typename... Args> void print(Args... args)
-{
-    _doprint(args...);
-    std::cout << std::endl;
-}
-
-namespace
-{
-// Helper function for the variadic template fs function.
-template <typename Type> std::string _to_string(Type value)
-{
-    std::ostringstream os;
-    os << value;
-    return os.str();
-}
-} // anonymous namespace.
-
-// Create a Python-style f-string.
-// Use: fs("{} {}", "hello", "world!").
-template <typename... Args> std::string fs(std::string const &input, Args... args)
-{
-    std::string output{input};
-    std::string argStrings[] = {_to_string(args)...};
-
-    for (auto const &arg : argStrings)
-    {
-        size_t pos = output.find_first_of('{');
-
-        if (pos == std::string::npos) // if not found, pos will be
-            break;                    // out of range, so we break.
-
-        output.replace(pos, 2, arg);
-    }
-
-    return output;
+    doprint(args...);
+    std::cout << '\n';
 }
 
 } // namespace pythonlike.
