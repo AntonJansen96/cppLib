@@ -9,7 +9,9 @@
 #endif
 // clang-format on
 
+#include <cmath>
 #include <concepts>
+#include <iomanip>
 #include <iostream>
 
 namespace // Anonymous namespace for helper functions.
@@ -27,7 +29,15 @@ inline void doprint()
 template <typename Type> void doprint(Type const &input, bool fromC = false)
 {
     LOG("case 2 (print base case) was called");
-    std::cout << input;
+    if constexpr (std::is_floating_point_v<Type>)
+    {
+        if (std::floor(input) == input)
+            std::cout << std::fixed << std::setprecision(1) << input;
+        else
+            std::cout << std::defaultfloat << std::setprecision(6) << input;
+    }
+    else
+        std::cout << input;
 }
 
 // Case 3: print() arguments of type bool (for std::boolalpha).
