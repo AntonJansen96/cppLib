@@ -1,4 +1,5 @@
 #include "fileio.h"
+#include <cstdint>
 
 namespace fileio
 {
@@ -44,6 +45,62 @@ std::vector<std::string> splitline(std::string const &line, char delim)
             tokens.push_back(token);
 
     return tokens;
+}
+
+// Read a column from a file into a vector of std::strings.
+std::vector<std::string> loadCol_s(std::string const &filename, size_t col,
+                                   size_t header)
+{
+    std::ifstream file(filename);
+    std::vector<std::string> array;
+    std::string line;
+
+    if (file.is_open())
+    { // Skip the #header number of header lines.
+        for (size_t i = 0; i != header; ++i)
+            std::getline(file, line);
+
+        while (std::getline(file, line))
+        {
+            std::istringstream tokenStream(line);
+            std::string token;
+            size_t idx = 0;
+
+            while (std::getline(tokenStream, token, ' '))
+            {
+                if (token.empty())
+                    continue;
+
+                if (idx == col)
+                {
+                    array.push_back(token);
+                    break;
+                }
+
+                ++idx;
+            }
+        }
+    }
+    return array;
+}
+
+// Read a column from a file into a vector of signed 64-bit integers.
+std::vector<int_fast64_t> loadCol_i(std::string const &filename, size_t col,
+                                    size_t header)
+{
+    std::vector<int_fast64_t> array;
+    for (std::string const &str : loadCol_s(filename, col, header))
+        array.push_back(std::stoll(str));
+    return array;
+}
+
+// Read a column from a file into a vector of 64-bit floating point numbers.
+std::vector<double> loadCol_f(std::string const &filename, size_t col, size_t header)
+{
+    std::vector<double> array;
+    for (std::string const &str : loadCol_s(filename, col, header))
+        array.push_back(std::stod(str));
+    return array;
 }
 
 } // namespace fileio

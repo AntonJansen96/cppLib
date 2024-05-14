@@ -14,6 +14,17 @@ std::vector<std::string> file2vector(std::string const &filename, char delim = '
 // Split a line into a vector of std:string, delimited by delim.
 std::vector<std::string> splitline(std::string const &line, char delim);
 
+// Read a column from a file into a vector of std::strings.
+std::vector<std::string> loadCol_s(std::string const &filename, size_t col = 0,
+                                   size_t header = 0);
+
+// Read a column from a file into a vector of signed 64-bit integers.
+std::vector<int_fast64_t> loadCol_i(std::string const &filename, size_t col = 0,
+                                    size_t header = 0);
+
+// Read a column from a file into a vector of 64-bit floating point numbers.
+std::vector<double> loadCol_f(std::string const &filename, size_t col, size_t header);
+
 } // namespace fileio
 
 #endif
