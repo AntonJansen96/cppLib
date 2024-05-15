@@ -88,6 +88,7 @@
         "stop_token": "cpp",
         "__tree": "cpp",
         "map": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "codecvt": "cpp"
     }
 }
