@@ -1,0 +1,35 @@
+# This file was created Mon May  6 14:14:34 2024
+# Created by:
+#     :-) GROMACS - gmx cphmd, 2021-beta1-dev-20220315-891277f02-unknown (-:
+# 
+# Executable:   /usr/local/gromacs_constantph/bin/gmx
+# Data prefix:  /usr/local/gromacs_constantph
+# Working dir:  /Users/anton/Downloads/pH_3.50/anton_cph
+# Command line:
+#   gmx cphmd -s MD.tpr -e MD.edr -numplot 1
+# gmx cphmd is part of G R O M A C S:
+#
+# Good ROcking Metal Altar for Chronical Sinners
+#
+@    title "Constant pH Lambda Coordinate for Lambda 1"
+@    xaxis  label "Time (ps)"
+@    yaxis  label "Lambda Coordinate"
+@TYPE xy
+@ view 0.15, 0.15, 0.75, 0.85
+@ legend on
+@ legend box on
+@ legend loctype view
+@ legend 0.78, 0.8
+@ legend length 2
+@ s0 legend "Atom Collection HSPT HSPT, index (1)"
+  0.0000      0.9997
+  1.0000      0.0360
+  2.0000      0.0353
+  3.0000      0.0413
+  4.0000     -0.0015
+  5.0000     -0.0445
+  6.0000     -0.0238
+  7.0000     -0.0072
+  8.0000      0.0120
+  9.0000      0.0167
+ 10.0000     -0.0041

@@ -1,0 +1,15 @@
+total 104
+-rw-r--r--   1 anton  staff  1965 May 15 11:38 CMakeLists.txt
+drwxr-xr-x  13 anton  staff   416 May 15 11:38 build
+-rw-r--r--   1 anton  staff   548 May 15 11:38 debug.cpp
+-rwxr-xr-x   1 anton  staff   126 May 15 11:38 dodebug.sh
+-rwxr-xr-x   1 anton  staff   182 May 15 11:38 dotests.sh
+-rw-r--r--   1 anton  staff    41 May 15 11:38 test_euler.cpp
+-rw-r--r--   1 anton  staff    43 May 15 11:38 test_fileio.cpp
+-rw-r--r--   1 anton  staff  1558 May 15 11:38 test_fractions.cpp
+-rw-r--r--   1 anton  staff  1378 May 15 11:38 test_main.cpp
+-rw-r--r--   1 anton  staff  1823 May 15 11:38 test_math.cpp
+-rw-r--r--   1 anton  staff  4855 May 15 11:38 test_pythonlike.cpp
+-rw-r--r--   1 anton  staff  1572 May 15 11:38 test_stopwatch.cpp
+-rw-r--r--   1 anton  staff   202 May 15 11:38 test_utility.cpp
+-rw-r--r--   1 anton  staff     0 May 15 11:39 text.txt
