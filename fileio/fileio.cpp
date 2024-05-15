@@ -53,18 +53,21 @@ std::vector<std::string> loadCol_s(std::string const &filename, size_t col,
 {
     std::ifstream file(filename);
     std::vector<std::string> array;
-    std::string line;
+    std::string line, token;
+    size_t idx = 0;
 
     if (file.is_open())
-    { // Skip the #header number of header lines.
-        for (size_t i = 0; i != header; ++i)
+    {
+        for (size_t i = 0; i != header; ++i) // Skip header lines.
             std::getline(file, line);
 
         while (std::getline(file, line))
         {
+            if (line.empty() || line[0] == '@' || line[0] == '#')
+                continue; // skip empty lines, those starting with @, #.
+
             std::istringstream tokenStream(line);
-            std::string token;
-            size_t idx = 0;
+            idx = 0;
 
             while (std::getline(tokenStream, token, ' '))
             {
@@ -101,6 +104,38 @@ std::vector<double> loadCol_f(std::string const &filename, size_t col, size_t he
     for (std::string const &str : loadCol_s(filename, col, header))
         array.push_back(std::stod(str));
     return array;
+}
+
+std::vector<std::vector<double>> loadxvg(std::string const &filename)
+{
+    std::ifstream file(filename);
+    std::vector<std::vector<double>> grid(12, std::vector<double>());
+    std::string line, token;
+    size_t idx = 0;
+
+    if (file.is_open())
+    {
+        while (std::getline(file, line))
+        {
+            if (line.empty() || line[0] == '@' || line[0] == '#')
+                continue; // skip empty lines, those starting with @, #.
+
+            std::istringstream tokenStream(line);
+
+            idx = 0;
+            while (std::getline(tokenStream, token, ' '))
+            {
+                if (token.empty())
+                    continue;
+
+                grid[idx].push_back(std::stod(token));
+
+                ++idx;
+            }
+        }
+    }
+    grid.resize(idx); // Remove unused std::vector<doubles> in the grid.
+    return grid;
 }
 
 } // namespace fileio
