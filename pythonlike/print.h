@@ -108,6 +108,39 @@ template <Container Type> void doprint(Type const &input, bool fromC = false)
     std::cout << "]";
 }
 
+// Case 7: print() arguments of type pair (this is straightforward).
+
+template <typename Type1, typename Type2>
+void doprint(std::pair<Type1, Type2> const &input, bool fromC = false)
+{
+    LOG("case 7 (print args of type pair) was called");
+
+    std::cout << '(';
+    doprint(input.first, true);
+    std::cout << ", ";
+    doprint(input.second, true);
+    std::cout << ')';
+}
+
+// Case 8: print() arguments of type tuple (this is more complex).
+
+template <typename... Args>
+void doprint(std::tuple<Args...> const &input, bool fromC = false)
+{
+    LOG("case 8 (print args of type tuple) was called");
+
+    std::cout << '(';
+    std::apply(
+        [&](auto const &...args)
+        {
+            size_t n = 0;
+            ((doprint(args, true), std::cout << (++n != sizeof...(args) ? ", " : "")),
+             ...);
+        },
+        input);
+    std::cout << ')';
+}
+
 // Main variadic template function.
 template <typename Type, typename... Args> void doprint(Type first, Args... args)
 {

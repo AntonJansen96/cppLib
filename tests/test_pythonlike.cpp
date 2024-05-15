@@ -64,6 +64,8 @@ int main()
     std::stringstream t12;
     t12 << "some stringstream text";
     std::vector<std::vector<int>> t13 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+    auto t14 = std::make_pair("hello", 3.14159);
+    auto t15 = std::make_tuple(1, 1.15, "hello", std::vector<int>{1, 2, 3});
 
     // Define various const primitive types, objects, and containers.
     const int t1c = 1;
@@ -77,6 +79,8 @@ int main()
     const std::vector<const char *> t9c = {"hello", "world"};
     const std::vector<std::string> t10c = {"some", "string"};
     const std::vector<std::vector<int>> t13c = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+    const auto t14c = std::make_pair("hello", 3.14159);
+    const auto t15c = std::make_tuple(1, 1.15, "hello", std::vector<int>{1, 2, 3});
 
     std::streambuf *oldCoutStreamBuf = std::cout.rdbuf();
     std::ostringstream strCout;
@@ -118,6 +122,18 @@ int main()
     strCout.str("");
 
     std::cout.rdbuf(strCout.rdbuf());
+    print(t14);
+    std::cout.rdbuf(oldCoutStreamBuf);
+    assert(strCout.str() == "('hello', 3.14159)\n");
+    strCout.str("");
+
+    std::cout.rdbuf(strCout.rdbuf());
+    print(t15);
+    std::cout.rdbuf(oldCoutStreamBuf);
+    assert(strCout.str() == "(1, 1.15, 'hello', [1, 2, 3])\n");
+    strCout.str("");
+
+    std::cout.rdbuf(strCout.rdbuf());
     print();
     std::cout.rdbuf(oldCoutStreamBuf);
     assert(strCout.str() == "\n");
@@ -145,6 +161,18 @@ int main()
     print(t13c);
     std::cout.rdbuf(oldCoutStreamBuf);
     assert(strCout.str() == "[[1, 2, 3], [4, 5, 6], [7, 8, 9]]\n");
+    strCout.str("");
+
+    std::cout.rdbuf(strCout.rdbuf());
+    print(t14c);
+    std::cout.rdbuf(oldCoutStreamBuf);
+    assert(strCout.str() == "('hello', 3.14159)\n");
+    strCout.str("");
+
+    std::cout.rdbuf(strCout.rdbuf());
+    print(t15c);
+    std::cout.rdbuf(oldCoutStreamBuf);
+    assert(strCout.str() == "(1, 1.15, 'hello', [1, 2, 3])\n");
     strCout.str("");
 
     // TEST TEMPLATES IN SLICE.H
