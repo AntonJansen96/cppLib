@@ -134,6 +134,7 @@ std::string loadVal(std::string const &filename, size_t row, size_t col)
             ++lineidx;
         }
     }
+    return ""; // control reahces end of non-void function.
 }
 
 std::vector<std::vector<double>> loadxvg(std::string const &filename)
