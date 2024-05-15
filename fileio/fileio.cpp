@@ -106,6 +106,36 @@ std::vector<double> loadCol_f(std::string const &filename, size_t col, size_t he
     return array;
 }
 
+// Read a specific value from a file (delimited by lines and whitespace).
+std::string loadVal(std::string const &filename, size_t row, size_t col)
+{
+    std::ifstream file(filename);
+    std::string line, token;
+    size_t lineidx = 1, colidx = 0;
+
+    if (file.is_open())
+    {
+        while (std::getline(file, line))
+        {
+            if (lineidx == row)
+            {
+                std::istringstream tokenStream(line);
+                while (std::getline(tokenStream, token, ' '))
+                {
+                    if (token.empty())
+                        continue;
+
+                    if (colidx == col)
+                        return token;
+
+                    ++colidx;
+                }
+            }
+            ++lineidx;
+        }
+    }
+}
+
 std::vector<std::vector<double>> loadxvg(std::string const &filename)
 {
     std::ifstream file(filename);

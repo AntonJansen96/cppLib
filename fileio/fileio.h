@@ -25,6 +25,9 @@ std::vector<int_fast64_t> loadCol_i(std::string const &filename, size_t col = 0,
 // Read a column from a file into a vector of 64-bit floating point numbers.
 std::vector<double> loadCol_f(std::string const &filename, size_t col, size_t header);
 
+// Read a specific value from a file (delimited by lines and whitespace).
+std::string loadVal(std::string const &filename, size_t row, size_t col);
+
 // Read a .xvg file into a tuple of vectors of 64-bit floating point numbers.
 std::vector<std::vector<double>> loadxvg(std::string const &filename);
 
