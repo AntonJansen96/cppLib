@@ -2,10 +2,14 @@
 #define CPPLIB_UTILITY_H
 
 #include <algorithm>
+#include <string>
 #include <vector>
 
 namespace utility
 {
+
+// Handles input options when prompting a user.
+size_t inputOptionHandler(std::string message, std::vector<std::string> const &options);
 
 // Transforms a vector of digits into an integer.
 template <typename Type> Type vec2num(std::vector<Type> const &input)
