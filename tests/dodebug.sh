@@ -3,7 +3,7 @@
 set -e
 
 if [ ! -f "build/CMakeCache.txt" ]; then
-  cmake -B build -DDEBUG=ON
+  cmake -B build -DSINGLE=OFF -DDEBUG=ON
 fi
 
 make -j -C build
