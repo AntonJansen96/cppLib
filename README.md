@@ -39,7 +39,7 @@ more or less a wrapper for some functionality of the std::chrono library.
 
 - [x]  build system
 - [ ]  euler
-- [ ]  fileio
+- [x]  fileio
 - [x]  fractions
 - [x]  math
 - [x]  stopwatch
@@ -47,4 +47,4 @@ more or less a wrapper for some functionality of the std::chrono library.
 - [x]  utility
 - [x]  unit and integration tests
 - [x]  make installation more general
-- [ ]  allow setting of fractions type (32bit or 64bit integer) in cmake.
+- [x]  allow setting of fractions type (32bit or 64bit integer) in cmake.
