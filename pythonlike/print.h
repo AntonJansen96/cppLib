@@ -91,9 +91,6 @@ template <Container Type> void doprint(Type const &input, bool fromC = false)
 {
     LOG("case 6 (print Container types) was called");
 
-    if (input.empty())
-        std::cout << "[] ";
-
     std::cout << '[';
 
     typename Type::const_iterator iter, end(input.end());
