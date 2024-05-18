@@ -26,6 +26,9 @@ uInt sumDigits(uInt num)
 // Returns the number of of occurances of digit in num.
 uInt countDigits(uInt num, uInt digit)
 {
+    if (num == 0 && digit == 0) // edge case.
+        return 1;
+
     uInt count = 0;
 
     while (num)
@@ -41,6 +44,9 @@ uInt countDigits(uInt num, uInt digit)
 // Returns the nth digit of a number (starting at least significant digit).
 uInt nthDigit(uInt num, uInt n)
 {
+    if (n == 0) // edge case.
+        return 0;
+
     while (--n > 0)
         num /= 10;
 

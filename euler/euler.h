@@ -85,13 +85,11 @@ uInt partition(uInt money, std::vector<uInt> const &coins);
 std::vector<uInt> genPandigital(uInt a, uInt b);
 
 // Generates primitive Pythagorean triples with perimeter (a + b + c) < perimLim.
-std::tuple<std::vector<uInt>, std::vector<uInt>, std::vector<uInt>>
-genPrimTriples(uInt perimLim);
+std::vector<std::tuple<uInt, uInt, uInt>> genPrimTriples(uInt perimLim);
 
 // Generates all Pythagorean triples with perimeter (a + b + c) < perimLim.
 // Contains duplicate perimeters.
-std::tuple<std::vector<uInt>, std::vector<uInt>, std::vector<uInt>>
-genTriples(uInt perimLim);
+std::vector<std::tuple<uInt, uInt, uInt>> genTriples(uInt perimLim);
 
 // CERTAIN CONVERSIONS *********************************************************
 
