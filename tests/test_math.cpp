@@ -45,10 +45,12 @@ int main()
     assert(math::gcd(23142, 155) == 1);
 
     // TEMPLATES
-    std::vector<int> const empty;
-    std::vector<int> const vec = {1, 2, 3, 4, 5};
+    std::vector<int> empty;
+    std::vector<int> vec = {1, 2, 3, 4, 5};
     assert(math::mean(empty) == 0.0);
     assert(math::mean(vec) == 3.0);
     assert(math::sdev(empty) == 0.0);
     assert(math::sdev(vec) == 1.4142135623730951);
+    assert(math::median(empty) == 0.0);
+    assert(math::median(vec) == 3);
 }

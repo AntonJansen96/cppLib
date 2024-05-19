@@ -11,16 +11,18 @@ namespace euler
 // Automorphic means that the square of the number ends with the number itself.
 bool isAutomorphic(uInt num)
 {
-    uInt m = 1;
-    uInt temp = num;
-
-    while (temp > 0)
+    uInt square = num * num;
+    // Start from the last digit of num and square, and compare digits
+    while (num > 0)
     {
-        m *= 10;
-        temp /= 10;
+        // If last digits of num and square are not same
+        if (num % 10 != square % 10)
+            return false;
+        // Move to the next digit
+        num /= 10;
+        square /= 10;
     }
-
-    return math::mulmod(num, num, m);
+    return true;
 }
 
 // Checks whether two numbers a and b are coprime.
@@ -29,13 +31,13 @@ bool isCoprime(uInt a, uInt b)
     if (((a | b) & 1) == 0) // Reject if both are even (gcd(a,b) >= 2).
         return false;
 
-    return (math::gcd(a, b) == 1);
+    return math::gcd(a, b) == 1;
 }
 
 // Checks whether a number is juf.
 bool isJuf(uInt num)
 {
-    return (num % 7 == 0 || std::to_string(num).find('7') != std::string::npos ||
+    return (num % 7 == 0 || std::to_string(num).contains('7') ||
             (isPalindrome(num) && num > 10));
 }
 
@@ -50,7 +52,7 @@ bool isPalindrome(uInt num)
         tmp /= 10;
     }
 
-    return invnum == num ? true : false;
+    return invnum == num;
 }
 
 // Check whether num is a perfect number.
@@ -87,7 +89,7 @@ uInt fingerPrint(uInt num)
 // Check whether the number a is a digit permutation of number b.
 bool isPermutationOf(uInt a, uInt b)
 {
-    return (fingerPrint(a) == fingerPrint(b)) ? true : false;
+    return fingerPrint(a) == fingerPrint(b);
 }
 
 // Return #partitions of a number.

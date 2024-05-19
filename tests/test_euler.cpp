@@ -44,4 +44,44 @@ int main()
     std::vector<std::array<uInt, 3>> triple1 = genPrimTriples(50);
     std::vector<std::array<uInt, 3>> triple2 = {{3, 4, 5}, {15, 8, 17}, {5, 12, 13}};
     assert(triple1 == triple2);
+
+    // SEQUENCES
+    assert(sequences::pisanoperiod(10) == 60); // https://oeis.org/A001175
+    std::vector<uInt> const seq_pisano = {0, 1, 1, 2, 3, 5, 8, 13, 21, 34};
+    assert(sequences::fibonacci(35) == seq_pisano);
+
+    // FUNCTIONS
+    for (uInt num : {0, 1, 5, 6, 25, 76, 376, 625, 9376})
+        assert(isAutomorphic(num) == true);
+    assert(isAutomorphic(123) == false);
+
+    assert(isCoprime(0, 0) == false);
+    assert(isCoprime(1, 1) == true);
+    assert(isCoprime(2, 2) == false);
+    assert(isCoprime(9, 2) == true);
+
+    assert(isPalindrome(0) == true);
+    assert(isPalindrome(13531) == true);
+    assert(isPalindrome(12345) == false);
+
+    assert(isJuf(8) == false);
+    assert(isJuf(11) == true);
+    assert(isJuf(21) == true);
+    assert(isJuf(27) == true);
+
+    assert(isPermutationOf(123, 132) == true);
+    assert(isPermutationOf(1234, 1325) == false);
+
+    for (uInt num : {0, 1, 4, 9, 16, 25, 36, 49, 64}) // https://oeis.org/A000290
+        assert(isSquare(num) == true);
+    for (uInt num : {2, 3, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 17, 101})
+        assert(isSquare(num) == false);
+
+    std::vector<uInt> const pandigitals = {123, 132, 213, 231, 312, 321};
+    assert(genPandigital(1, 3) == pandigitals);
+
+    assert(lcm(0, 0) == 0);
+    assert(lcm(0, 1) == 0);
+    assert(lcm(1, 1) == 1);
+    assert(lcm(123, 15) == 615);
 }

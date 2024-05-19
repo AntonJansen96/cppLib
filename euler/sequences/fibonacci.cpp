@@ -6,7 +6,7 @@ namespace euler::sequences
 // Generate all Fibonacci numbers smaller than uplim.
 std::vector<uInt> fibonacci(uInt uplim)
 {
-    std::vector<uInt> numbers = {1};
+    std::vector<uInt> numbers = {0};
     uInt idx = 1, next = 1;
 
     while (next <= uplim)
