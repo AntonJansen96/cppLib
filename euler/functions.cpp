@@ -92,23 +92,6 @@ bool isPermutationOf(uInt a, uInt b)
     return fingerPrint(a) == fingerPrint(b);
 }
 
-// Return #partitions of a number.
-uInt partition(uInt money)
-{
-    std::vector<uInt> coins;
-    for (uInt num = 1; num <= money; ++num)
-        coins.push_back(num);
-
-    std::vector<uInt> ways(money + 1);
-    ways[0] = 1;
-
-    for (uInt ii = 0; ii < coins.size(); ++ii)
-        for (uInt jj = coins[ii]; jj <= money; ++jj)
-            ways[jj] += ways[jj - coins[ii]];
-
-    return ways[money];
-}
-
 // Check whether num is a square.
 bool isSquare(uInt num)
 {
@@ -124,19 +107,6 @@ bool isSquare(uInt num)
     }
 
     return false;
-}
-
-// Returns #ways money can be divided by coins in listed in coinvector.
-uInt partition(uInt money, std::vector<uInt> const &coins)
-{
-    std::vector<uInt> ways(money + 1);
-    ways[0] = 1;
-
-    for (uInt ii = 0; ii < coins.size(); ++ii)
-        for (uInt jj = coins[ii]; jj <= money; ++jj)
-            ways[jj] += ways[jj - coins[ii]];
-
-    return ways[money];
 }
 
 // Generate all numbers that are a to b pandigital.

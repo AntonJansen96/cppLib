@@ -73,11 +73,14 @@ bool isSquare(uInt num);
 
 // PARTITIONING ****************************************************************
 
-// Returns #partitions of a number.
-uInt partition(uInt money);
+// Returns the number of partitions of a number.
+uInt numpartitions(uInt money);
 
-// Returns #ways money can be divided by coins in listed in coinvector.
-uInt partition(uInt money, std::vector<uInt> const &coins);
+// Returns the number of partitions of a number using a coinvector.
+uInt numpartitions(uInt money, std::vector<uInt> const &coins);
+
+// Generates all partitions of a number.
+std::vector<std::vector<uInt>> genpartitions(uInt n);
 
 // GENERATORS ******************************************************************
 

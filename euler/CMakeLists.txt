@@ -1,5 +1,6 @@
 set(EULER_SOURCES
     combinatorics/numbersplit.cpp
+    combinatorics/partitions.cpp
     combinatorics/permutations.cpp
     combinatorics/combinations.cpp
     primetools/isamicable.cpp

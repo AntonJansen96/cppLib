@@ -50,7 +50,7 @@ int main()
     std::vector<uInt> const seq_pisano = {0, 1, 1, 2, 3, 5, 8, 13, 21, 34};
     assert(sequences::fibonacci(35) == seq_pisano);
 
-    // FUNCTIONS
+    // EULER FUNCTIONS
     for (uInt num : {0, 1, 5, 6, 25, 76, 376, 625, 9376})
         assert(isAutomorphic(num) == true);
     assert(isAutomorphic(123) == false);
@@ -84,4 +84,10 @@ int main()
     assert(lcm(0, 1) == 0);
     assert(lcm(1, 1) == 1);
     assert(lcm(123, 15) == 615);
+
+    // PARTITIONING
+    assert(numpartitions(50) == 204226);
+    assert(numpartitions(200, {1, 2, 5, 10, 20, 50, 100, 200}) == 73682);
+    std::vector<std::vector<uInt>> par = {{4}, {3, 1}, {2, 2}, {2, 1, 1}, {1, 1, 1, 1}};
+    assert(genpartitions(4) == par);
 }
