@@ -1,13 +1,14 @@
 #include "euler.h"
+#include <array>
 #include <cmath>
 
 namespace euler
 {
 
 // Generate primitive Pythagorean triples with perimeter (a + b + c) < perimLim.
-std::vector<std::tuple<uInt, uInt, uInt>> genPrimTriples(uInt perimLim)
+std::vector<std::array<uInt, 3>> genPrimTriples(uInt perimLim)
 {
-    std::vector<std::tuple<uInt, uInt, uInt>> array;
+    std::vector<std::array<uInt, 3>> array;
     uInt a, b, c;
 
     for (uInt m = 1; m < sqrt(perimLim); ++m)
@@ -19,7 +20,7 @@ std::vector<std::tuple<uInt, uInt, uInt>> genPrimTriples(uInt perimLim)
                 c = n * n + m * m;
 
                 if (a + b + c <= perimLim)
-                    array.push_back(std::tuple{a, b, c});
+                    array.push_back({a, b, c});
             }
 
     return array;
@@ -27,9 +28,9 @@ std::vector<std::tuple<uInt, uInt, uInt>> genPrimTriples(uInt perimLim)
 
 // Generate all Pythagorean triples with perimeter (a + b + c) < perimLim.
 // Contains duplicate perimeters.
-std::vector<std::tuple<uInt, uInt, uInt>> genTriples(uInt perimLim)
+std::vector<std::array<uInt, 3>> genTriples(uInt perimLim)
 {
-    std::vector<std::tuple<uInt, uInt, uInt>> array;
+    std::vector<std::array<uInt, 3>> array;
     uInt a, b, c, k;
 
     for (uInt m = 1; m < sqrt(perimLim); ++m)
@@ -43,7 +44,7 @@ std::vector<std::tuple<uInt, uInt, uInt>> genTriples(uInt perimLim)
                 k = 1;
                 while (k * (a + b + c) <= perimLim)
                 {
-                    array.push_back(std::tuple{k * a, k * b, k * c});
+                    array.push_back({k * a, k * b, k * c});
                     ++k;
                 }
             }

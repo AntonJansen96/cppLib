@@ -41,10 +41,7 @@ int main()
         assert(num == roman2dec(dec2roman(num)));
 
     // PYTHAGOREAN TRIPLES
-    std::vector<std::tuple<int, int, int>> x = {{3, 4, 5}, {6, 8, 10}, {5, 12, 13}};
-    print(x); // print fails because it can't print tuples
-    // std::tuple<int, int, int> y = {3, 4, 5};
-    // print(y);
-    // for (auto const &triple : genTriples(100))
-        // print(triple);
+    std::vector<std::array<uInt, 3>> triple1 = genPrimTriples(50);
+    std::vector<std::array<uInt, 3>> triple2 = {{3, 4, 5}, {15, 8, 17}, {5, 12, 13}};
+    assert(triple1 == triple2);
 }
