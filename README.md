@@ -48,3 +48,4 @@ more or less a wrapper for some functionality of the std::chrono library.
 - [x]  unit and integration tests
 - [x]  make installation more general
 - [x]  allow setting of fractions type (32bit or 64bit integer) in cmake.
+- []   check C++ 2023 features and update code
