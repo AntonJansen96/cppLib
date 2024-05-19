@@ -30,9 +30,9 @@ template <typename Container> double sdev(Container const &array)
     auto Mean = mean(array);
     auto len = static_cast<double>(array.size());
 
-    auto sq_sum = std::inner_product(
-        array.begin(), array.end(), array.begin(), 0.0, std::plus<>(),
-        [Mean](auto x, auto y) { return (x - Mean) * (y - Mean); });
+    auto sq_sum = std::inner_product(array.begin(), array.end(), array.begin(), 0.0,
+                                     std::plus<>(), [Mean](auto x, auto y)
+                                     { return (x - Mean) * (y - Mean); });
 
     return std::sqrt(sq_sum / len);
 }

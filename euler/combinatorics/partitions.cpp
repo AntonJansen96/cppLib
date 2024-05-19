@@ -1,8 +1,10 @@
 #include "../euler.h"
 
-namespace {
+namespace
+{
 
-void genPartitionsHelper(euler::uInt n, std::vector<euler::uInt> &part, euler::uInt max, std::vector<std::vector<euler::uInt>> &result)
+void genPartitionsHelper(euler::uInt n, std::vector<euler::uInt> &part, euler::uInt max,
+                         std::vector<std::vector<euler::uInt>> &result)
 {
     if (n == 0)
     {
@@ -20,7 +22,8 @@ void genPartitionsHelper(euler::uInt n, std::vector<euler::uInt> &part, euler::u
 
 } // anonymous namespace
 
-namespace euler {
+namespace euler
+{
 
 // Returns the number of partitions of a number.
 uInt numpartitions(uInt money)
@@ -61,4 +64,4 @@ std::vector<std::vector<uInt>> genpartitions(uInt n)
     return result;
 }
 
-}
+} // namespace euler

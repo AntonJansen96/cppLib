@@ -32,4 +32,4 @@ size_t inputOptionHandler(std::string message, std::vector<std::string> const &o
     }
 }
 
-} // utility
+} // namespace utility
