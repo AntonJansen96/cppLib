@@ -1,7 +1,7 @@
 #!/bin/bash
 
-C=/opt/homebrew/bin/gcc-13
-CXX=/opt/homebrew/bin/g++-13
+C=/opt/homebrew/bin/gcc-14
+CXX=/opt/homebrew/bin/g++-14
 FLAGS="-Wall -std=c++23 -O3 -march=native -funroll-loops -ffast-math -flto"
 
 rm -rf build
