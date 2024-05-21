@@ -36,7 +36,9 @@ int main()
     assert(math::factorial(0) == 1);
     assert(math::factorial(1) == 1);
     assert(math::factorial(5) == 120);
-    assert(math::factorial(100) == 0); // int64 overflow -> 0.
+    double const result = math::factorial(80);
+    double const expected = 7.15695e+118;
+    assert(std::abs((result - expected) / expected) < 1e-5);
 
     assert(math::binom(5, 2) == 10);
     assert(math::binom(18, 7) == 31824);

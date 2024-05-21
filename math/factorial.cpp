@@ -3,13 +3,13 @@
 namespace math
 {
 
-// Returns factorial of number (0 if 64-bit overflow).
-uInt factorial(uInt num)
+// Returns factorial of number.
+double factorial(uInt num)
 {
-    if (num > 20) // 64-bit overflow.
-        return 0;
-
-    return (num > 1) ? num * factorial(num - 1) : 1;
+    double result = 1.0;
+    for (size_t i = 2; i <= num; ++i)
+        result *= i;
+    return result;
 }
 
 } // Namespace math.
