@@ -15,7 +15,7 @@ size_t inputOptionHandler(std::string message, std::vector<std::string> const &o
 template <typename Type> Type vec2num(std::vector<Type> const &input)
 {
     Type number = 0;
-    for (auto const &digit : input)
+    for (Type digit : input)
         number = number * 10 + digit;
     return number;
 }
