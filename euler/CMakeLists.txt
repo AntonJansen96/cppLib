@@ -1,8 +1,4 @@
 set(EULER_SOURCES
-    combinatorics/numbersplit.cpp
-    combinatorics/partitions.cpp
-    combinatorics/permutations.cpp
-    combinatorics/combinations.cpp
     primetools/isamicable.cpp
     primetools/propdivsum.cpp
     primetools/isprime.cpp
@@ -19,6 +15,7 @@ set(EULER_SOURCES
     primetools/factorall.cpp
     sequences/fibonacci.cpp
     sequences/pisano.cpp
+    combinatorics.cpp
     digits.cpp
     functions.cpp
     roman.cpp

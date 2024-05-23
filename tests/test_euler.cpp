@@ -1,9 +1,7 @@
 #include "euler/euler.h"
-#include "pythonlike/pythonlike.h" // debug only
 #include <cassert>
 
-using namespace euler;      // remove at end?
-using namespace pythonlike; // debug only
+using namespace euler;
 
 int main()
 {
@@ -90,4 +88,40 @@ int main()
     assert(numpartitions(200, {1, 2, 5, 10, 20, 50, 100, 200}) == 73682);
     std::vector<std::vector<uInt>> par = {{4}, {3, 1}, {2, 2}, {2, 1, 1}, {1, 1, 1, 1}};
     assert(genpartitions(4) == par);
+
+    // PERMUTATIONS, COMBINATIONS, NUMBERSPLIT
+    assert(numUniquePerms({1, 1, 1, 2, 3}) == 20.0);
+    assert(numUniquePerms({1, 2, 3, 4, 5}) == 120.0);
+
+    std::vector<std::vector<uInt>> store;
+    std::vector<std::vector<uInt>> answer = {{1, 1, 2}, {1, 2, 1}, {2, 1, 1}};
+    for (auto const &perm : genUniquePerms({1, 1, 2}))
+        store.push_back(perm);
+    assert(store == answer);
+
+    store.clear();
+    answer = {{1, 2, 3}, {1, 3, 2}, {2, 1, 3}, {2, 3, 1}, {3, 1, 2}, {3, 2, 1}};
+    for (auto const &perm : genUniquePerms({1, 2, 3}))
+        store.push_back(perm);
+    assert(store == answer);
+ 
+    // assert numCombs = binom is already covered.
+
+    store.clear();
+    answer = {{3, 4}, {2, 4}, {2, 3}, {1, 4}, {1, 3}, {1, 2}};
+    for (auto const &comb : genCombs({1, 2, 3, 4}, 2))
+        store.push_back(comb);
+    assert(store == answer);
+
+    store.clear();
+    answer = {{}, {3}, {2}, {1}, {2, 3}, {1, 3}, {1, 2}, {1, 2, 3}};
+    for (auto const &comb : genAllCombs({1, 2, 3}))
+        store.push_back(comb);
+    assert(store == answer);
+
+    store.clear();
+    answer = {{1234}, {1, 234}, {12, 34}, {1, 2, 34}, {123, 4}, {1, 23, 4}, {12, 3, 4}, {1, 2, 3, 4}};
+    for (auto const &split : numbersplit(1234))
+        store.push_back(split);
+    assert(store == answer);
 }

@@ -1,4 +1,5 @@
 #include "../math/math.h"
+#include "../utility/utility.h"
 #include "euler.h"
 
 #include <algorithm>
@@ -116,13 +117,10 @@ std::vector<uInt> genPandigital(uInt a, uInt b)
     for (uInt digit = a; digit <= b; ++digit)
         digits.push_back(digit);
 
-    Permutations perm(digits);
-
     std::vector<uInt> pandigitals;
-    while (not perm.done())
+    for (std::vector<uInt> const &perm : genUniquePerms(digits))
     {
-        uInt num = perm.yieldnumber();
-
+        uInt const num = utility::vec2num(perm);
         if (numDigits(num) == b - a + 1)
             pandigitals.push_back(num);
     }

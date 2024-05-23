@@ -1,15 +1,12 @@
 #ifndef CPPLIB_EULER_H
 #define CPPLIB_EULER_H
 
-#include "combinatorics/combinations.h"
-#include "combinatorics/numbersplit.h"
-#include "combinatorics/permutations.h"
 #include "primetools/primetools.h"
 #include "sequences/sequences.h"
 
 #include <cstdint>
+#include <generator>
 #include <string>
-#include <tuple>
 #include <vector>
 
 namespace euler
@@ -73,6 +70,23 @@ bool isSquare(uInt num);
 
 // PARTITIONING ****************************************************************
 
+// Number of unique permutations of an array.
+// This is n! / (n1! * n2! * ... * nk!).
+double numUniquePerms(std::vector<uInt> const &array);
+
+// Generate all unique permutations of an array.
+std::generator<std::vector<uInt>> genUniquePerms(std::vector<uInt> array);
+
+// Number of combinations for an array. This is binom(len(array), r).
+uInt numCombs(std::vector<uInt> const &array, uInt r);
+
+// Generate combinations of an array. Note: not necessarily unique.
+std::generator<std::vector<uInt>> genCombs(std::vector<uInt> array, uInt r);
+
+// Generate all combinations of an array.
+// Does not return the empty (identity) element.
+std::generator<std::vector<uInt>> genAllCombs(std::vector<uInt> const array);
+
 // Returns the number of partitions of a number.
 uInt numpartitions(uInt money);
 
@@ -81,6 +95,9 @@ uInt numpartitions(uInt money, std::vector<uInt> const &coins);
 
 // Generates all partitions of a number.
 std::vector<std::vector<uInt>> genpartitions(uInt n);
+
+// Split a number into all possible combinations of numbers.
+std::generator<std::vector<uInt>> numbersplit(uInt number);
 
 // GENERATORS ******************************************************************
 
