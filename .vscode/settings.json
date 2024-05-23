@@ -89,6 +89,9 @@
         "__tree": "cpp",
         "map": "cpp",
         "set": "cpp",
-        "codecvt": "cpp"
+        "codecvt": "cpp",
+        "execution": "cpp",
+        "stack": "cpp",
+        "text_encoding": "cpp"
     }
 }
