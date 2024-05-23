@@ -11,6 +11,7 @@
 
 #include <cmath>
 #include <concepts>
+#include <generator>
 #include <iomanip>
 #include <iostream>
 
@@ -136,6 +137,24 @@ void doprint(std::tuple<Args...> const &input, bool fromC = false)
         },
         input);
     std::cout << ')';
+}
+
+// Case 9: print() arguments of type std::generator (C++23).
+template <typename Type> void doprint(std::generator<Type> &input)
+{
+    LOG("case 9 (print args of type std::generator (C++23)) was called");
+
+    bool start = true;
+    std::cout << '[';
+    for (auto const &val : input)
+    {
+        if (!start) // if-else statement is to prevent writing a comma at the end.
+            std::cout << ", ";
+        else
+            start = false;
+        doprint(val, true);
+    }
+    std::cout << ']';
 }
 
 // Main variadic template function.
