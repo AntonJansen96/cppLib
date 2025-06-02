@@ -92,6 +92,9 @@
         "codecvt": "cpp",
         "execution": "cpp",
         "stack": "cpp",
-        "text_encoding": "cpp"
+        "text_encoding": "cpp",
+        "print": "cpp",
+        "coroutine": "cpp",
+        "generator": "cpp"
     }
 }
