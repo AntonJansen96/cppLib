@@ -1,15 +1,18 @@
 #include "../../math/math.h"
 #include "primetools.h"
 
+namespace euler
+{
+
 // Generate prime pFactors of a number.
-std::vector<size_t> euler::Primetools::factorPrime(size_t num)
+std::vector<uInt> euler::Primetools::factorPrime(uInt num)
 {
     if (num < 2)
-        return std::vector<size_t>{}; // 0, 1 have no prime factors.
+        return std::vector<uInt>{}; // 0, 1 have no prime factors.
 
-    std::vector<size_t> pFactors;
-    size_t prime;
-    int idx = 1;                     // Start at second prime in d_primes
+    std::vector<uInt> pFactors;
+    uInt prime;
+    uInt idx = 1;                    // Start at second prime in d_primes
                                      // (3) because we already checked 2.
     while (((num >> 1) << 1) == num) // while num % 2 == 0
     {
@@ -38,3 +41,5 @@ std::vector<size_t> euler::Primetools::factorPrime(size_t num)
                                  // a prime so add to PFactors.
     return pFactors;
 }
+
+} // namespace euler

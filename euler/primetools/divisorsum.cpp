@@ -4,8 +4,10 @@
 namespace
 {
 
-void findFactors0(size_t num, std::vector<size_t> const &pFacs, size_t idx,
-                  size_t factor, size_t &factorSum)
+using uInt = euler::uInt;
+
+void findFactors0(uInt num, std::vector<uInt> const &pFacs, uInt idx, uInt factor,
+                  uInt &factorSum)
 {
     if (idx == pFacs.size())
     {
@@ -24,8 +26,8 @@ void findFactors0(size_t num, std::vector<size_t> const &pFacs, size_t idx,
     }
 }
 
-void findFactors1(size_t num, std::vector<size_t> const &pFacs, size_t idx,
-                  size_t factor, size_t &factorSum)
+void findFactors1(uInt num, std::vector<uInt> const &pFacs, uInt idx, uInt factor,
+                  uInt &factorSum)
 {
     if (idx == pFacs.size())
     {
@@ -44,8 +46,8 @@ void findFactors1(size_t num, std::vector<size_t> const &pFacs, size_t idx,
     }
 }
 
-void findFactors2(size_t num, std::vector<size_t> const &pFacs, size_t idx,
-                  size_t factor, size_t &factorSum)
+void findFactors2(uInt num, std::vector<uInt> const &pFacs, uInt idx, uInt factor,
+                  uInt &factorSum)
 {
     if (idx == pFacs.size())
     {
@@ -64,8 +66,8 @@ void findFactors2(size_t num, std::vector<size_t> const &pFacs, size_t idx,
     }
 }
 
-void findFactors3(size_t num, std::vector<size_t> const &pFacs, size_t idx,
-                  size_t factor, size_t &factorSum)
+void findFactors3(uInt num, std::vector<uInt> const &pFacs, uInt idx, uInt factor,
+                  uInt &factorSum)
 {
     if (idx == pFacs.size())
     {
@@ -84,8 +86,8 @@ void findFactors3(size_t num, std::vector<size_t> const &pFacs, size_t idx,
     }
 }
 
-void findFactors4(size_t num, std::vector<size_t> const &pFacs, size_t idx,
-                  size_t factor, int order, size_t &factorSum)
+void findFactors4(uInt num, std::vector<uInt> const &pFacs, uInt idx, uInt factor,
+                  uInt order, uInt &factorSum)
 {
     if (idx == pFacs.size())
     {
@@ -107,11 +109,12 @@ void findFactors4(size_t num, std::vector<size_t> const &pFacs, size_t idx,
 } // Namespace.
 
 // Return the sum of the factors (divisors) of a number.
-size_t euler::Primetools::divisorSum(size_t num, int order)
+uInt euler::Primetools::divisorSum(uInt num, uInt order)
 {
-    if (num == 0) return 0;
+    if (num == 0)
+        return 0;
 
-    size_t factorSum = 0;
+    uInt factorSum = 0;
 
     switch (order)
     {

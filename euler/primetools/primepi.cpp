@@ -5,12 +5,16 @@
 namespace
 {
 
-static std::vector<unsigned int> primes; // Will contain all primes up to
-                                         // sqrt(num).
+using uInt = euler::uInt;
+static std::vector<uInt> primes; // Will contain all primes up to
+                                 // sqrt(num).
 } // Namespace.
 
+namespace euler
+{
+
 // Returns number of primes up to (and including) num.
-size_t euler::Primetools::primePi(size_t num) const
+uInt euler::Primetools::primePi(uInt num) const
 {
     if (num < 2)
         return 0; // Below 2 all primepi are zero.
@@ -22,22 +26,22 @@ size_t euler::Primetools::primePi(size_t num) const
         return std::distance(primes.begin(), nextPrime);
     }
 
-    unsigned int v = math::isqrt(num);
+    uInt v = math::isqrt(num);
     // About sqrt(num) * 12 bytes, for num = 10^12 => 12 MByte plus primes[].
-    std::vector<unsigned long long> higher(v + 2, 0);
-    std::vector<unsigned int> lower(v + 2, 0);
+    std::vector<uInt> higher(v + 2, 0);
+    std::vector<uInt> lower(v + 2, 0);
     std::vector<bool> used(v + 2, false);
 
-    unsigned long long result = num - 1; // Assume all numbers are primes.
+    uInt result = num - 1; // Assume all numbers are primes.
     // The remaining lines subtract composites until result contains #primes.
 
-    for (unsigned int p = 2; p <= v; ++p) // set up lower and upper bound.
+    for (uInt p = 2; p <= v; ++p) // set up lower and upper bound.
     {
         lower[p] = p - 1;
         higher[p] = num / p - 1;
     }
 
-    for (unsigned int p = 2; p <= v; ++p)
+    for (uInt p = 2; p <= v; ++p)
     {
         if (lower[p] == lower[p - 1]) // Composite?
             continue;
@@ -48,8 +52,8 @@ size_t euler::Primetools::primePi(size_t num) const
         auto temp = lower[p - 1]; // Remove more composites.
         result -= higher[p] - temp;
 
-        auto pSquare = (unsigned long long)p * p;
-        auto end = std::min<unsigned long long>(v, num / pSquare);
+        auto pSquare = (uInt)p * p;
+        auto end = std::min<uInt>(v, num / pSquare);
 
         auto j = 1 + (p & 1); // Alternate between 1 and 2.
 
@@ -74,3 +78,5 @@ size_t euler::Primetools::primePi(size_t num) const
 
     return result;
 }
+
+} // namespace euler

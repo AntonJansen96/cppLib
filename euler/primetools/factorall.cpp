@@ -3,10 +3,11 @@
 namespace
 {
 
-std::vector<size_t> factors;
+using uInt = euler::uInt;
 
-void findFactors(size_t num, std::vector<size_t> const &pFacs, size_t idx,
-                 size_t factor)
+std::vector<uInt> factors;
+
+void findFactors(uInt num, std::vector<uInt> const &pFacs, uInt idx, uInt factor)
 {
     if (idx == pFacs.size())
     {
@@ -28,10 +29,10 @@ void findFactors(size_t num, std::vector<size_t> const &pFacs, size_t idx,
 } // Namespace.
 
 // Generate all factors of a number.
-std::vector<size_t> euler::Primetools::factorAll(size_t num)
+std::vector<uInt> euler::Primetools::factorAll(uInt num)
 {
     if (num == 0)
-        return std::vector<size_t>{}; // special case for 0.
+        return std::vector<uInt>{}; // special case for 0.
 
     factors.clear();
 
@@ -39,26 +40,3 @@ std::vector<size_t> euler::Primetools::factorAll(size_t num)
 
     return factors;
 }
-
-// OLD (this is a lot slower).
-
-// std::set<size_t> euler::Primetools::factorAll(size_t num)
-// {   // First obtain the prime factors of the num.
-//     std::vector<size_t> const pFactors{factorPrime(num)};
-
-//     size_t iter;
-//     std::set<size_t> factors = {1};
-//                     // comb != 2^pFactors.size()
-//     for (int comb = 1; comb != (1 << pFactors.size()); ++comb)
-//     {
-//         iter = 1;
-
-//         for (size_t idx = 0; idx != pFactors.size(); ++idx)
-//             if (comb & 1 << idx)
-//                 iter *= pFactors[idx];
-
-//         factors.insert(iter);
-//     }
-
-//     return factors;
-// }

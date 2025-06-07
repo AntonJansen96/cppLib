@@ -1,13 +1,16 @@
 #include "../../math/math.h"
 #include "primetools.h"
 
+namespace euler
+{
+
 // Compute the totient of a number.
-size_t euler::Primetools::totient(size_t num)
+uInt Primetools::totient(uInt num)
 {
     if (num == 0) // Otherwise, 0 is not handled correctly.
         return 0;
 
-    size_t totient = num;
+    uInt totient = num;
 
     if (((num >> 1) << 1) == num) // num % 2 == 0
     {
@@ -17,8 +20,8 @@ size_t euler::Primetools::totient(size_t num)
             num >>= 1;                   // num /= 2
     }
 
-    size_t prime;
-    int idx = 1;
+    uInt prime;
+    uInt idx = 1;
     while (d_primes[idx] <= math::isqrt(num))
     {
         prime = d_primes[idx];
@@ -42,3 +45,5 @@ size_t euler::Primetools::totient(size_t num)
 
     return totient;
 }
+
+} // namespace euler

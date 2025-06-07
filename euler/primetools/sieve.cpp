@@ -1,15 +1,18 @@
 #include "../../math/math.h"
 #include "primetools.h"
 
-// Sieve of Eratosthenes. Generate all prime numbers smaller than uplim.
-std::vector<size_t> euler::Primetools::sieve(size_t uplim) const
+namespace euler
 {
-    std::vector<size_t> primes = {2};
-    size_t next = 3; // First number after last prime in primes.
+
+// Sieve of Eratosthenes. Generate all prime numbers smaller than uplim.
+std::vector<uInt> euler::Primetools::sieve(uInt uplim) const
+{
+    std::vector<uInt> primes = {2};
+    uInt next = 3; // First number after last prime in primes.
 
     while (next <= uplim)
     {
-        for (size_t prime : primes)
+        for (uInt prime : primes)
         {
             if (next % prime == 0) // If next is divisible by a prime, next
                 break;             // is not prime. Therefore we break.
@@ -24,3 +27,5 @@ std::vector<size_t> euler::Primetools::sieve(size_t uplim) const
     } // even numbers are never prime.
     return primes;
 }
+
+} // namespace euler

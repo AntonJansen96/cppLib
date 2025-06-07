@@ -1,8 +1,11 @@
 #include "../../math/math.h"
 #include "primetools.h"
 
+namespace euler
+{
+
 // Returns the sum of the proper factors (divisors) of a number.
-size_t euler::Primetools::divisorSumProper(size_t num, int order)
+uInt Primetools::divisorSumProper(uInt num, uInt order)
 {
     switch (order)
     {
@@ -22,3 +25,5 @@ size_t euler::Primetools::divisorSumProper(size_t num, int order)
             return this->divisorSum(num, order) - math::fastpow(num, order);
     }
 }
+
+} // namespace euler
