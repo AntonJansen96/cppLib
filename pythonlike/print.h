@@ -9,6 +9,7 @@
 #endif
 // clang-format on
 
+#include <atomic>
 #include <cmath>
 #include <concepts>
 #include <generator>
@@ -140,6 +141,7 @@ void doprint(std::tuple<Args...> const &input, bool fromC = false)
 }
 
 // Case 9: print() arguments of type std::generator (C++23).
+
 template <typename Type> void doprint(std::generator<Type> &input)
 {
     LOG("case 9 (print args of type std::generator (C++23)) was called");
@@ -157,8 +159,16 @@ template <typename Type> void doprint(std::generator<Type> &input)
     std::cout << ']';
 }
 
+// Case 10: print() arguments of type std::atomic (C++20).
+
+template <typename Type> void doprint(std::atomic<Type> const &input)
+{
+    LOG("case 10 (print() arguments of type std::atomic (C++20)) was called");
+    doprint(input.load());
+}
+
 // Main variadic template function.
-template <typename Type, typename... Args> void doprint(Type first, Args... args)
+template <typename Type, typename... Args> void doprint(const Type& first, const Args&... args)
 {
     doprint(first);
     doprint(' ');
@@ -171,7 +181,7 @@ namespace pythonlike
 {
 
 // print args to terminal.
-template <typename... Args> void print(Args... args) noexcept
+template <typename... Args> void print(const Args&... args) noexcept
 // This is a wrapper for the main variadic template function.
 // We wrap so we can insert newline character after doprint finishes.
 {
