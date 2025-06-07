@@ -30,6 +30,10 @@ if(NOT DEBUG)
     add_executable(test_euler test_euler.cpp)
     target_link_libraries(test_euler euler)
 
+    # PRIMETOOLS (AS PART OF EULER)
+    add_executable(test_primetools test_primetools.cpp)
+    target_link_libraries(test_primetools euler)
+
     # FILEIO
     add_executable(test_fileio test_fileio.cpp)
     target_link_libraries(test_fileio fileio)

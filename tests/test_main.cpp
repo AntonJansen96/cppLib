@@ -10,6 +10,7 @@ int main()
     // euler
     clock1.start();
     system("build/test_euler");
+    system("build/test_primetools");
     clock1.stop();
 
     // fileio

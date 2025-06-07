@@ -10,7 +10,11 @@ static std::vector<unsigned int> primes; // Will contain all primes up to
 
 // Returns number of primes up to (and including) num.
 size_t euler::Primetools::primePi(size_t num) const
-{ // If primes[] contains enough elements then run a fast binary search:
+{
+    if (num < 2)
+        return 0; // Below 2 all primepi are zero.
+
+    // If primes[] contains enough elements then run a fast binary search:
     if (not primes.empty() and primes.back() > num)
     { // Find smallest number larger than num:
         auto nextPrime = std::upper_bound(primes.begin(), primes.end(), num);

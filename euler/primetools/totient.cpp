@@ -3,6 +3,9 @@
 // Compute the totient of a number.
 size_t euler::Primetools::totient(size_t num)
 {
+    if (num == 0) // Otherwise, 0 is not handled correctly.
+        return 0; 
+
     size_t totient = num;
 
     if (((num >> 1) << 1) == num) // num % 2 == 0
