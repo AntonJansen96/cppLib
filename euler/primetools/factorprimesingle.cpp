@@ -1,3 +1,4 @@
+#include "../../math/math.h"
 #include "primetools.h"
 
 // Generate prime pFactors of a number.
@@ -15,7 +16,7 @@ std::vector<size_t> euler::Primetools::factorPrimeSingle(size_t num)
             num >>= 1;                   // num /= 2
     }
     // Only have to check up until root of
-    while (d_primes[idx] <= fastRoot(num))
+    while (d_primes[idx] <= math::isqrt(num))
     { // num.
         prime = d_primes[idx];
 

@@ -1,3 +1,4 @@
+#include "../../math/math.h"
 #include "primetools.h"
 #include <algorithm>
 
@@ -21,7 +22,7 @@ size_t euler::Primetools::primePi(size_t num) const
         return std::distance(primes.begin(), nextPrime);
     }
 
-    unsigned int v = std::sqrt(num);
+    unsigned int v = math::isqrt(num);
     // About sqrt(num) * 12 bytes, for num = 10^12 => 12 MByte plus primes[].
     std::vector<unsigned long long> higher(v + 2, 0);
     std::vector<unsigned int> lower(v + 2, 0);

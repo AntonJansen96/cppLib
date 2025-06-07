@@ -1,7 +1,6 @@
 #ifndef CPPLIB_EULER_PRIMETOOLS_H
 #define CPPLIB_EULER_PRIMETOOLS_H
 
-#include <cmath>
 #include <vector>
 
 namespace euler
@@ -67,18 +66,8 @@ class Primetools
   private:
     // Expands d_max by factor 4 and d_primes by factor 2.
     void expand();
-
-    // To-do: look for faster version of std::sqrt.
-    // We only need to integer part.
-    unsigned int fastRoot(size_t num) const;
 };
 
 } // namespace euler
-
-// To-do: look for faster version of std::sqrt.
-inline unsigned int euler::Primetools::fastRoot(size_t num) const
-{
-    return std::sqrt(num);
-}
 
 #endif

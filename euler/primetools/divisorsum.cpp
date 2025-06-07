@@ -1,3 +1,4 @@
+#include "../../math/math.h"
 #include "primetools.h"
 
 namespace
@@ -88,7 +89,7 @@ void findFactors4(size_t num, std::vector<size_t> const &pFacs, size_t idx,
 {
     if (idx == pFacs.size())
     {
-        factorSum += std::pow(factor, order);
+        factorSum += math::fastpow(factor, order);
         return;
     }
 

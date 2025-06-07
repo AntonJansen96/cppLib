@@ -1,5 +1,5 @@
+#include "../../math/math.h"
 #include "primetools.h"
-#include <cmath>
 #include <iostream>
 
 // Check whether a number is prime using the classical method.
@@ -9,7 +9,7 @@ bool euler::Primetools::isPrime(size_t num)
         return (num == 2); // only even prime is 2
 
     int idx = 1;
-    while (d_primes[idx] <= fastRoot(num))
+    while (d_primes[idx] <= math::isqrt(num))
     {                                 // If divisble by a prime, smaller than
         if (num % d_primes[idx] == 0) // the root of num, num is not prime.
             return false;
