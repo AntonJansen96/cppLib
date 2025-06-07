@@ -38,7 +38,7 @@ A class that can be used to time and profile C++ code. This class is
 more or less a wrapper for some functionality of the std::chrono library.
 
 - [x]  build system
-- [ ]  euler
+- [x]  euler
 - [x]  fileio
 - [x]  fractions
 - [x]  math
@@ -48,5 +48,5 @@ more or less a wrapper for some functionality of the std::chrono library.
 - [x]  unit and integration tests
 - [x]  make installation more general
 - [x]  allow setting of fractions type (32bit or 64bit integer) in cmake.
-- [x]  upgrade system to gcc/g++-14.
-- [ ]  check C++ 2023 features and update code
+- [x]  upgrade system to gcc/g++-15.
+- [x]  check C++ 2023 features and update code
