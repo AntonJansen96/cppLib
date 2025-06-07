@@ -1,5 +1,8 @@
 #include "stopwatch.h"
 
+namespace stopwatch
+{
+
 // Construct Stopwatch object and start.
 Stopwatch::Stopwatch()
     : d_start(std::chrono::high_resolution_clock::time_point())
@@ -116,3 +119,5 @@ void Stopwatch::swap(Stopwatch &other) noexcept
     std::swap(d_description, other.d_description);
     std::swap(d_stopped, other.d_stopped);
 }
+
+} // namespace stopwatch

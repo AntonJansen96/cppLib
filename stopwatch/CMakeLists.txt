@@ -1,6 +1,7 @@
 set (STOPWATCH_SOURCES
     format.cpp
     profile.cpp
+    progress.cpp
     sleep.cpp
     stopwatch.cpp
 )

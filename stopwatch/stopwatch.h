@@ -1,9 +1,14 @@
 #ifndef CPPLIB_STOPWATCH_H
 #define CPPLIB_STOPWATCH_H
 
+#include <atomic>
 #include <chrono>
 #include <functional>
 #include <iostream>
+#include <thread>
+
+namespace stopwatch
+{
 
 // Additional function that may be be used for profiling functions/lambdas.
 // Make sure to inline the function to be tested.
@@ -134,4 +139,92 @@ inline bool Stopwatch::operator>=(Stopwatch const &other) const
     return rawtime() >= other.rawtime();
 }
 
+class ProgressReport
+{
+    size_t const d_total;
+    size_t const d_update;
+    std::atomic<size_t> d_progress{0};
+    Stopwatch d_timer;
+    std::thread d_progress_thread;
+
+  public:
+    // Construct ProgressReport object.
+    explicit ProgressReport(size_t total);
+    // Construct ProgressReport object.
+    ProgressReport(size_t total, size_t update);
+    // Destructor.
+    ~ProgressReport();
+    // Delete copy and move constructors, since we have an std::thread member.
+    ProgressReport(const ProgressReport &) = delete;
+    ProgressReport(ProgressReport &&) = delete;
+    // Delete copy and move assignment, since we have an std::thread member.
+    ProgressReport &operator=(const ProgressReport &) = delete;
+    ProgressReport &operator=(ProgressReport &&) = delete;
+    // Increments the progress count (from any thread (threadsafe)).
+    void tick();
+    // Finish the progress count (join the progress thread).
+    void join();
+
+  private:
+    // Start and run the progress counter thread (main code).
+    void run();
+    // Format user update.
+    void progformat(double percent, size_t rawtime) const;
+};
+
+// Construct ProgressReport object.
+inline ProgressReport::ProgressReport(size_t total)
+    : d_total(total)
+    , d_update(100) // default update every 100ms.
+{
+    run();
+}
+
+// Construct ProgressReport object.
+inline ProgressReport::ProgressReport(size_t total, size_t update)
+    : d_total(total)
+    , d_update(update)
+{
+    run();
+}
+
+// Destructor.
+inline ProgressReport::~ProgressReport()
+{
+    this->join();
+}
+
+// Increments the progress count (from any thread (threadsafe)).
+inline void ProgressReport::tick()
+{
+    ++d_progress;
+}
+
+// Finish the progress count (join the progress thread).
+inline void ProgressReport::join()
+{
+    if (d_progress_thread.joinable())
+        d_progress_thread.join();
+}
+
+} // namespace stopwatch
+
 #endif
+
+// EXAMPLE CODE FOR USING THE PROGRESSREPORT CLASS.
+// int main()
+// {
+//     size_t start = 0;
+//     size_t stop = 20;
+//     stopwatch::ProgressReport progress(stop - start);
+
+//     #pragma omp parallel for schedule(dynamic, 1)
+//     for (size_t ii = start; ii != stop; ++ii)
+//     {
+//         stopwatch::sleep(1);
+//         progress.tick();
+//     }
+//     progress.join();
+
+//     std::cout << "Finished loop." << std::endl;
+// }
