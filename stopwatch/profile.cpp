@@ -3,6 +3,9 @@
 #include <iostream>
 #include <vector>
 
+namespace stopwatch
+{
+
 // Additional function that may be be used for profiling functions/lambdas.
 // Make sure to inline the function to be tested.
 size_t profile(std::function<void()> func, size_t cycles)
@@ -29,3 +32,5 @@ size_t profile(std::function<void()> func, size_t cycles)
               << " ± " << Stopwatch::format(sdev) << " (" << cycles << " cycles).\n";
     return static_cast<size_t>(mean);
 }
+
+} // Namespace stopwatch

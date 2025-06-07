@@ -3,7 +3,7 @@
 
 int main()
 {
-    Stopwatch clock, clock1, clock2, clock3, clock4, clock5, clock6, clock7;
+    stopwatch::Stopwatch clock, clock1, clock2, clock3, clock4, clock5, clock6, clock7;
 
     clock.start();
 

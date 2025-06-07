@@ -1,6 +1,9 @@
 #include <chrono>
 #include <thread>
 
+namespace stopwatch
+{
+
 // Additional Stopwatch function. Sleeps (the current thread) for #seconds.
 void sleep(float seconds)
 {
@@ -11,3 +14,5 @@ void sleep(float seconds)
     // Sleep for the specified number of microseconds.
     std::this_thread::sleep_for(std::chrono::microseconds(ms));
 }
+
+} // namespace stopwatch

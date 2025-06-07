@@ -1,6 +1,9 @@
 #include "stopwatch.h"
 #include <iomanip>
 
+namespace stopwatch
+{
+
 enum Time : size_t
 {
     MICROSECOND = 1000,
@@ -63,3 +66,5 @@ std::string Stopwatch::format(size_t rawtime)
     }
     return oss.str();
 }
+
+} // namespace stopwatch

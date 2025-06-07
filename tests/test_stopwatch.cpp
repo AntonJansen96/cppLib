@@ -1,6 +1,8 @@
 #include "stopwatch/stopwatch.h"
 #include <cassert>
 
+using namespace stopwatch;
+
 void func()
 {
     sleep(0.000001);
