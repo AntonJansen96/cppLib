@@ -6,10 +6,10 @@ using namespace euler;
 int main()
 {
     // DIGITS
-    assert(numDigits(0 == 1));
-    assert(numDigits(9 == 1));
-    assert(numDigits(10 == 2));
-    assert(numDigits(123456789 == 9));
+    assert(numDigits(0) == 1);
+    assert(numDigits(9) == 1);
+    assert(numDigits(10) == 2);
+    assert(numDigits(123456789) == 9);
 
     assert(sumDigits(0) == 0);
     assert(sumDigits(9) == 9);
