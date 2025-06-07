@@ -109,6 +109,8 @@ void findFactors4(size_t num, std::vector<size_t> const &pFacs, size_t idx,
 // Return the sum of the factors (divisors) of a number.
 size_t euler::Primetools::divisorSum(size_t num, int order)
 {
+    if (num == 0) return 0;
+
     size_t factorSum = 0;
 
     switch (order)

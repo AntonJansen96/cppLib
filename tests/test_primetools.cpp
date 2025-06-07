@@ -1,9 +1,8 @@
 #include "euler/euler.h"
-#include "pythonlike/pythonlike.h"
+#include <algorithm>
 #include <cassert>
 
 using namespace euler;
-using namespace pythonlike;
 
 int main()
 {
@@ -57,6 +56,12 @@ int main()
     assert(p.factorAll(123456) == f7);
 
     // Check divisorSum
+    assert(p.divisorSum(0, 1) == 0);
+    assert(p.divisorSum(1, 1) == 1);
+    assert(p.divisorSum(2, 1) == 3);
+    assert(p.divisorSum(60, 1) == 168);
+    assert(p.divisorSum(60, 0) == f6.size());
+    assert(p.divisorSum(123456, 1) == 327152);
 
     // Check divisorSumProper
     // This is one is for free / guaranteed correct if divisorSum is correct.
@@ -82,6 +87,4 @@ int main()
         bool inami = std::find(ami.begin(), ami.end(), num) != ami.end();
         assert(p.isAmicable(num) == inami);
     }
-
-    print("* primetool tests ended succesfully *");
 }
