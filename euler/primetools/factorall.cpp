@@ -30,6 +30,9 @@ void findFactors(size_t num, std::vector<size_t> const &pFacs, size_t idx,
 // Generate all factors of a number.
 std::vector<size_t> euler::Primetools::factorAll(size_t num)
 {
+    if (num == 0)
+        return std::vector<size_t>{}; // special case for 0.
+
     factors.clear();
 
     findFactors(num, this->factorPrimeSingle(num), 0, 1);

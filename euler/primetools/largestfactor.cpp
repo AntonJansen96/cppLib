@@ -4,5 +4,5 @@
 // Returns 1 if number is prime.
 size_t euler::Primetools::largestFactor(size_t num)
 {
-    return (num <= 1) ? 1 : num / this->factorPrimeSingle(num)[0];
+    return (num < 2) ? 0 : num / this->factorPrimeSingle(num)[0];
 }
