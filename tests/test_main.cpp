@@ -3,7 +3,8 @@
 
 int main()
 {
-    stopwatch::Stopwatch clock, clock1, clock2, clock3, clock4, clock5, clock6, clock7;
+    stopwatch::Stopwatch clock, clock1, clock2, clock3, clock4, clock5, clock6, clock7,
+        clock8;
 
     clock.start();
 
@@ -33,15 +34,20 @@ int main()
     system("build/test_pythonlike");
     clock5.stop();
 
-    // stopwatch
+    // probability
     clock6.start();
-    system("build/test_stopwatch");
+    system("build/test_probability");
     clock6.stop();
 
-    // utility
+    // stopwatch
     clock7.start();
-    system("build/test_utility");
+    system("build/test_stopwatch");
     clock7.stop();
+
+    // utility
+    clock8.start();
+    system("build/test_utility");
+    clock8.stop();
 
     std::cout << "\nTest performance summary:\n";
     std::cout << "Executing euler tests took " << clock1 << ".\n";
@@ -49,7 +55,8 @@ int main()
     std::cout << "Executing fractions tests took " << clock3 << ".\n";
     std::cout << "Executing math tests took " << clock4 << ".\n";
     std::cout << "Executing pythonlike tests took " << clock5 << ".\n";
-    std::cout << "Executing stopwatch tests took " << clock6 << ".\n";
-    std::cout << "Executing utility tests took " << clock7 << ".\n";
+    std::cout << "Executing probability tests took " << clock6 << ".\n";
+    std::cout << "Executing stopwatch tests took " << clock7 << ".\n";
+    std::cout << "Executing utility tests took " << clock8 << ".\n";
     std::cout << "Total time is " << clock << ".\n";
 }

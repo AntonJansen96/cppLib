@@ -22,6 +22,7 @@ add_subdirectory(../euler euler)
 add_subdirectory(../fileio fileio)
 add_subdirectory(../fractions fractions)
 add_subdirectory(../math math)
+add_subdirectory(../probability probability)
 add_subdirectory(../stopwatch stopwatch)
 add_subdirectory(../utility utility)
 
@@ -50,6 +51,10 @@ if(NOT DEBUG)
     add_executable(test_pythonlike test_pythonlike.cpp)
     target_link_libraries(test_pythonlike) # add pythonlike explicitly if no-longer only an interface lib.
 
+    # RANDOM
+    add_executable(test_probability test_probability.cpp)
+    target_link_libraries(test_probability probability)
+
     # STOPWATCH
     add_executable(test_stopwatch test_stopwatch.cpp)
     target_link_libraries(test_stopwatch stopwatch)
@@ -67,5 +72,5 @@ endif() # DEBUG
 if(DEBUG)
     add_compile_definitions(DEBUG)
     add_executable(debug debug.cpp)
-    target_link_libraries(debug fileio fractions math stopwatch utility)
+    target_link_libraries(debug fileio fractions math probability stopwatch utility)
 endif()

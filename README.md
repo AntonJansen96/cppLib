@@ -32,6 +32,10 @@ as well as a print() function that takes an arbitrary number of arbitrarily-type
 arguments and prints them to the console. The library also includes slice(),
 view(), and range() functions.
 
+## probability
+
+A library that can be used for randomness. Similar to `import random` in Python.
+
 ## stopwatch
 
 A class that can be used to time and profile C++ code. This class is
