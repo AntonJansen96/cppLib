@@ -1,9 +1,9 @@
 #ifndef CPPLIB_RANDOM_H
 #define CPPLIB_RANDOM_H
 
-#include <algorithm>  // for std::shuffle
-#include <cstdint>    // for int_fast64_t
-#include <random>     // for std::random_device, std::mt19937
+#include <algorithm> // for std::shuffle
+#include <cstdint>   // for int_fast64_t
+#include <random>    // for std::random_device, std::mt19937
 
 #ifdef SINGLE
 using sInt = int_fast32_t;  // Signed 32-bit integer.
@@ -40,37 +40,37 @@ class Random
     double uniform(double a, double b);
 
     // Returns a random element from a non-empty sequence.
-    template <typename Type>
-    auto choice(Type const &container) -> decltype(container[0]);
+    template <typename Container>
+    auto choice(const Container &container) -> typename Container::value_type;
 
     // Returns a list of k elements chosen with replacement.
-    template <typename Type>
-    std::vector<decltype(std::declval<Type>()[0])> choices(Type const &population,
-                                                           uInt k);
+    template <typename Container>
+    std::vector<typename Container::value_type> choices(Container const &population,
+                                                        uInt k);
 
     // Returns a list of k unique elements chosen without replacement.
-    template <typename Type>
-    std::vector<decltype(std::declval<Type>()[0])> sample(Type const &population,
-                                                          uInt k);
+    template <typename Container>
+    std::vector<typename Container::value_type> sample(Container const &population,
+                                                       uInt k);
 
     // Shuffles the sequence in the container in place.
     template <typename Type> void shuffle(Type &container);
 };
 
 // Returns a random element from a non-empty sequence.
-template <typename Type>
-auto Random::choice(Type const &container) -> decltype(container[0])
+template <typename Container>
+inline auto Random::choice(const Container &container) -> typename Container::value_type
 {
     size_t const idx = this->randint(0, container.size() - 1);
     return container[idx];
 }
 
 // Returns a list of k elements chosen with replacement.
-template <typename Type>
-inline std::vector<decltype(std::declval<Type>()[0])>
-Random::choices(Type const &population, uInt k)
+template <typename Container>
+inline std::vector<typename Container::value_type>
+Random::choices(Container const &population, uInt k)
 {
-    std::vector<decltype(population[0])> result;
+    std::vector<typename Container::value_type> result;
     result.reserve(k);
     for (size_t i = 0; i < k; ++i)
         result.push_back(this->choice(population));
@@ -78,14 +78,13 @@ Random::choices(Type const &population, uInt k)
 }
 
 // Returns a list of k unique elements chosen without replacement.
-template <typename Type>
-inline std::vector<decltype(std::declval<Type>()[0])>
-Random::sample(Type const &population, uInt k)
+template <typename Container>
+std::vector<typename Container::value_type> inline Random::sample(
+    const Container &population, uInt k)
 {
+    using T = typename Container::value_type;
     if (k > population.size())
         k = population.size();
-
-    using T = decltype(population[0]);
 
     // Make a copy to shuffle.
     std::vector<T> pool(population.begin(), population.end());
