@@ -17,7 +17,11 @@ int main()
     assert(x3 == x4);
 
     probability::Random r;
-    r.randint(1, 3);
     std::vector<int> array = {1, 4, 9, 16, 25};
-    r.choice(array);
+    r.randint(1, 3);      // seems good.
+    r.uniform(0.3, 0.6);  // seems good.
+    r.choice(array);      // seems good.
+    r.choices(array, 20); // seems good.
+    r.sample(array, 3);   // seems good.
+    r.shuffle(array);     // seems good.
 }
