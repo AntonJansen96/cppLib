@@ -1,11 +1,9 @@
 #ifndef CPPLIB_RANDOM_H
 #define CPPLIB_RANDOM_H
 
-#include <cstdint>
-#include <random>
-
-namespace probability
-{
+#include <algorithm>  // for std::shuffle
+#include <cstdint>    // for int_fast64_t
+#include <random>     // for std::random_device, std::mt19937
 
 #ifdef SINGLE
 using sInt = int_fast32_t;  // Signed 32-bit integer.
@@ -17,8 +15,8 @@ using uInt = uint_fast64_t;   // Unsigned 64-bit integer.
 using genT = std::mt19937_64; // 64-bit Mersenne Twister.
 #endif
 
-// Test function
-void hellofromprobability();
+namespace probability
+{
 
 class Random
 {
@@ -38,55 +36,26 @@ class Random
     // Returns a random integer N such that a ≤ N ≤ b.
     uInt randint(uInt a, uInt b);
 
-    // Returns a random float N such that a ≤ N ≤ b.
+    // Returns a random double N such that a ≤ N ≤ b.
     double uniform(double a, double b);
 
     // Returns a random element from a non-empty sequence.
     template <typename Type>
     auto choice(Type const &container) -> decltype(container[0]);
 
-    // To be implemented.
-    // 5. choices(population, weights=None, k=1) — Returns a list of k elements chosen
-    // with replacement.
-    // 6. sample(population, k) — Returns a list of k unique elements chosen without
-    // replacement.
-    // 7. shuffle(x) — Shuffles the sequence x in place.
+    // Returns a list of k elements chosen with replacement.
+    template <typename Type>
+    std::vector<decltype(std::declval<Type>()[0])> choices(Type const &population,
+                                                           uInt k);
+
+    // Returns a list of k unique elements chosen without replacement.
+    template <typename Type>
+    std::vector<decltype(std::declval<Type>()[0])> sample(Type const &population,
+                                                          uInt k);
+
+    // Shuffles the sequence in the container in place.
+    template <typename Type> void shuffle(Type &container);
 };
-
-// Construct Random object and use a random seed.
-inline Random::Random()
-    : d_rd()
-    , d_gen(d_rd())
-{
-}
-
-// Construct Random object using specific seed.
-inline Random::Random(uInt seed)
-    : d_rd()
-    , d_gen(seed)
-{
-}
-
-// Returns a random number in the range [0.0, 1.0).
-inline double Random::random()
-{
-    std::uniform_real_distribution<double> dist(0.0, 1.0);
-    return dist(d_gen);
-}
-
-// Returns a random integer N such that a ≤ N ≤ b.
-inline uInt Random::randint(uInt a, uInt b)
-{
-    std::uniform_int_distribution<uInt> dist(a, b);
-    return dist(d_gen);
-}
-
-// Returns a random float N such that a ≤ N ≤ b.
-inline double Random::uniform(double a, double b)
-{
-    std::uniform_int_distribution<uInt> dist(a, b);
-    return dist(d_gen);
-}
 
 // Returns a random element from a non-empty sequence.
 template <typename Type>
@@ -94,6 +63,42 @@ auto Random::choice(Type const &container) -> decltype(container[0])
 {
     size_t const idx = this->randint(0, container.size() - 1);
     return container[idx];
+}
+
+// Returns a list of k elements chosen with replacement.
+template <typename Type>
+inline std::vector<decltype(std::declval<Type>()[0])>
+Random::choices(Type const &population, uInt k)
+{
+    std::vector<decltype(population[0])> result;
+    result.reserve(k);
+    for (size_t i = 0; i < k; ++i)
+        result.push_back(this->choice(population));
+    return result;
+}
+
+// Returns a list of k unique elements chosen without replacement.
+template <typename Type>
+inline std::vector<decltype(std::declval<Type>()[0])>
+Random::sample(Type const &population, uInt k)
+{
+    if (k > population.size())
+        k = population.size();
+
+    using T = decltype(population[0]);
+
+    // Make a copy to shuffle.
+    std::vector<T> pool(population.begin(), population.end());
+    this->shuffle(pool);
+
+    // Take the first k elements.
+    return std::vector<T>(pool.begin(), pool.begin() + k);
+}
+
+// Shuffles the sequence in the container in place.
+template <typename Type> inline void Random::shuffle(Type &container)
+{
+    std::shuffle(container.begin(), container.end(), d_gen);
 }
 
 } // namespace probability
