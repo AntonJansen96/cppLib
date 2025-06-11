@@ -39,6 +39,9 @@ class Random
     // Returns a random double N such that a ≤ N ≤ b.
     double uniform(double a, double b);
 
+    // Sample from a normal (Gaussian) distribution.
+    double normal(double mu = 0.0, double sigma = 1.0);
+
     // Returns a random element from a non-empty sequence.
     template <typename Container>
     auto choice(const Container &container) -> typename Container::value_type;

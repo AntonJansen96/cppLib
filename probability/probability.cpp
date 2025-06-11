@@ -38,4 +38,11 @@ double Random::uniform(double a, double b)
     return dist(d_gen);
 }
 
+// Sample from a normal (Gaussian) distribution.
+double Random::normal(double mu, double sigma)
+{
+    std::normal_distribution<double> dist(mu, sigma);
+    return dist(d_gen);
+}
+
 } // namespace probability
