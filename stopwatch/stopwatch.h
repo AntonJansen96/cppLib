@@ -161,7 +161,7 @@ class ProgressReport
     ProgressReport &operator=(const ProgressReport &) = delete;
     ProgressReport &operator=(ProgressReport &&) = delete;
     // Increments the progress count (from any thread (threadsafe)).
-    void tick();
+    void tick(size_t n = 1);
     // Finish the progress count (join the progress thread).
     void join();
 
@@ -195,9 +195,10 @@ inline ProgressReport::~ProgressReport()
 }
 
 // Increments the progress count (from any thread (threadsafe)).
-inline void ProgressReport::tick()
+inline void ProgressReport::tick(size_t n)
 {
-    ++d_progress;
+    for (size_t ii = 0; ii != n; ++ii)
+        ++d_progress;
 }
 
 // Finish the progress count (join the progress thread).
